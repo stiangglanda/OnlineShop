@@ -7,12 +7,10 @@ const app = express();
 const publicDir = path.join(__dirname, 'public');
 const viewsDir = path.join(__dirname, 'views');
 
-app.set('views', viewsDir);
 app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(publicDir));
 
 app.get('/', function (req, res) {
 	res.redirect('/api');
