@@ -19,13 +19,17 @@ module.exports = class Article {
 	}
 
 	/**
+	 * Find an article by id.
+	 * @returns {Promise<Article>}
+	 */
+
+	/**
 	 * Saves an article to the database.
 	 * @returns {Promise<Article>}
 	 */
-	async save() {
-		const [rows] = await db.query('INSERT INTO articles (name, description, price, seller_id) VALUES (?, ?, ?, ?)', [this.name, this.description, this.price, this.seller]);
-		this.id = rows[0].id;
-		return this;
+	async findById(id) {
+		const [rows] = await db.query('SELECT * FROM articles WHERE id = ?', [id]);
+		return rows[0];
 	}
 
 	/**
