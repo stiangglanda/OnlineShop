@@ -27,9 +27,9 @@ module.exports = class Article {
 	 * Saves an article to the database.
 	 * @returns {Promise<Article>}
 	 */
-	async findById(id) {
+	static async findById(id) {
 		const [rows] = await db.query('SELECT * FROM articles WHERE id = ?', [id]);
-		return rows[0];
+		return new Article(rows[0].id, rows[0].name, rows[0].description, rows[0].seller);
 	}
 
 	/**

@@ -26,7 +26,8 @@ const createArticle = async (req, res) => {
 };
 
 const getArticle = async (req, res) => {
-	return Article.findById(req.params.id);
+	const article = await Article.findById(req.params.id);
+	return res.status(200).json(article);
 };
 
 const updateArticle = async (req, res) => {
