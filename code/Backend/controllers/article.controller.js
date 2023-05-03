@@ -13,11 +13,11 @@ const createArticle = async (req, res) => {
 	const article = new Article({
 		name: req.body.name,
 		description: req.body.description,
+		price: req.body.price,
 		seller: req.body.seller
 	});
 
 	try {
-		// TODO: validate data
 		const newArticle = article.save();
 		res.status(201).json(newArticle);
 	} catch (error) {
