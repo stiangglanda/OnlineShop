@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid)
     {
       console.log(this.loginForm.value)
+      this.loginForm.reset();
     }else
     {
       ValidateForm.validateAllFormFields(this.loginForm);

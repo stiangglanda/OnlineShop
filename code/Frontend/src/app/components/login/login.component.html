@@ -10,14 +10,14 @@
                     <p class="text-xs mt-4 bg-transparent">If you are already a member, easily log in</p>
         
                     <form [formGroup]="loginForm" class="flex flex-col gap-4">
-                        <div class="input-field" [class.error]="loginForm.controls['username'].dirty && loginForm.hasError('required', 'username')">
-                            <input class="p-2 mt-8 rounded-xl border" formControlName="username" type="email" placeholder="Username">
+                        <div class="" [class.error]="loginForm.controls['username'].dirty && loginForm.hasError('required', 'username')">
+                            <input class="p-2 mt-8 rounded-xl border w-full" formControlName="username" type="email" placeholder="Username">
                         </div>
                         <small 
                             *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required', 'username')" 
                             class="text-danger">*Username is required
                         </small>
-                        <div class="input-field" [class.error]="loginForm.controls['username'].dirty && loginForm.hasError('required', 'username')">
+                        <div class="" [class.error]="loginForm.controls['username'].dirty && loginForm.hasError('required', 'username')">
                             <div class="relative">
                                 <input class="p-2 rounded-xl border w-full" formControlName="password" type="password" placeholder="Password">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" class="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2" viewBox="0 0 16 16">
