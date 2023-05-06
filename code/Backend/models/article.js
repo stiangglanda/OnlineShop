@@ -15,7 +15,7 @@ module.exports = class Article {
 	 */
 	static async list() {
 		const [rows] = await db.query('SELECT * FROM articles');
-		return rows.map((row) => new Article(row.id, row.name, row.description, row.price, row.seller));
+		return rows.map((row) => new Article(row.id, row.name, row.description, row.price, row.seller_id));
 	}
 
 	/**
@@ -24,7 +24,7 @@ module.exports = class Article {
 	 */
 	static async findById(id) {
 		const [rows] = await db.query('SELECT * FROM articles WHERE id = ?', [id]);
-		return new Article(rows[0].id, rows[0].name, rows[0].description, rows[0].price, rows[0].seller);
+		return new Article(rows[0].id, rows[0].name, rows[0].description, rows[0].price, rows[0].seller_id);
 	}
 
 	/**
@@ -41,17 +41,17 @@ module.exports = class Article {
 	 * @returns {Promise<Article>}
 	 */
 	async save() {
-		const [result] = await db.query('INSERT INTO articles (name, description, price, seller_id) VALUES (?, ?, ?, ?)', [this.name, this.description, this.price, this.seller]);
-		this.id = result.insertId;
+		await db.query('INSERT INTO articles (id, name, description, price, seller_id) VALUES (?, ?, ?, ?, ?)', [this.id, this.name, this.description, this.price, this.seller]);
 		return this;
 	}
 
 	/**
 	 * Updates an article in the database.
-	 * @returns {Promise<void>}
+	 * @returns {Article} The updated article.
 	 */
 	async update() {
 		await db.query('UPDATE articles SET name = ?, description = ?, price = ?, seller_id = ? WHERE id = ?', [this.name, this.description, this.price, this.seller, this.id]);
+		return this;
 	}
 
 	/**
@@ -59,6 +59,6 @@ module.exports = class Article {
 	 * @returns {Promise<void>}
 	 */
 	async delete() {
-		await db.query('DELETE FROM articles WHERE id = ?', [this.id]);
+		return await db.query('DELETE FROM articles WHERE id = ?', [this.id]);
 	}
 };
