@@ -12,6 +12,7 @@ app.get('/', function (req, res) {
 });
 
 app.use('/api/articles', require('./routes/articles'));
+app.use('/api/users', require('./routes/users'));
 
 app.listen(3000, function () {
 	console.log('Backend at http://localhost:3000');
