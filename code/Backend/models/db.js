@@ -1,7 +1,7 @@
-const mysql = require('mysql2');
+import { createPool } from 'mysql2';
 
 // create db connection
-const pool = mysql.createPool({
+const pool = createPool({
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
 	password: process.env.DB_PASS,
@@ -19,4 +19,4 @@ pool.getConnection(function (err, conn) {
 });
 
 // export db
-module.exports = pool.promise();
+export default pool.promise();

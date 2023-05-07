@@ -1,6 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const articleCtrl = require('../controllers/article.controller');
+import { Router } from 'express';
+import articleCtrl from '../controllers/article.controller.js';
+const router = Router();
 
 router // /api/articles
 	.route('/')
@@ -13,4 +13,4 @@ router // /api/articles/:id
 	.put(articleCtrl.updateArticle)
 	.delete(articleCtrl.deleteArticle);
 
-module.exports = router;
+export default router;

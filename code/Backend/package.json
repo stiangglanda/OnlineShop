@@ -6,6 +6,7 @@
   "author": "",
   "license": "ISC",
   "description": "Backend for Amazon++",
+  "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"

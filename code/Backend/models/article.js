@@ -1,6 +1,6 @@
-const db = require('./db');
+import db from './db.js';
 
-module.exports = class Article {
+export default class Article {
 	constructor(id, name, description, price, seller) {
 		this.id = id;
 		this.name = name;
@@ -61,4 +61,4 @@ module.exports = class Article {
 	async delete() {
 		return await db.query('DELETE FROM articles WHERE id = ?', [this.id]);
 	}
-};
+}

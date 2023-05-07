@@ -1,7 +1,7 @@
-const bcrypt = require('bcrypt');
-const db = require('./db');
+import bcrypt from 'bcrypt';
+import db from './db.js';
 
-module.exports = class User {
+export default class User {
 	constructor(id, username, firstname, lastname, email, password, balance, token) {
 		this.id = id;
 		this.username = username;
@@ -45,7 +45,16 @@ module.exports = class User {
 	 * @returns {Promise<User>}
 	 */
 	async save() {
-		await db.query('INSERT INTO users (id, username, firstname, lastname, email, password, balance, token) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [this.id, this.username, this.firstname, this.lastname, this.email, this.password, this.balance, this.token]);
+		await db.query('INSERT INTO users (id, username, firstname, lastname, email, password, balance, token) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [
+			this.id,
+			this.username,
+			this.firstname,
+			this.lastname,
+			this.email,
+			this.password,
+			this.balance,
+			this.token
+		]);
 		return this;
 	}
 
@@ -54,7 +63,16 @@ module.exports = class User {
 	 * @returns {User} The updated user.
 	 */
 	async update() {
-		await db.query('UPDATE users SET username = ?, firstname = ?, lastname = ?, email = ?, password = ?, balance = ?, token = ? WHERE id = ?', [this.username, this.firstname, this.lastname, this.email, this.password, this.balance, this.token, this.id]);
+		await db.query('UPDATE users SET username = ?, firstname = ?, lastname = ?, email = ?, password = ?, balance = ?, token = ? WHERE id = ?', [
+			this.username,
+			this.firstname,
+			this.lastname,
+			this.email,
+			this.password,
+			this.balance,
+			this.token,
+			this.id
+		]);
 		return this;
 	}
 
@@ -65,4 +83,4 @@ module.exports = class User {
 	async delete() {
 		return await db.query('DELETE FROM users WHERE id = ?', [this.id]);
 	}
-};
+}
