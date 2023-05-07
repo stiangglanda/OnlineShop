@@ -32,6 +32,15 @@ export default class User {
 	}
 
 	/**
+	 * Finds an user by their email.
+	 * @returns {Promise<User>}
+	 */
+	static async findByEmail(email) {
+		const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+		return new User(rows[0].id, rows[0].username, rows[0].firstname, rows[0].lastname, rows[0].email, rows[0].password, rows[0].balance, rows[0].token);
+	}
+
+	/**
 	 * Gets the next id for a new user.
 	 * @returns {number}
 	 */

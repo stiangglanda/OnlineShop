@@ -15,11 +15,52 @@ const getUsers = async (req, res) => {
 const register = async (req, res) => {
 	try {
 		const { username, firstname, lastname, email, password, balance, token } = req.body;
-		const id = await nextId();		
+
+		// check if all required fields are provided
+		if (!username || !firstname || !lastname || !email || !password || !balance || !token) {
+			return res.status(400).json({ message: 'Please provide all required fields.' });
+		}
+
+		// check if user already exists
+		if (await User.findByEmail(email)) {
+			return res.status(400).json({ message: 'This user already exists.' });
+		}
+
+		// hash password
 		const hashedPassword = await hash(password, 10);
-		const user = new User(id, username, firstname, lastname, email, hashedPassword, balance, token);
+
+		// create new user
+		const user = new User(await User.nextId(), username, firstname, lastname, email, hashedPassword, balance, token);
 		await user.save();
+
+		// respond with user
 		res.status(201).json(user);
+	} catch (error) {
+		res.status(400).json({ message: error.message });
+	}
+};
+
+// login an user
+const login = async (req, res) => {
+	try {
+		const { email, password } = req.body;
+
+		if (!email || !password) {
+			return res.status(400).json({ message: 'Please provide all required fields.' });
+		}
+
+		const user = await User.findByEmail(email);
+		if (!user) {
+			return res.status(400).json({ message: 'This user does not exist.' });
+		}
+
+		// check if password is correct
+		if (!(await compare(password, user.password))) {
+			return res.status(400).json({ message: 'Password is incorrect.' });
+		}
+
+		// respond with user
+		res.status(200).json(user);
 	} catch (error) {
 		res.status(400).json({ message: error.message });
 	}
@@ -69,7 +110,8 @@ const deleteUser = async (req, res) => {
 
 export default {
 	getUsers,
-	createUser: register,
+	register,
+	login,
 	getUser,
 	updateUser,
 	deleteUser
