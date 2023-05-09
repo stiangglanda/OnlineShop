@@ -12,7 +12,7 @@ app.use(urlencoded({ extended: true }));
 
 app.use('/api/articles', articlesRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/transactions', transactionsRouter);
+app.use('/api/trans', transactionsRouter);
 
 
 app.listen(3000, function () {

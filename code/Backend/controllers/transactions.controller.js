@@ -11,13 +11,12 @@ const createTransaction = async (req, res) => {
 };
 
 const getbuyerTransaction = async (req, res) => {
-    console.log("aaa")
-    const transaction = await Transaction.findBybuyerId(req.params.id);
-    return res.status(200).json(transaction);
-	// try {
-	// } catch (error) {
-	// 	return res.status(404).json({ message: 'Could not find this transaction.' });
-	// }
+	try {
+        const transaction = await Transaction.findBybuyerId(req.params.id);
+        return res.status(200).json(transaction);
+	} catch (error) {
+		return res.status(404).json({ message: 'Could not find this transaction.' });
+	}
 };
 
 const getsellerTransaction = async (req, res) => {
