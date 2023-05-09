@@ -9,8 +9,8 @@ export default class Transaction {
 	}
 
 	/**
-	 * Finds an article by id.
-	 * @returns {Promise<Article>}
+	 * Finds a Transaction by buyer id.
+	 * @returns {Promise<Transaction>}
 	 */
 	static async findBybuyerId(id) {
 		const [rows] = await db.query('select * from transactions where buyer_id=?', [id]);
@@ -18,8 +18,8 @@ export default class Transaction {
 	}
 
 	/**
-	 * Finds an article by id.
-	 * @returns {Promise<Article>}
+	 * Finds a Transaction by seller id.
+	 * @returns {Promise<Transaction>}
 	 */
 	static async findBysellerId(id) {
 		const [rows] = await db.query('select * from transactions where seller_id=?', [id]);
@@ -27,7 +27,7 @@ export default class Transaction {
 	}
 
 	/**
-	 * Gets the next id for a new article.
+	 * Gets the next id for a new Transaction.
 	 * @returns {number}
 	 */
 	static async nextId() {
@@ -36,7 +36,7 @@ export default class Transaction {
 	}
 
 	/**
-	 * Saves an article in the database.
+	 * Saves a Transaction in the database.
 	 * @returns {Promise<Article>}
 	 */
 	async save() {
