@@ -9,6 +9,7 @@ import { ShopListContentComponent } from './components/content/shop-list-content
 import { SignupComponent } from './components/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
+import { TransactionsComponent } from './components/transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { UserprofileComponent } from './components/userprofile/userprofile.compo
     LoginComponent,
     ShopListContentComponent,
     SignupComponent,
-    UserprofileComponent
+    UserprofileComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserModule,
