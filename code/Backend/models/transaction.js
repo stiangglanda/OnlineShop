@@ -12,6 +12,15 @@ export default class Transaction {
 	 * Finds a Transaction by buyer id.
 	 * @returns {Promise<Transaction>}
 	 */
+	static async list() {
+		const [rows] = await db.query('select * from transaction',);
+		return rows.map((row) => new Transaction(row.id, row.seller_id, row.buyer_id, row.article_id));
+	}
+
+	/**
+	 * Finds a Transaction by buyer id.
+	 * @returns {Promise<Transaction>}
+	 */
 	static async findBybuyerId(id) {
 		const [rows] = await db.query('select * from transaction where buyer_id=?', [id]);
 		return rows.map((row) => new Transaction(row.id, row.seller_id, row.buyer_id, row.article_id));
