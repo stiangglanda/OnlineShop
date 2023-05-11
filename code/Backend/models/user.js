@@ -2,14 +2,16 @@ import bcrypt from 'bcrypt';
 import db from './db.js';
 
 export default class User {
-	constructor(id, username, firstname, lastname, email, password, balance, token) {
+	constructor(id, status, username, firstname, lastname, email, password, balance, address_id, token) {
 		this.id = id;
+		this.status = status;
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.password = password;
 		this.balance = balance;
+		this.address_id = address_id;
 		this.token = token;
 	}
 
@@ -19,7 +21,7 @@ export default class User {
 	 */
 	static async list() {
 		const [rows] = await db.query('SELECT * FROM user');
-		return rows.map((row) => new User(row.id, row.username, row.firstname, row.lastname, row.email, row.password, row.balance, row.token));
+		return rows.map((row) => new User(row.id, row.status, row.username, row.firstname, row.lastname, row.email, row.password, row.balance, row.address_id, row.token));
 	}
 
 	/**
@@ -28,7 +30,7 @@ export default class User {
 	 */
 	static async findById(id) {
 		const [rows] = await db.query('SELECT * FROM user WHERE id = ?', [id]);
-		return new User(rows[0].id, rows[0].username, rows[0].firstname, rows[0].lastname, rows[0].email, rows[0].password, rows[0].balance, rows[0].token);
+		return new User(rows[0].id, rows[0].status, rows[0].username, rows[0].firstname, rows[0].lastname, rows[0].email, rows[0].password, rows[0].balance, rows[0].address_id, rows[0].token);
 	}
 
 	/**
@@ -37,7 +39,12 @@ export default class User {
 	 */
 	static async findByEmail(email) {
 		const [rows] = await db.query('SELECT * FROM user WHERE email = ?', [email]);
-		return new User(rows[0].id, rows[0].username, rows[0].firstname, rows[0].lastname, rows[0].email, rows[0].password, rows[0].balance, rows[0].token);
+
+		if (rows.length === 0) {
+			return null;
+		}
+
+		return new User(rows[0].id, rows[0].status, rows[0].username, rows[0].firstname, rows[0].lastname, rows[0].email, rows[0].password, rows[0].balance, rows[0].address_id, rows[0].token);
 	}
 
 	/**
@@ -54,14 +61,16 @@ export default class User {
 	 * @returns {Promise<User>}
 	 */
 	async save() {
-		await db.query('INSERT INTO user (id, username, firstname, lastname, email, password, balance, token) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [
+		await db.query('INSERT INTO user (id, status, username, firstname, lastname, email, password, balance, address_id, token) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
 			this.id,
+			this.status,
 			this.username,
 			this.firstname,
 			this.lastname,
 			this.email,
 			this.password,
 			this.balance,
+			this.address_id,
 			this.token
 		]);
 		return this;
@@ -69,16 +78,18 @@ export default class User {
 
 	/**
 	 * Updates an user in the database.
-	 * @returns {User} The updated user.
+	 * @returns {Promise<User>} The updated user.
 	 */
 	async update() {
-		await db.query('UPDATE user SET username = ?, firstname = ?, lastname = ?, email = ?, password = ?, balance = ?, token = ? WHERE id = ?', [
+		await db.query('UPDATE user SET status = ?, username = ?, firstname = ?, lastname = ?, email = ?, password = ?, balance = ?, address_id = ?, token = ? WHERE id = ?', [
+			this.status,
 			this.username,
 			this.firstname,
 			this.lastname,
 			this.email,
 			this.password,
 			this.balance,
+			this.address_id,
 			this.token,
 			this.id
 		]);
@@ -86,10 +97,10 @@ export default class User {
 	}
 
 	/**
-	 * Deletes an user from the database.
+	 * Disables an user in the database.
 	 * @returns {Promise<void>}
 	 */
-	async delete() {
-		return await db.query('DELETE FROM user WHERE id = ?', [this.id]);
+	async disable() {
+		return await db.query('UPDATE user SET status = 0 WHERE id = ?', [this.id]);
 	}
 }

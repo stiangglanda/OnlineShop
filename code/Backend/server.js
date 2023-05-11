@@ -11,6 +11,11 @@ const app = express();
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
+// redirect to /api/ when accessing /
+app.get('/', (req, res) => {
+	res.redirect('/api/');
+});
+
 app.use('/api/articles', articlesRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/transactions', transactionsRouter);

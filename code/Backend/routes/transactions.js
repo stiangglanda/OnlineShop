@@ -4,8 +4,7 @@ const router = Router();
 
 router // /api/transaction
 	.route('/')
-	.post(transactionsCtrl.createTransaction)
-	.get(transactionsCtrl.getTransactions);
+	.post(transactionsCtrl.createTransaction);
 
 router // /api/transaction/buyer/:id
 	.route('/buyer/:id')

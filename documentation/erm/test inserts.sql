@@ -29,13 +29,13 @@ VALUES (3, 3, 1);
 
 
 INSERT INTO user (username, firstname, lastname, email, password, balance, address_id, token)
-VALUES ('thistim', 'Tim', 'Hofmann', 'timhofmann01@gmail.com', '1234', 99999, 2, '1234');
+VALUES ('thistim', 'Tim', 'Hofmann', 'timhofmann01@gmail.com', '$2b$10$zNAGq/LGwGMBIlWoCEDxFO6E70mWQfAkgRxmC0YQXTaD9fNVVTRfe', 99999, 2, '1234');
 
 INSERT INTO user (username, firstname, lastname, email, password, balance, address_id, token)
-VALUES ('stiangglanda', 'Leander', 'Kieweg', 'kieweg.leander@gmail.com', '1234', 99999, 3, '1234');
+VALUES ('stiangglanda', 'Leander', 'Kieweg', 'kieweg.leander@gmail.com', '$2b$10$zNAGq/LGwGMBIlWoCEDxFO6E70mWQfAkgRxmC0YQXTaD9fNVVTRfe', 99999, 3, '1234');
 
 INSERT INTO user (username, firstname, lastname, email, password, balance, address_id, token)
-VALUES ('TimeskateHD', 'Maximilian', 'Schernhuber', 'max.schernhuber@students.bs-linz2.ac.at', '1234', 99999, 1, '1234');
+VALUES ('TimeskateHD', 'Maximilian', 'Schernhuber', 'max.schernhuber@students.bs-linz2.ac.at', '$2b$10$zNAGq/LGwGMBIlWoCEDxFO6E70mWQfAkgRxmC0YQXTaD9fNVVTRfe', 99999, 1, '1234');
 
 
 INSERT INTO article (status, name, description, price, seller_id)
