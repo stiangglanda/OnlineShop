@@ -81,17 +81,35 @@ const updateUser = async (req, res) => {
 		const user = await User.findById(req.params.id);
 		const { status, username, firstname, lastname, email, password, balance, address_id, token } = req.body; // address
 
+		if (username) {
+			// check if username is already taken
+			if (await User.findByUsername(username)) {
+				return res.status(400).json({ message: 'This username is already taken.' });
+			}
+			user.username = username;
+		}
+
+		if (email) {
+			// check if email is already taken
+			if (await User.findByEmail(email)) {
+				return res.status(400).json({ message: 'This email is already in use.' });
+			}
+			user.email = email;
+		}
+
+		if (password) {
+			// hash password
+			const hashedPassword = await hash(password, 10);
+			user.password = hashedPassword;
+		}
+
 		if (status) user.status = status;
-		if (username) user.username = username;
 		if (firstname) user.firstname = firstname;
 		if (lastname) user.lastname = lastname;
-		if (email) user.email = email;
-		if (password) user.password = password;
-		if (balance) user.balance = balance;
+		if (balance) user.balance = balance * -1;
 		if (address_id) user.address_id = address_id;
 		if (token) user.token = token;
 
-		
 		const updatedUser = await user.update();
 		res.status(200).json(updatedUser);
 	} catch (error) {
