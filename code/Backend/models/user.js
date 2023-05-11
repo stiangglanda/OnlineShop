@@ -18,7 +18,7 @@ export default class User {
 	 * @returns {Promise<Array<User>>}
 	 */
 	static async list() {
-		const [rows] = await db.query('SELECT * FROM users');
+		const [rows] = await db.query('SELECT * FROM user');
 		return rows.map((row) => new User(row.id, row.username, row.firstname, row.lastname, row.email, row.password, row.balance, row.token));
 	}
 
@@ -27,7 +27,7 @@ export default class User {
 	 * @returns {Promise<User>}
 	 */
 	static async findById(id) {
-		const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [id]);
+		const [rows] = await db.query('SELECT * FROM user WHERE id = ?', [id]);
 		return new User(rows[0].id, rows[0].username, rows[0].firstname, rows[0].lastname, rows[0].email, rows[0].password, rows[0].balance, rows[0].token);
 	}
 
@@ -36,7 +36,7 @@ export default class User {
 	 * @returns {Promise<User>}
 	 */
 	static async findByEmail(email) {
-		const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+		const [rows] = await db.query('SELECT * FROM user WHERE email = ?', [email]);
 		return new User(rows[0].id, rows[0].username, rows[0].firstname, rows[0].lastname, rows[0].email, rows[0].password, rows[0].balance, rows[0].token);
 	}
 
@@ -45,7 +45,7 @@ export default class User {
 	 * @returns {number}
 	 */
 	static async nextId() {
-		const [rows] = await db.query('SELECT MAX(id) AS max_id FROM users');
+		const [rows] = await db.query('SELECT MAX(id) AS max_id FROM user');
 		return rows[0].max_id + 1;
 	}
 
@@ -54,7 +54,7 @@ export default class User {
 	 * @returns {Promise<User>}
 	 */
 	async save() {
-		await db.query('INSERT INTO users (id, username, firstname, lastname, email, password, balance, token) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [
+		await db.query('INSERT INTO user (id, username, firstname, lastname, email, password, balance, token) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [
 			this.id,
 			this.username,
 			this.firstname,
@@ -72,7 +72,7 @@ export default class User {
 	 * @returns {User} The updated user.
 	 */
 	async update() {
-		await db.query('UPDATE users SET username = ?, firstname = ?, lastname = ?, email = ?, password = ?, balance = ?, token = ? WHERE id = ?', [
+		await db.query('UPDATE user SET username = ?, firstname = ?, lastname = ?, email = ?, password = ?, balance = ?, token = ? WHERE id = ?', [
 			this.username,
 			this.firstname,
 			this.lastname,
@@ -90,6 +90,6 @@ export default class User {
 	 * @returns {Promise<void>}
 	 */
 	async delete() {
-		return await db.query('DELETE FROM users WHERE id = ?', [this.id]);
+		return await db.query('DELETE FROM user WHERE id = ?', [this.id]);
 	}
 }

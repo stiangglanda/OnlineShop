@@ -14,7 +14,7 @@ export default class Article {
 	 * @returns {Promise<Array<Article>>}
 	 */
 	static async list() {
-		const [rows] = await db.query('SELECT * FROM articles');
+		const [rows] = await db.query('SELECT * FROM article');
 		return rows.map((row) => new Article(row.id, row.name, row.description, row.price, row.seller_id));
 	}
 
@@ -23,7 +23,7 @@ export default class Article {
 	 * @returns {Promise<Article>}
 	 */
 	static async findById(id) {
-		const [rows] = await db.query('SELECT * FROM articles WHERE id = ?', [id]);
+		const [rows] = await db.query('SELECT * FROM article WHERE id = ?', [id]);
 		return new Article(rows[0].id, rows[0].name, rows[0].description, rows[0].price, rows[0].seller_id);
 	}
 
@@ -32,7 +32,7 @@ export default class Article {
 	 * @returns {number}
 	 */
 	static async nextId() {
-		const [rows] = await db.query('SELECT MAX(id) AS max_id FROM articles');
+		const [rows] = await db.query('SELECT MAX(id) AS max_id FROM article');
 		return rows[0].max_id + 1;
 	}
 
@@ -41,7 +41,7 @@ export default class Article {
 	 * @returns {Promise<Article>}
 	 */
 	async save() {
-		await db.query('INSERT INTO articles (id, name, description, price, seller_id) VALUES (?, ?, ?, ?, ?)', [this.id, this.name, this.description, this.price, this.seller]);
+		await db.query('INSERT INTO article (id, name, description, price, seller_id) VALUES (?, ?, ?, ?, ?)', [this.id, this.name, this.description, this.price, this.seller]);
 		return this;
 	}
 
@@ -50,7 +50,7 @@ export default class Article {
 	 * @returns {Article} The updated article.
 	 */
 	async update() {
-		await db.query('UPDATE articles SET name = ?, description = ?, price = ?, seller_id = ? WHERE id = ?', [this.name, this.description, this.price, this.seller, this.id]);
+		await db.query('UPDATE article SET name = ?, description = ?, price = ?, seller_id = ? WHERE id = ?', [this.name, this.description, this.price, this.seller, this.id]);
 		return this;
 	}
 
@@ -59,6 +59,6 @@ export default class Article {
 	 * @returns {Promise<void>}
 	 */
 	async delete() {
-		return await db.query('DELETE FROM articles WHERE id = ?', [this.id]);
+		return await db.query('DELETE FROM article WHERE id = ?', [this.id]);
 	}
 }
