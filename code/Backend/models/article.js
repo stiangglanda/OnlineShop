@@ -30,7 +30,7 @@ export default class Article {
 
 	/**
 	 * Gets the next id for a new article.
-	 * @returns {number} The next id.
+	 * @returns {Promise<number>} The next id.
 	 */
 	static async nextId() {
 		const [rows] = await db.query('SELECT MAX(id) AS max_id FROM article');
