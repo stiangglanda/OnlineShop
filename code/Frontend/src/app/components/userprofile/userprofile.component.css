@@ -133,7 +133,7 @@ body{
     }
     
     .view-account .content-panel .avatar .figure img {
-    float: right;
+    float: left;
     width: 64px
     }
     
