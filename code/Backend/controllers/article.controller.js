@@ -3,15 +3,17 @@ import Article from '../models/article.js';
 const getArticles = async (req, res) => {
 	try {
 		const articles = await Article.list();
-		res.json(articles);
+		res.status(200).json(articles);
 	} catch (error) {
-		res.status(500).json({ message: 'There is no articles.' });
+		res.status(404).json({ message: 'There is no articles.' });
 	}
 };
 
 const createArticle = async (req, res) => {
 	const id = await Article.nextId();
-	const article = new Article(id, req.body.name, req.body.description, req.body.price, req.body.seller);
+	const { name, description, price, seller_id } = req.body || null;
+
+	const article = new Article(id, 1, name, description, price * -1, seller_id);
 	try {
 		res.status(201).json(await article.save());
 	} catch (error) {
@@ -32,14 +34,15 @@ const getArticle = async (req, res) => {
 const updateArticle = async (req, res) => {
 	try {
 		const article = await Article.findById(req.params.id);
-		const { name, description, price, seller } = req.body;
+		const { status, name, description, price, seller_id } = req.body || null;
 
+		if (status) article.status = status;
 		if (name) article.name = name;
 		if (description) article.description = description;
 		if (price) article.price = price;
-		if (seller) article.seller = seller;
+		if (seller_id) article.seller_id = seller_id;
 
-		const updatedArticle = article.update();
+		const updatedArticle = await article.update();
 		res.status(200).json(updatedArticle);
 	} catch (error) {
 		res.status(400).json({ message: error.message });
@@ -47,11 +50,11 @@ const updateArticle = async (req, res) => {
 };
 
 // deletes an article from the database
-const deleteArticle = async (req, res) => {
+const disableArticle = async (req, res) => {
 	try {
 		const article = await Article.findById(req.params.id);
-		await article.delete();
-		res.status(200).json({ message: `The article ${article.id} has been deleted.` });
+		await article.disable();
+		res.status(200).json({ message: `The article ${article.id} has been disabled.` });
 	} catch (error) {
 		res.status(400).json({ message: error.message });
 	}
@@ -62,5 +65,5 @@ export default {
 	createArticle,
 	getArticle,
 	updateArticle,
-	deleteArticle
+	disableArticle
 };

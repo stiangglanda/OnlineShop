@@ -12,6 +12,7 @@ const pool = createPool({
 pool.getConnection(function (err, conn) {
 	if (err) {
 		console.log('Error connecting to database!');
+		console.log(err);
 		return;
 	}
 	console.log(`Connected to database ${pool.config.connectionConfig.database} on port ${pool.config.connectionConfig.port}`);
