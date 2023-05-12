@@ -24,8 +24,8 @@ export default class Article {
 	 * @returns {Promise<Article>} The article.
 	 */
 	static async findById(id) {
-		const [rows] = await db.query('SELECT * FROM article WHERE id = ?', [id]);
-		return new Article(rows[0].id, rows[0].status, rows[0].name, rows[0].description, rows[0].price, rows[0].seller_id);
+		const [articles] = await db.query('SELECT * FROM article WHERE id = ?', [id]);
+		return new Article(articles[0].id, articles[0].status, articles[0].name, articles[0].description, articles[0].price, articles[0].seller_id);
 	}
 
 	/**
@@ -33,8 +33,8 @@ export default class Article {
 	 * @returns {Promise<number>} The next id.
 	 */
 	static async nextId() {
-		const [rows] = await db.query('SELECT MAX(id) AS max_id FROM article');
-		return rows[0].max_id + 1;
+		const [articles] = await db.query('SELECT MAX(id) AS max_id FROM article');
+		return articles[0].max_id + 1;
 	}
 
 	/**
@@ -42,7 +42,14 @@ export default class Article {
 	 * @returns {Promise<Article>} The saved article.
 	 */
 	async save() {
-		await db.query('INSERT INTO article (id, status, name, description, price, seller_id) VALUES (?, ?, ?, ?, ?, ?)', [this.id, this.status, this.name, this.description, this.price, this.seller_id]);
+		await db.query('INSERT INTO article (id, status, name, description, price, seller_id) VALUES (?, ?, ?, ?, ?, ?)', [
+			this.id,
+			this.status,
+			this.name,
+			this.description,
+			this.price,
+			this.seller_id
+		]);
 		return this;
 	}
 
@@ -51,7 +58,14 @@ export default class Article {
 	 * @returns {Promise<Article>} The updated article.
 	 */
 	async update() {
-		await db.query('UPDATE article SET name = ?, status = ?, description = ?, price = ?, seller_id = ? WHERE id = ?', [this.name, this.status, this.description, this.price, this.seller_id, this.id]);
+		await db.query('UPDATE article SET name = ?, status = ?, description = ?, price = ?, seller_id = ? WHERE id = ?', [
+			this.name,
+			this.status,
+			this.description,
+			this.price,
+			this.seller_id,
+			this.id
+		]);
 		return this;
 	}
 
