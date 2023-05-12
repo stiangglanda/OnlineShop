@@ -11,9 +11,9 @@ const getArticles = async (req, res) => {
 
 const createArticle = async (req, res) => {
 	const id = await Article.nextId();
-	const { name, description, price, seller_id } = req.body || null;
+	const { name, description, price, seller_id, categories, images } = req.body || null;
 
-	const article = new Article(id, 1, name, description, price * -1, seller_id);
+	const article = new Article(id, 1, name, description, Math.abs(price), seller_id, categories, images);
 	try {
 		res.status(201).json(await article.save());
 	} catch (error) {
@@ -22,6 +22,13 @@ const createArticle = async (req, res) => {
 };
 
 const getArticle = async (req, res) => {
+	try {
+		const article = await Article.findById(req.params.id);
+		return res.status(200).json(article);
+	} catch (error) {
+		return res.status(404).json({ message: 'Could not find this article.' });
+	}
+
 	try {
 		const article = await Article.findById(req.params.id);
 		return res.status(200).json(article);
