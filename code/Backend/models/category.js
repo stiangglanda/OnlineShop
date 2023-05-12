@@ -23,4 +23,13 @@ export default class Category {
 		const [rows] = await db.query('SELECT * FROM category WHERE id = ?', [id]);
 		return new Category(rows[0].id, rows[0].name);
 	}
+
+	/**
+	 * Finds an Categorie by name.
+	 * @returns {Promise<Category>}
+	 */
+	static async findByName(name) {
+		const [rows] = await db.query('SELECT * FROM category WHERE name = ?', [name]);
+		return new Category(rows[0].id, rows[0].name);
+	}
 }

@@ -1,4 +1,5 @@
 import db from './db.js';
+import Category from './category.js';
 
 export default class Article {
 	constructor(id, status, name, description, price, seller_id, categories, images) {
@@ -77,11 +78,13 @@ export default class Article {
 		await db.query('INSERT INTO article (id, status, name, description, price, seller_id) VALUES (?, ?, ?, ?, ?, ?)', [this.id, this.status, this.name, this.description, this.price, this.seller_id]);
 		
 		for (let i = 0; i < this.categories.length; i++) {
-			await db.query('INSERT INTO article_category (article_id, category_id) VALUES (?, ?)', [this.id, this.categories[i]]);
+			const cat_name=await Category.findByName(this.categories[i].name);
+			console.log(cat_name);
+			await db.query('INSERT INTO article_category (article_id, category_id) VALUES (?, ?)', [this.id, cat_name.id]);
 		}
 
 		for (let i = 0; i < this.images.length; i++) {
-			await db.query('INSERT INTO image (url, article_id) VALUES (?, ?)', [this.images[i],this.id, ]);
+			await db.query('INSERT INTO image (url, article_id) VALUES (?, ?)', [this.images[i].url,this.id]);
 		}
 		return this;
 	}
