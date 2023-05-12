@@ -13,11 +13,11 @@ export default class Article {
 	}
 
 	/**
-	 * Lists all articles.
+	 * Lists all enabled articles.
 	 * @returns {Promise<Array<Article>>} The articles.
 	 */
 	static async list() {
-		const [rows] = await db.query('SELECT * FROM article');
+		const [rows] = await db.query('SELECT * FROM article WHERE status = 1');
 		return rows.map((row) => new Article(row.id, row.status, row.name, row.description, row.price, row.seller_id));
 	}
 
@@ -32,7 +32,7 @@ export default class Article {
 
 	/**
 	 * Gets the next id for a new article.
-	 * @returns {number} The next id.
+	 * @returns {Promise<number>} The next id.
 	 */
 	static async nextId() {
 		const [rows] = await db.query('SELECT MAX(id) AS max_id FROM article');

@@ -26,25 +26,32 @@ export default class User {
 
 	/**
 	 * Finds an user by id.
+	 * @param {number} id
 	 * @returns {Promise<User>}
 	 */
 	static async findById(id) {
 		const [rows] = await db.query('SELECT * FROM user WHERE id = ?', [id]);
-		return new User(rows[0].id, rows[0].status, rows[0].username, rows[0].firstname, rows[0].lastname, rows[0].email, rows[0].password, rows[0].balance, rows[0].address_id, rows[0].token);
+		return new User(rows[0].id, rows[0].status, rows[0].username, rows[0].firstname, rows[0].lastname, rows[0].email, rows[0].password, rows[0].balance, rows[0].address_id, rows[0].token) || null;
+	}
+
+	/**
+	 * Finds an user by their username.
+	 * @param {string} username
+	 * @returns {Promise<User>}
+	 */
+	static async findByUsername(username) {
+		const [rows] = await db.query('SELECT * FROM user WHERE username = ?', [username]);
+		return new User(rows[0].id, rows[0].status, rows[0].username, rows[0].firstname, rows[0].lastname, rows[0].email, rows[0].password, rows[0].balance, rows[0].address_id, rows[0].token) || null;
 	}
 
 	/**
 	 * Finds an user by their email.
+	 * @param {string} email
 	 * @returns {Promise<User>}
 	 */
 	static async findByEmail(email) {
 		const [rows] = await db.query('SELECT * FROM user WHERE email = ?', [email]);
-
-		if (rows.length === 0) {
-			return null;
-		}
-
-		return new User(rows[0].id, rows[0].status, rows[0].username, rows[0].firstname, rows[0].lastname, rows[0].email, rows[0].password, rows[0].balance, rows[0].address_id, rows[0].token);
+		return new User(rows[0].id, rows[0].status, rows[0].username, rows[0].firstname, rows[0].lastname, rows[0].email, rows[0].password, rows[0].balance, rows[0].address_id, rows[0].token) || null;
 	}
 
 	/**
