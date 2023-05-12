@@ -1,121 +1,56 @@
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-              </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-    </nav>
-    <div class="container mt-3">
-        <div class="view-account">
-            <section class="module">
-                <div class="module-inner">
-                    <div class="side-bar">
-                        <div class="user-info">
-                            <!--ToDo load picture from database so we can update it on the fly-->
-                            <img class="img-profile img-circle img-responsive center-block" src="/../../../assets/images/Profilepic1.webp" alt="">
-                            <ul class="meta list list-unstyled">
-                                <li class="name">Barack Obama
-                                    <label class="label label-info">Web Developer</label>
-                                </li>
-                                <li class="email"><a href="#">Barack.O@Bama.com</a></li>
-                                <li class="activity">Last logged in: Today at 2:18pm</li>
-                            </ul>
-                        </div>
-                        <nav class="side-menu">
-                            <ul class="nav">
-                                <li><a href="#"><span class="fa fa-user"></span> Profile</a></li>
-                                <li class="active"><a href="#"><span class="fa fa-credit-card"></span> Billing</a></li>
-                                <li><a href="#"><span class="fa fa-envelope"></span> Messages</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="content-panel">
-                        <h2 class="title">Profile<span class="pro-label label label-warning">PRO</span></h2>
-                        <form class="form-horizontal">
-                            <fieldset class="fieldset">
-                                <h3 class="fieldset-title">Personal Info</h3>
-                                <div class="form-group avatar">
-                                    <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                                        <img class="img-rounded img-responsive" src="/../../../assets/images/Profilepic1.webp" alt=""> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
-                                    </figure>
-                                    <div class="form-inline col-md-10 col-sm-9 col-xs-12 text-left">
-                                        <input type="file" class="file-uploader pull-left">
-                                        <button type="submit" class="btn btn-sm btn-default-alt pull-left">Update Image</button>
-                                    </div>
-                                </div><br>
-                                <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">User Name</label>
-                                    <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" class="form-control" placeholder="BerryO'"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
-                                    </div>
-                                </div>
-            
-                                <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name</label>
-                                    <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" class="form-control" placeholder="Barack"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>
-                                    <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" class="form-control" placeholder="Obama"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <fieldset class="fieldset">
-                                <h3 class="fieldset-title">Contact Info</h3>
-                                <div class="form-group">
-                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">E-Mail</label>
-                                    <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="email" class="form-control" placeholder="Barack.O@Bama.com"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Phone Number</label>
-                                    <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" class="form-control" placeholder="+43 660 123456"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
-                                    </div>
-                                </div>  
-                            </fieldset>
-                            <hr><br>
-                            <div class="form-group">
-                                <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-                                    <input class="btn btn-primary bg-blue-400" type="submit" placeholder="Update Profile">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
+	<div class="container mt-3">
+		<div class="view-account">
+			<section class="module">
+				<div class="module-inner">
+					<div class="side-bar">
+						<div class="user-info">
+							<!--ToDo load picture from database so we can update it on the fly-->
+							<img class="img-profile img-circle img-responsive center-block" src="/../../../assets/images/Profilepic1.webp" alt="">
+							<ul class="meta list list-unstyled">
+								<li class="name">Barack Obama
+									<label class="label label-info">Web Developer</label>
+								</li>
+								<li class="email"><a href="#">Barack.O@Bama.com</a></li>
+								<li class="activity">Last logged in: Today at 2:18pm</li>
+							</ul>
+						</div>
+						<nav class="side-menu">
+							<ul class="nav">
+								<li><a routerLink="/userprofile"><span class="fa fa-user"></span> Profile</a></li>
+								<li class="active"><a><span class="fa fa-credit-card"></span> Billing</a></li>
+								<li><a routerLink="/messages"><span class="fa fa-envelope"></span> Messages</a></li>
+							</ul>
+						</nav>
+					</div>
+					<div class="content-panel">
+						
+						<h2 class="title">Wallet</h2>
+						<form class="form-horizontal">
+							<fieldset class="fieldset">
+								<h3 class="fieldset-title">Here you can deposit money to increase your balance</h3>
+								
+							</fieldset>
+						</form>
+						<h2 class="title">Transactions</h2>
+						<form class="form-horizontal">
+							<fieldset class="fieldset">
+								<h3 class="fieldset-title">Here's your transaction history</h3>
+							</fieldset>
+							<div class="card">
+								<div class="card-header">
+									header
+								</div>
+								<div class="card-body">
+									body
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="content-panel">
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
 </body>

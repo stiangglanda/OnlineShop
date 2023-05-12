@@ -10,6 +10,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TransactionsComponent } from './components/transactions/transactions.co
     ShopListContentComponent,
     SignupComponent,
     UserprofileComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

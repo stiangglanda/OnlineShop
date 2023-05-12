@@ -52,7 +52,7 @@ body{
     }
     
     .view-account .side-bar .side-menu {
-    text-align: center
+    text-align: center;
     }
     
     .view-account .side-bar .side-menu .nav {
@@ -130,6 +130,14 @@ body{
     margin-bottom: 30px;
     color: #616670;
     font-size: 16px
+    }
+
+    .view-account .content-panel .card {
+        margin-bottom: 2.2rem;
+        border: none;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 25px 0 rgba(0,0,0,.1);
+        transition: all .3s ease-in-out;
     }
     
     .view-account .content-panel .avatar .figure img {
