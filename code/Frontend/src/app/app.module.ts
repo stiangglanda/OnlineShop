@@ -10,6 +10,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { TransactionsComponent } from './components/transactions/transactions.co
     ShopListContentComponent,
     SignupComponent,
     UserprofileComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
