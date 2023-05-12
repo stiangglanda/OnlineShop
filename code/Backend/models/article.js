@@ -57,8 +57,26 @@ export default class Article {
 	 * @returns {Promise<Article>} The article.
 	 */
 	static async findById(id) {
-		const [rows] = await db.query('SELECT * FROM article WHERE id = ?', [id]);
-		return new Article(rows[0].id, rows[0].status, rows[0].name, rows[0].description, rows[0].price, rows[0].seller_id);
+		const [article] = await db.query('SELECT * FROM article WHERE id = ?', [id]);
+
+		let [images] = await db.query('SELECT id, url, article_id FROM image where article_id=?', [id]);
+		images = images.map((image) => {
+			return {
+				id: image.id,
+				url: image.url,
+				article_id: image.article_id
+			};
+		});
+
+		let [article_categories] = await db.query('SELECT category_id, name FROM article_category ac, category c where ac.category_id=c.id and article_id=?', [id]);
+		article_categories = article_categories.map((article_category) => {
+			return {
+				category_id: article_category.category_id,
+				name: article_category.name
+			};
+		});
+
+		return new Article(article[0].id, article[0].status, article[0].name, article[0].description, article[0].price, article[0].seller_id, article_categories, images);
 	}
 
 	/**
@@ -79,7 +97,6 @@ export default class Article {
 		
 		for (let i = 0; i < this.categories.length; i++) {
 			const cat_name=await Category.findByName(this.categories[i].name);
-			console.log(cat_name);
 			await db.query('INSERT INTO article_category (article_id, category_id) VALUES (?, ?)', [this.id, cat_name.id]);
 		}
 
