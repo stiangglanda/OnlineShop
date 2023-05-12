@@ -28,13 +28,6 @@ const getArticle = async (req, res) => {
 	} catch (error) {
 		return res.status(404).json({ message: 'Could not find this article.' });
 	}
-
-	try {
-		const article = await Article.findById(req.params.id);
-		return res.status(200).json(article);
-	} catch (error) {
-		return res.status(404).json({ message: 'Could not find this article.' });
-	}
 };
 
 // updates an article in the database
