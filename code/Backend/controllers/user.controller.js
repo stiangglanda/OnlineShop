@@ -1,5 +1,6 @@
 import User from '../models/user.js';
 import { hash, compare } from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 // get all users from the database
 const getUsers = async (req, res) => {
@@ -14,7 +15,7 @@ const getUsers = async (req, res) => {
 // register a new user
 const register = async (req, res) => {
 	try {
-		let { username, firstname, lastname, email, password, balance, address_id, token } = req.body || null;
+		let { username, firstname, lastname, email, password, balance, address_id } = req.body || null;
 
 		// check if all required fields are provided
 		if (!username || !firstname || !lastname || !email || !password || !balance) {
@@ -26,11 +27,18 @@ const register = async (req, res) => {
 			return res.status(400).json({ message: 'This user already exists.' });
 		}
 
+		// check if user already exists
+		if (await User.findByUsername(username)) {
+			return res.status(400).json({ message: 'This username is already taken.' });
+		}
+
 		// hash password
 		const hashedPassword = await hash(password, 10);
 
 		// create new user
-		const user = new User(await User.nextId(), 1, username, firstname, lastname, email, hashedPassword, balance, address_id, token);
+		const user_id = await User.nextId();
+		const user = new User(user_id, 1, username, firstname, lastname, email, hashedPassword, balance, address_id, jwt.sign({ id: user_id, username: username }, process.env.TOKEN_SECRET));
+
 		await user.save();
 
 		// respond with user
@@ -49,6 +57,7 @@ const login = async (req, res) => {
 		}
 
 		const user = await User.findByEmail(email);
+		
 		if (!user || user.status === 0) {
 			return res.status(404).json({ message: 'This user does not exist.' });
 		}
@@ -57,6 +66,7 @@ const login = async (req, res) => {
 		if (!(await compare(password, user.password))) {
 			return res.status(401).json({ message: 'Password is incorrect.' });
 		}
+		
 
 		// respond with user
 		res.status(200).json(user);
