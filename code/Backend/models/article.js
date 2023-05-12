@@ -1,13 +1,15 @@
 import db from './db.js';
 
 export default class Article {
-	constructor(id, status, name, description, price, seller_id) {
+	constructor(id, status, name, description, price, seller_id, categories, images) {
 		this.id = id;
 		this.status = status;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.seller_id = seller_id;
+		this.categories=categories;
+		this.images=images;
 	}
 
 	/**
@@ -43,6 +45,14 @@ export default class Article {
 	 */
 	async save() {
 		await db.query('INSERT INTO article (id, status, name, description, price, seller_id) VALUES (?, ?, ?, ?, ?, ?)', [this.id, this.status, this.name, this.description, this.price, this.seller_id]);
+		
+		for (let i = 0; i < this.categories.length; i++) {
+			await db.query('INSERT INTO article_category (article_id, category_id) VALUES (?, ?)', [this.id, this.categories[i]]);
+		}
+
+		for (let i = 0; i < this.images.length; i++) {
+			await db.query('INSERT INTO image (url, article_id) VALUES (?, ?)', [this.images[i],this.id, ]);
+		}
 		return this;
 	}
 
