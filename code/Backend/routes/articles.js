@@ -11,6 +11,6 @@ router // /api/articles/:id
 	.route('/:id')
 	.get(articleCtrl.getArticle)
 	.put(articleCtrl.updateArticle)
-	.delete(articleCtrl.deleteArticle);
+	.delete(articleCtrl.disableArticle);
 
 export default router;

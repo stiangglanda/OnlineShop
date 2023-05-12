@@ -1,17 +1,17 @@
 import { Router } from 'express';
-import transactionsCtrl from '../controllers/transactions.controller.js';
+import transactionsCtrl from '../controllers/transaction.controller.js';
 const router = Router();
 
-router // /api/trans
+router // /api/transaction
 	.route('/')
 	.post(transactionsCtrl.createTransaction);
 
-router // /api/trans/buyer/:id
+router // /api/transaction/buyer/:id
 	.route('/buyer/:id')
-	.get(transactionsCtrl.getbuyerTransaction);
+	.get(transactionsCtrl.getBuyerTransaction);
 
-router // /api/trans/seller/:id
+router // /api/transaction/seller/:id
 	.route('/seller/:id')
-	.get(transactionsCtrl.getsellerTransaction);
+	.get(transactionsCtrl.getSellerTransaction);
 
 export default router;
