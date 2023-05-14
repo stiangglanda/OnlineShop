@@ -60,8 +60,8 @@ INSERT INTO transaction (seller_id, buyer_id, article_id)
 VALUES (2, 1, 2);
 
 
-INSERT INTO image (text, url, article_id)
-VALUES ('ROG Zephyrus M16', 'https://gzhls.at/i/09/62/2710962-n0.jpg', 1);
+INSERT INTO image (url, article_id)
+VALUES ('https://gzhls.at/i/09/62/2710962-n0.jpg', 1);
 
-INSERT INTO image (text, url, article_id)
-VALUES ('Lenovo Idea Pad Gaming', 'https://gzhls.at/i/35/48/2683548-n0.jpg', 2);
+INSERT INTO image (url, article_id)
+VALUES ('https://gzhls.at/i/35/48/2683548-n0.jpg', 2);
