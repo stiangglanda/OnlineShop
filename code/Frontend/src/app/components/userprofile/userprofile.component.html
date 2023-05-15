@@ -26,7 +26,7 @@
 					</div>
 					<div class="content-panel">
 						<h2 class="title">Profile<span class="pro-label label label-warning">PRO</span></h2>
-						<form class="form-horizontal">
+						<form [formGroup]="userForm" class="form-horizontal">
 							<fieldset class="fieldset">
 								<h3 class="fieldset-title">Personal Info</h3>
 								<div class="form-group avatar">
@@ -41,20 +41,20 @@
 								<div class="form-group">
 									<label class="col-md-2 col-sm-3 col-xs-12 control-label">User Name</label>
 									<div class="col-md-10 col-sm-9 col-xs-12">
-										<input type="text" class="form-control" placeholder="BerryO'"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+										<input type="text" class="form-control" formControlName="username" placeholder="BerryO'"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 									</div>
 								</div>
 			
 								<div class="form-group">
 									<label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name</label>
 									<div class="col-md-10 col-sm-9 col-xs-12">
-										<input type="text" class="form-control" placeholder="Barack"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+										<input type="text" class="form-control" formControlName="firstname" placeholder="Barack"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>
 									<div class="col-md-10 col-sm-9 col-xs-12">
-										<input type="text" class="form-control" placeholder="Obama"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+										<input type="text" class="form-control" formControlName="lastname" placeholder="Obama"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 									</div>
 								</div>
 							</fieldset>
@@ -63,20 +63,20 @@
 								<div class="form-group">
 									<label class="col-md-2  col-sm-3 col-xs-12 control-label">E-Mail</label>
 									<div class="col-md-10 col-sm-9 col-xs-12">
-										<input type="email" class="form-control" placeholder="Barack.O@Bama.com"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+										<input type="email" class="form-control" formControlName="email" placeholder="Barack.O@Bama.com"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-2  col-sm-3 col-xs-12 control-label">Phone Number</label>
 									<div class="col-md-10 col-sm-9 col-xs-12">
-										<input type="text" class="form-control" placeholder="+43 660 123456"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+										<input type="text" class="form-control" formControlName="phoneNumber" placeholder="+43 660 123456"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 									</div>
 								</div>  
 							</fieldset>
 							<hr><br>
 							<div class="form-group">
 								<div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-									<input class="btn btn-primary bg-blue-400" type="submit" placeholder="Update Profile">
+									<input class="btn btn-primary bg-blue-400" type="button" (click)="update_Profile()" placeholder="Update Profile">
 								</div>
 							</div>
 						</form>
