@@ -14,7 +14,7 @@ const getCategorie = async (req, res) => {
 		const categorie = await Categorie.findById(req.params.id);
 		return res.status(200).json(categorie);
 	} catch (error) {
-		return res.status(404).json({ message: 'Could not find this Categorie.' });
+		return res.status(404).json({ message: 'Could not find this category.' });
 	}
 };
 
