@@ -29,7 +29,10 @@ body{
     .view-account .side-bar .user-info .img-profile {
     width: 120px;
     height: 120px;
-    margin-bottom: 15px
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
     }
     
     .view-account .side-bar .user-info .meta li {
@@ -133,7 +136,7 @@ body{
     }
     
     .view-account .content-panel .avatar .figure img {
-    float: left;
+    margin-right: auto;
     width: 64px
     }
     
