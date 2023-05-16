@@ -10,14 +10,13 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'shop', component: ShopComponent},
   {path: 'userprofile', component: UserprofileComponent},
   {path: 'transactions', component: TransactionsComponent},
-  {path: 'payment', component: PaymentComponent},
-  {path: 'header', component: HeaderComponent},
-  {path: 'footer', component: FooterComponent}
+  {path: 'payment', component: PaymentComponent}
 ];
 
 @NgModule({
