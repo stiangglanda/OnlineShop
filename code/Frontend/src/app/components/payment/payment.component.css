@@ -1,6 +1,8 @@
 body{
-    background:#f9f9fb;    
+    background: #F3F3F4; 
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
     }
+    
     .btn-amazon-green { 
         color: #ffffff; 
         background-color: #1AB394; 
@@ -48,9 +50,11 @@ body{
       }
 
     .view-account{
-    background:#FFFFFF; 
+    background:#F3F3F4; 
     margin-top:20px;
+    padding: 30px;
     }
+    
     .view-account .pro-label {
     font-size: 13px;
     padding: 4px 5px;
@@ -66,8 +70,8 @@ body{
     
     .view-account .side-bar .user-info {
     text-align: center;
-    margin-bottom: 15px;
-    padding: 30px;
+    margin:0px!important;
+    padding: 0px!important;
     color: #616670;
     border-bottom: 1px solid #f3f3f3
     }
