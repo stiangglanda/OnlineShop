@@ -19,5 +19,10 @@ pool.getConnection(function (err, conn) {
 	pool.releaseConnection(conn);
 });
 
-// export db
-export default pool.promise();
+export const db = pool.promise();
+
+export const nextId = async (table) => {
+	const [rows] = await db.query(`SELECT MAX(id) as max_id FROM ${table}`);
+	if (rows.length <= 0) return 1;
+	return rows[0].max_id + 1;
+};

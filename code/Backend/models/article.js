@@ -1,4 +1,4 @@
-import db from './db.js';
+import { db } from './db.js';
 
 export default class Article {
 	constructor(id, status, name, description, price, seller_id) {

@@ -1,5 +1,5 @@
 import Article from '../models/article.js';
-
+import { nextId } from '../models/db.js';
 const getArticles = async (req, res) => {
 	try {
 		const articles = await Article.list();
@@ -10,7 +10,7 @@ const getArticles = async (req, res) => {
 };
 
 const createArticle = async (req, res) => {
-	const id = await Article.nextId();
+	const id = await nextId('article');
 	const { name, description, price, seller_id } = req.body || null;
 
 	const article = new Article(id, 1, name, description, price * -1, seller_id);

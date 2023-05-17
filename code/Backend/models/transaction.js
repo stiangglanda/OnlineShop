@@ -1,4 +1,4 @@
-import db from './db.js';
+import { db } from './db.js';
 
 export default class Transaction {
 	constructor(id, seller_id, buyer_id, article_id, created) {
