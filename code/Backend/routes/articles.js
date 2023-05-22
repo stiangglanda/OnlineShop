@@ -13,4 +13,8 @@ router // /api/articles/:id
 	.put(articleCtrl.updateArticle)
 	.delete(articleCtrl.disableArticle);
 
+router // /api/articles/:id
+	.route('/:category/:priceFrom&:priceTo')
+	.get(articleCtrl.getFilteredArticles)
+
 export default router;
