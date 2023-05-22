@@ -15,7 +15,6 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use(json());
-app.use(urlencoded({ extended: true }));
 
 // redirect to /api/ when accessing /
 app.get('/', (req, res) => {

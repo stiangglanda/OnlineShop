@@ -11,9 +11,9 @@ const getArticles = async (req, res) => {
 
 const createArticle = async (req, res) => {
 	const id = await nextId('article');
-	const { name, description, price, seller_id } = req.body || null;
+	const { name, description, price, seller_id, categories, images } = req.body || null;
 
-	const article = new Article(id, 1, name, description, price * -1, seller_id);
+	const article = new Article(id, 1, name, description, Math.abs(price), seller_id, categories, images);
 	try {
 		res.status(201).json(await article.save());
 	} catch (error) {

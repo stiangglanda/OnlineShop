@@ -54,7 +54,7 @@ body{
     margin-top:20px;
     padding: 30px;
     }
-
+    
     .view-account .pro-label {
     font-size: 13px;
     padding: 4px 5px;
@@ -168,7 +168,7 @@ body{
     }
     
     .view-account .content-panel {
-    padding: 30px;
+    padding: 30px
     }
     
     .view-account .content-panel .title {
@@ -184,6 +184,7 @@ body{
     color: #616670;
     font-size: 16px
     }
+
     .view-account .content-panel .card {
         margin-bottom: 2.2rem;
         border: none;
@@ -214,6 +215,7 @@ body{
     }
 
     .view-account .content-panel .card .card-body .form-group input {
+        width: 100%;
         position: relative;
         font-size: 16px;
         background: none;
@@ -221,17 +223,8 @@ body{
         box-shadow: 2px 3px #40BABD;
         opacity: 75%;
         margin-bottom: 1.5em;
-        min-width: 300px;
     }
 
-    .view-account .content-panel .card .card-body .form-group.avatar input {
-        margin-bottom: 0em;
-    }
-
-    .view-account .content-panel .card .card-body .form-group.avatar button {
-        margin-bottom: 1em;
-    }
-    
     .view-account .content-panel .avatar .figure img {
     margin-right: auto;
     width: 64px
