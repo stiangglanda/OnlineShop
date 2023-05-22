@@ -73,17 +73,15 @@ export default class User {
 	 * @returns {Promise<User>} The saved user.
 	 */
 	async save() {
-		let address = null;
-		if (this.address) {
-			address = await Address.findById(this.address.id);
+		let address_id = null;
+		if (Object.keys(this.address).length !== 0) {
+			address_id = await Address.findById(this.address.id).id;
 			
-			if (!address) {
-				await this.address.save();
-				address = this.address;
+			if (!address_id) {
+				let new_address = await this.address.save();
+				address_id = new_address.id;
 			}
 		}
-
-		this.address = address;
 
 		await db.query('INSERT INTO user (id, status, username, firstname, lastname, email, password, balance, address_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [
 			this.id,
@@ -94,7 +92,7 @@ export default class User {
 			this.email,
 			this.password,
 			this.balance,
-			this.address.id
+			address_id
 		]);
 		return this;
 	}
