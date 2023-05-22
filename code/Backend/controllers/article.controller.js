@@ -2,32 +2,21 @@ import Article from '../models/article.js';
 import { nextId } from '../models/db.js';
 const getArticles = async (req, res) => {
 	const filters = req.query;
-	if(Object.keys(filters).length==0)
-	{
+	if (Object.keys(filters).length == 0) {
 		try {
 			const articles = await Article.list();
 			res.status(200).json(articles);
 		} catch (error) {
 			res.status(404).json({ message: 'There is no articles.' });
 		}
-	}
-	else
-	{
+	} else {
 		try {
-			console.log(filters.category);
-			const articles = await Article.listFiltered(filters.category,filters.priceFrom,filters.priceTo);
+			const articles = await Article.listFiltered(filters.category, filters.priceFrom, filters.priceTo);
 			res.status(200).json(articles);
 		} catch (error) {
 			res.status(404).json({ message: 'There is no articles.' });
 		}
 	}
-
-
-	// for (kat in filters) {
-	// 	console.log(category);
-	// }
-
-
 };
 
 const getFilteredArticles = async (req, res) => {
