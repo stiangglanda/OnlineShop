@@ -105,6 +105,7 @@ export default class Article {
 
 	/**
 	 * Finds an article by id.
+	 * @param {number} id The article's id.
 	 * @returns {Promise<Article>} The article.
 	 */
 	static async findById(id) {
