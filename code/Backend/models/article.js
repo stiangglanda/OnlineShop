@@ -60,16 +60,8 @@ export default class Article {
 	 * @returns {Promise<Array<Article>>} The articles.
 	 */
 	static async listFiltered(category, priceFrom, priceTo) {
-		const [articles] = await db.query(
-			`SELECT *
-			   FROM article a, category c, article_category ac
-			  WHERE a.status = 1
-			    AND a.id = ac.article_id
-				AND c.id = ac.category_id
-				AND c.name in (?)
-				AND a.price BETWEEN ? AND ?`,
-			[category, priceFrom, priceTo]
-		);
+		const [articles] = await db.query('SELECT distinct a.id, a.status, a.name, a.description, a.price, a.seller_id FROM article a, category c, article_category ac WHERE a.status = 1 and a.id=ac.article_id and c.id=ac.category_id and c.name in (?) and a.price between ? and ?', [category, priceFrom, priceTo]);
+
 		let [images] = await db.query('SELECT id, url, article_id FROM image');
 		images = images.map((image) => {
 			return {
@@ -96,6 +88,7 @@ export default class Article {
 		});
 
 		return articles.map((article) => {
+			console.log(article.name);
 			const art_img = images.filter((image) => image.article_id === article.id);
 			const art_categories = article_categories.filter((article_category) => article_category.article_id === article.id).map((article_category) => article_category.category_id);
 			const cat = categories.filter((category) => art_categories.includes(category.id));
