@@ -75,19 +75,14 @@ export default class User {
 	async save() {
 		let address = null;
 		if (this.address) {
-			console.log("Got address: " + this.address);
-			console.log("Look for address in db with id: " + this.address.id);
 			address = await Address.findById(this.address.id);
 			
 			if (!address) {
-				console.log("Address not found, saving it");
 				await this.address.save();
 				address = this.address;
 			}
 		}
 
-		console.log("Saving user");
-		console.log(this);
 		this.address = address;
 
 		await db.query('INSERT INTO user (id, status, username, firstname, lastname, email, password, balance, address_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [
