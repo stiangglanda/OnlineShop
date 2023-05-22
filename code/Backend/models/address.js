@@ -76,7 +76,6 @@ export default class Address {
 		// check if address already exists, if it does, return it
 		const [address_rows] = await db.query('SELECT * FROM address WHERE city_id = ? AND street_id = ? AND street_nr = ?', [city_id, street_id, this.street_nr]);
 		if (address_rows.length > 0) {
-			console.log("Address already exists: " + address_rows[0].id);
 			return new Address(address_rows[0].id, this.city, this.plz, this.street, this.street_nr);
 		}
 		

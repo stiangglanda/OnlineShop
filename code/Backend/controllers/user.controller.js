@@ -44,7 +44,6 @@ const register = async (req, res) => {
 
 			user = new User(user_id, 1, username, firstname, lastname, email, hashedPassword, 0, address);
 			await user.save();
-			console.log(user);
 		}
 
 		// respond with user
