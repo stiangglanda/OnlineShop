@@ -57,8 +57,6 @@ export default class Article {
 	 * @returns {Promise<Array<Article>>} The articles.
 	 */
 	static async listFiltered(category, priceFrom, priceTo) {
-		console.log(category.length);
-		console.log(Object.keys(priceTo).length);
 		const [articles] = await db.query('SELECT * FROM article a, category c, article_category ac WHERE a.status = 1 and a.id=ac.article_id and c.id=ac.category_id and c.name in (?) and a.price between ? and ?', [category, priceFrom, priceTo]);
 		let [images] = await db.query('SELECT id, url, article_id FROM image');
 		images = images.map((image) => {
