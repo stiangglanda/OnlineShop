@@ -1,4 +1,4 @@
-import db from './db.js';
+import { db } from './db.js';
 
 export default class Transaction {
 	constructor(id, seller_id, buyer_id, article_id, created) {
@@ -34,15 +34,6 @@ export default class Transaction {
 	static async findBysellerId(id) {
 		const [rows] = await db.query('select * from transaction where seller_id=?', [id]);
 		return rows.map((row) => new Transaction(row.id, row.seller_id, row.buyer_id, row.article_id, row.created));
-	}
-
-	/**
-	 * Gets the next id for a new Transaction.
-	 * @returns {number}
-	 */
-	static async nextId() {
-		const [rows] = await db.query('SELECT MAX(id) AS max_id FROM transaction');
-		return rows[0].max_id + 1;
 	}
 
 	/**

@@ -1,4 +1,4 @@
-import db from './db.js';
+import { db } from './db.js';
 import Category from './category.js';
 
 export default class Article {
@@ -137,7 +137,7 @@ export default class Article {
 		await db.query('INSERT INTO article (id, status, name, description, price, seller_id) VALUES (?, ?, ?, ?, ?, ?)', [this.id, this.status, this.name, this.description, this.price, this.seller_id]);
 		
 		for (let i = 0; i < this.categories.length; i++) {
-			const cat_name=await Category.findByName(this.categories[i].name);
+			const cat_name = await Category.findByName(this.categories[i].name);
 			await db.query('INSERT INTO article_category (article_id, category_id) VALUES (?, ?)', [this.id, cat_name.id]);
 		}
 
@@ -152,7 +152,14 @@ export default class Article {
 	 * @returns {Promise<Article>} The updated article.
 	 */
 	async update() {
-		await db.query('UPDATE article SET name = ?, status = ?, description = ?, price = ?, seller_id = ? WHERE id = ?', [this.name, this.status, this.description, this.price, this.seller_id, this.id]);
+		await db.query('UPDATE article SET name = ?, status = ?, description = ?, price = ?, seller_id = ? WHERE id = ?', [
+			this.name,
+			this.status,
+			this.description,
+			this.price,
+			this.seller_id,
+			this.id
+		]);
 		return this;
 	}
 

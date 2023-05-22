@@ -28,14 +28,14 @@ INSERT INTO address (city_id, street_id, street_nr)
 VALUES (3, 3, 1);
 
 
-INSERT INTO user (username, firstname, lastname, email, password, balance, address_id, token)
-VALUES ('thistim', 'Tim', 'Hofmann', 'timhofmann01@gmail.com', '$2b$10$zNAGq/LGwGMBIlWoCEDxFO6E70mWQfAkgRxmC0YQXTaD9fNVVTRfe', 99999, 2, 'ttoken');
+INSERT INTO user (username, firstname, lastname, email, password, balance, address_id)
+VALUES ('thistim', 'Tim', 'Hofmann', 'timhofmann01@gmail.com', '$2b$10$zNAGq/LGwGMBIlWoCEDxFO6E70mWQfAkgRxmC0YQXTaD9fNVVTRfe', 99999, 2);
 
-INSERT INTO user (username, firstname, lastname, email, password, balance, address_id, token)
-VALUES ('stiangglanda', 'Leander', 'Kieweg', 'kieweg.leander@gmail.com', '$2b$10$zNAGq/LGwGMBIlWoCEDxFO6E70mWQfAkgRxmC0YQXTaD9fNVVTRfe', 99999, 3, 'ltoken');
+INSERT INTO user (username, firstname, lastname, email, password, balance, address_id)
+VALUES ('stiangglanda', 'Leander', 'Kieweg', 'kieweg.leander@gmail.com', '$2b$10$zNAGq/LGwGMBIlWoCEDxFO6E70mWQfAkgRxmC0YQXTaD9fNVVTRfe', 99999, 3);
 
-INSERT INTO user (username, firstname, lastname, email, password, balance, address_id, token)
-VALUES ('TimeskateHD', 'Maximilian', 'Schernhuber', 'max.schernhuber@students.bs-linz2.ac.at', '$2b$10$zNAGq/LGwGMBIlWoCEDxFO6E70mWQfAkgRxmC0YQXTaD9fNVVTRfe', 99999, 1, 'mtoken');
+INSERT INTO user (username, firstname, lastname, email, password, balance, address_id)
+VALUES ('TimeskateHD', 'Maximilian', 'Schernhuber', 'max.schernhuber@students.bs-linz2.ac.at', '$2b$10$zNAGq/LGwGMBIlWoCEDxFO6E70mWQfAkgRxmC0YQXTaD9fNVVTRfe', 99999, 1);
 
 
 INSERT INTO article (status, name, description, price, seller_id)
@@ -47,7 +47,6 @@ VALUES (1, 'Lenovo Idea Pad Gaming', 'Gaming Laptop', 1000.1, 2);
 
 INSERT INTO category (name)
 VALUES ('Technology');
-
 
 INSERT INTO article_category (article_id, category_id)
 VALUES (1, 1);

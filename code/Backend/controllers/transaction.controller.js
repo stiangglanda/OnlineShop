@@ -1,8 +1,8 @@
 import Transaction from '../models/transaction.js';
+import { nextId } from '../models/db.js';
 
 const createTransaction = async (req, res) => {
-	console.log(new Date());
-	const id = await Transaction.nextId();
+	const id = await nextId('transaction');
 	const transaction = new Transaction(id, req.body.seller_id, req.body.buyer_id, req.body.article_id, new Date());
 	try {
 		res.status(201).json(await transaction.save());

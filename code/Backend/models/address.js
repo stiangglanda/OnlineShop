@@ -1,37 +1,50 @@
-import db from './db.js';
+import { db, nextId } from './db.js';
 
 export default class Address {
-	constructor(id, city_id, city, plz, street_id, street, street_nr) {
+	constructor(id, city, plz, street, street_nr) {
 		this.id = id;
-
-		this.city_id = city_id;
 		this.city = city;
 		this.plz = plz;
-
-		this.street_id = street_id;
 		this.street = street;
 		this.street_nr = street_nr;
 	}
 
 	/**
-	 * Finds an addresse of a user.
-	 * @returns {Promise<Article>} The user's address.
+	 * Finds an address by its id.
+	 * @param {number} id The address's id.
+	 * @returns {Promise<Address>|null} The address or null if not found.
 	 */
-	static async findByUser(id) {
+	static async findById(id) {
 		const [rows] = await db.query(
-			'SELECT a.id as address_id, c.id as city_id, c.name as city, c.plz, s.id as street_id, s.name as street, a.street_nr FROM address a, street s, city c, user u WHERE a.street_id = s.id AND a.city_id = c.id AND a.id = u.address_id AND u.id = ?',
+			`SELECT a.id as address_id, c.name as city, c.plz, s.name as street, a.street_nr
+			   FROM address a, street s, city c
+			  WHERE a.street_id = s.id
+			    AND a.city_id = c.id
+				AND a.id = ?`,
 			[id]
 		);
-		return new Address(rows[0].address_id, rows[0].city_id, rows[0].city, rows[0].plz, rows[0].street_id, rows[0].street, rows[0].street_nr);
+
+		if (rows.length <= 0) return null;
+		return new Address(rows[0].address_id, rows[0].city, rows[0].plz, rows[0].street, rows[0].street_nr);
 	}
 
 	/**
-	 * Gets the next id for a new address.
-	 * @returns {number} The next id.
+	 * Finds an addresse of a user.
+	 * @param {number} user_id The user's id.
+	 * @returns {Promise<Article>} The user's address.
 	 */
-	static async nextId() {
-		const [rows] = await db.query('SELECT MAX(id) AS max_id FROM address');
-		return rows[0].max_id + 1;
+	static async findByUser(user_id) {
+		const [rows] = await db.query(
+			`SELECT a.id as address_id, c.name as city, c.plz, s.name as street, a.street_nr
+			   FROM address a, street s, city c, user u
+			  WHERE a.street_id = s.id
+			    AND a.city_id = c.id
+				AND a.id = u.address_id
+				AND u.id = ?`,
+			[user_id]
+		);
+		if (rows.length <= 0) return null;
+		return new Address(rows[0].address_id, rows[0].city, rows[0].plz, rows[0].street, rows[0].street_nr);
 	}
 
 	/**
@@ -39,24 +52,36 @@ export default class Address {
 	 * @returns {Promise<Address>} The saved address.
 	 */
 	async save() {
-		// check if city already exists
+		let city_id;
+		let street_id;
+
+		// check if city already exists, if it doesn't, create it
 		const [city_rows] = await db.query('SELECT * FROM city WHERE name = ? AND plz = ?', [this.city, this.plz]);
-		if (city_rows.length > 0) {
-			this.city_id = city_rows[0].id;
+		if (city_rows.length <= 0) {
+			const city_insert = await db.query('INSERT INTO city (name, plz) VALUES (?, ?)', [this.city, this.plz]);
+			city_id = city_insert[0].insertId;
 		} else {
-			await db.query('INSERT INTO city (id, name, plz) VALUES (?, ?, ?)', [this.city_id, this.city, this.plz]);
+			city_id = city_rows[0].id;
 		}
 
-		// check if street already exists
+		// check if street already exists, if it doesn't, create it
 		const [street_rows] = await db.query('SELECT * FROM street WHERE name = ?', [this.street]);
-		if (street_rows.length > 0) {
-			this.street_id = street_rows[0].id;
+		if (street_rows.length <= 0) {
+			const street_insert = await db.query('INSERT INTO street (name) VALUES (?)', [this.street]);
+			street_id = street_insert[0].insertId;
 		} else {
-			await db.query('INSERT INTO street (id, name) VALUES (?, ?)', [this.street_id, this.street]);
+			street_id = street_rows[0].id;
 		}
 
-		// save address
-		await db.query('INSERT INTO address (id, city_id, street_id, street_nr) VALUES (?, ?, ?, ?)', [this.id, this.city_id, this.street_id, this.street_nr]);
+		// check if address already exists, if it does, return it
+		const [address_rows] = await db.query('SELECT * FROM address WHERE city_id = ? AND street_id = ? AND street_nr = ?', [city_id, street_id, this.street_nr]);
+		if (address_rows.length > 0) {
+			console.log("Address already exists: " + address_rows[0].id);
+			return new Address(address_rows[0].id, this.city, this.plz, this.street, this.street_nr);
+		}
+		
+		// insert address
+		await db.query('INSERT INTO address (id, city_id, street_id, street_nr) VALUES (?, ?, ?, ?)', [this.address_id, city_id, street_id, this.street_nr]);
 		return this;
 	}
 
@@ -67,18 +92,18 @@ export default class Address {
 	async update() {
 		// check if city already exists, if it does, update it
 		const [city_rows] = await db.query('SELECT * FROM city WHERE name = ? AND plz = ?', [this.city, this.plz]);
-		if (city_rows.length > 0) {
-			await db.query('UPDATE city SET name = ?, plz = ? WHERE id = ?', [this.city, this.plz, this.city_id]);
+		if (city_rows.length >= 0) {
+			await db.query('UPDATE city SET name = ?, plz = ? WHERE id = ?', [this.city, this.plz, city_rows[0].id]);
 		} else {
-			await db.query('INSERT INTO city (id, name, plz) VALUES (?, ?, ?)', [this.city_id, this.city, this.plz]);
+			await db.query('INSERT INTO city (id, name, plz) VALUES (?, ?, ?)', [this.address_id, this.city, this.plz]);
 		}
 
 		// check if street already exists, if it does, update it
 		const [street_rows] = await db.query('SELECT * FROM street WHERE name = ?', [this.street]);
 		if (street_rows.length > 0) {
-			await db.query('UPDATE street SET name = ? WHERE id = ?', [this.street, this.street_id]);
+			await db.query('UPDATE street SET name = ? WHERE id = ?', [this.street, street_rows[0].id]);
 		} else {
-			await db.query('INSERT INTO street (id, name) VALUES (?, ?)', [this.street_id, this.street]);
+			await db.query('INSERT INTO street (id, name) VALUES (?, ?)', [await nextId('street'), this.street]);
 		}
 
 		return this;
