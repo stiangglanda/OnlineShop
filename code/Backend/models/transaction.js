@@ -37,15 +37,6 @@ export default class Transaction {
 	}
 
 	/**
-	 * Gets the next id for a new Transaction.
-	 * @returns {number}
-	 */
-	static async nextId() {
-		const [rows] = await db.query('SELECT MAX(id) AS max_id FROM transaction');
-		return rows[0].max_id + 1;
-	}
-
-	/**
 	 * Saves a Transaction in the database.
 	 * @returns {Promise<Transaction>}
 	 */
