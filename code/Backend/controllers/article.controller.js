@@ -1,5 +1,6 @@
 import Article from '../models/article.js';
 import { nextId } from '../models/db.js';
+
 const getArticles = async (req, res) => {
 	const filters = req.query;
 	if (Object.keys(filters).length == 0) {

@@ -9,8 +9,8 @@ export default class Article {
 		this.description = description;
 		this.price = price;
 		this.seller_id = seller_id;
-		this.categories=categories;
-		this.images=images;
+		this.categories = categories;
+		this.images = images;
 	}
 
 	/**
@@ -43,21 +43,33 @@ export default class Article {
 				category_id: article_category.category_id
 			};
 		});
-        
+
 		return articles.map((article) => {
 			const art_img = images.filter((image) => image.article_id === article.id);
 			const art_categories = article_categories.filter((article_category) => article_category.article_id === article.id).map((article_category) => article_category.category_id);
 			const cat = categories.filter((category) => art_categories.includes(category.id));
 			return new Article(article.id, article.status, article.name, article.description, article.price, article.seller_id, cat, art_img);
 		});
-	}   
+	}
 
 	/**
 	 * Lists all enabled articles.
+	 * @param {Array<string>} category The category.
+	 * @param {number} priceFrom The price from.
+	 * @param {number} priceTo The price to.
 	 * @returns {Promise<Array<Article>>} The articles.
 	 */
 	static async listFiltered(category, priceFrom, priceTo) {
-		const [articles] = await db.query('SELECT * FROM article a, category c, article_category ac WHERE a.status = 1 and a.id=ac.article_id and c.id=ac.category_id and c.name in (?) and a.price between ? and ?', [category, priceFrom, priceTo]);
+		const [articles] = await db.query(
+			`SELECT *
+			   FROM article a, category c, article_category ac
+			  WHERE a.status = 1
+			    AND a.id = ac.article_id
+				AND c.id = ac.category_id
+				AND c.name in (?)
+				AND a.price BETWEEN ? AND ?`,
+			[category, priceFrom, priceTo]
+		);
 		let [images] = await db.query('SELECT id, url, article_id FROM image');
 		images = images.map((image) => {
 			return {
@@ -82,14 +94,14 @@ export default class Article {
 				category_id: article_category.category_id
 			};
 		});
-        
+
 		return articles.map((article) => {
 			const art_img = images.filter((image) => image.article_id === article.id);
 			const art_categories = article_categories.filter((article_category) => article_category.article_id === article.id).map((article_category) => article_category.category_id);
 			const cat = categories.filter((category) => art_categories.includes(category.id));
 			return new Article(article.id, article.status, article.name, article.description, article.price, article.seller_id, cat, art_img);
 		});
-	}   
+	}
 
 	/**
 	 * Finds an article by id.
@@ -132,15 +144,22 @@ export default class Article {
 	 * @returns {Promise<Article>} The saved article.
 	 */
 	async save() {
-		await db.query('INSERT INTO article (id, status, name, description, price, seller_id) VALUES (?, ?, ?, ?, ?, ?)', [this.id, this.status, this.name, this.description, this.price, this.seller_id]);
-		
+		await db.query('INSERT INTO article (id, status, name, description, price, seller_id) VALUES (?, ?, ?, ?, ?, ?)', [
+			this.id,
+			this.status,
+			this.name,
+			this.description,
+			this.price,
+			this.seller_id
+		]);
+
 		for (let i = 0; i < this.categories.length; i++) {
 			const cat_name = await Category.findByName(this.categories[i].name);
 			await db.query('INSERT INTO article_category (article_id, category_id) VALUES (?, ?)', [this.id, cat_name.id]);
 		}
 
 		for (let i = 0; i < this.images.length; i++) {
-			await db.query('INSERT INTO image (url, article_id) VALUES (?, ?)', [this.images[i].url,this.id]);
+			await db.query('INSERT INTO image (url, article_id) VALUES (?, ?)', [this.images[i].url, this.id]);
 		}
 		return this;
 	}
