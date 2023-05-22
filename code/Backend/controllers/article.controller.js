@@ -1,11 +1,41 @@
 import Article from '../models/article.js';
 
 const getArticles = async (req, res) => {
+	const filters = req.query;
+	if(Object.keys(filters).length==0)
+	{
+		try {
+			const articles = await Article.list();
+			res.status(200).json(articles);
+		} catch (error) {
+			res.status(404).json({ message: 'There is no articles.' });
+		}
+	}
+	else
+	{
+		try {
+			console.log(filters.category);
+			const articles = await Article.listFiltered(filters.category,filters.priceFrom,filters.priceTo);
+			res.status(200).json(articles);
+		} catch (error) {
+			res.status(404).json({ message: 'There is no articles.' });
+		}
+	}
+
+
+	// for (kat in filters) {
+	// 	console.log(category);
+	// }
+
+
+};
+
+const getFilteredArticles = async (req, res) => {
 	try {
-		const articles = await Article.list();
+		const articles = await Article.listFiltered(req.params.category, req.params.priceFrom, req.params.priceTo);
 		res.status(200).json(articles);
 	} catch (error) {
-		res.status(404).json({ message: 'There is no articles.' });
+		res.status(404).json({ message: 'There are no articles.' });
 	}
 };
 
@@ -62,6 +92,7 @@ const disableArticle = async (req, res) => {
 
 export default {
 	getArticles,
+	getFilteredArticles,
 	createArticle,
 	getArticle,
 	updateArticle,
