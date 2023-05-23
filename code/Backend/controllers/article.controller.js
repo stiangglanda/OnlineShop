@@ -9,7 +9,7 @@ const getArticles = async (req, res) => {
 			const articles = await Article.list();
 			res.status(200).json(articles);
 		} catch (error) {
-			res.status(404).json({ message: 'There is no articles.' });
+			res.status(404).json({ message: 'There are no articles.' });
 		}
 	} else {
 		// Otherwise, apply the filters and return the articles
@@ -17,7 +17,7 @@ const getArticles = async (req, res) => {
 			const articles = await Article.listFiltered(filters.category, filters.priceFrom, filters.priceTo);
 			res.status(200).json(articles);
 		} catch (error) {
-			res.status(404).json({ message: 'There is no articles.' });
+			res.status(404).json({ message: 'There are no articles.' });
 		}
 	}
 };
@@ -32,10 +32,23 @@ const getFilteredArticles = async (req, res) => {
 };
 
 const createArticle = async (req, res) => {
-	const id = await nextId('article');
 	const { name, description, price, seller_id, categories, images } = req.body || null;
 
+	if(name.length > 150)
+	{
+		return res.status(400).json({ message: `Article name exeeded the max length(150)` });
+	}
+
+	if(description.length > 2000)
+	{
+		return res.status(400).json({ message: `Article description exeeded the max length(2000)` });
+	}
+
+
+	const id = await nextId('article');
+
 	const article = new Article(id, 1, name, description, Math.abs(price), seller_id, categories, images);
+	//TODO validation
 	try {
 		res.status(201).json(await article.save());
 	} catch (error) {
