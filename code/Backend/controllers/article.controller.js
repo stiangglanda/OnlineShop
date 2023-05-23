@@ -34,6 +34,7 @@ const createArticle = async (req, res) => {
 	const { name, description, price, seller_id, categories, images } = req.body || null;
 
 	const article = new Article(id, 1, name, description, Math.abs(price), seller_id, categories, images);
+	//TODO validation
 	try {
 		res.status(201).json(await article.save());
 	} catch (error) {
