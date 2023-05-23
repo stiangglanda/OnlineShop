@@ -146,14 +146,13 @@ export default class Article {
 			this.price,
 			this.seller_id
 		]);
-
+		
 		for (let i = 0; i < this.categories.length; i++) {
-			const cat_name = await Category.findByName(this.categories[i].name);
+			const cat_name = await Category.findByName(this.categories[i]);
 			await db.query('INSERT INTO article_category (article_id, category_id) VALUES (?, ?)', [this.id, cat_name.id]);
 		}
-
 		for (let i = 0; i < this.images.length; i++) {
-			await db.query('INSERT INTO image (url, article_id) VALUES (?, ?)', [this.images[i].url, this.id]);
+			await db.query('INSERT INTO image (url, article_id) VALUES (?, ?)', [this.images[i], this.id]);
 		}
 		return this;
 	}

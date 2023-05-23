@@ -32,10 +32,23 @@ const getFilteredArticles = async (req, res) => {
 };
 
 const createArticle = async (req, res) => {
-	const id = await nextId('article');
 	const { name, description, price, seller_id, categories, images } = req.body || null;
 
+	if(name.length > 150)
+	{
+		return res.status(400).json({ message: `Article name exeeded the max length(150)` });
+	}
+
+	if(description.length > 2000)
+	{
+		return res.status(400).json({ message: `Article description exeeded the max length(2000)` });
+	}
+
+
+	const id = await nextId('article');
+
 	const article = new Article(id, 1, name, description, Math.abs(price), seller_id, categories, images);
+	//TODO validation
 	try {
 		res.status(201).json(await article.save());
 	} catch (error) {
