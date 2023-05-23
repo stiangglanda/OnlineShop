@@ -76,7 +76,7 @@ export default class User {
 		let address_id = null;
 		if (Object.keys(this.address).length !== 0) {
 			address_id = await Address.findById(this.address.id).id;
-			
+
 			if (!address_id) {
 				let new_address = await this.address.save();
 				address_id = new_address.id;
