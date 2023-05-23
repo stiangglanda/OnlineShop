@@ -9,7 +9,7 @@ const getArticles = async (req, res) => {
 			const articles = await Article.list();
 			res.status(200).json(articles);
 		} catch (error) {
-			res.status(404).json({ message: 'There is no articles.' });
+			res.status(404).json({ message: 'There are no articles.' });
 		}
 	} else {
 		// Otherwise, apply the filters and return the articles
@@ -17,7 +17,7 @@ const getArticles = async (req, res) => {
 			const articles = await Article.listFiltered(filters.category, filters.priceFrom, filters.priceTo);
 			res.status(200).json(articles);
 		} catch (error) {
-			res.status(404).json({ message: 'There is no articles.' });
+			res.status(404).json({ message: 'There are no articles.' });
 		}
 	}
 };

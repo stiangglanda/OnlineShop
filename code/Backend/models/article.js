@@ -60,7 +60,95 @@ export default class Article {
 	 * @returns {Promise<Array<Article>>} The articles.
 	 */
 	static async listFiltered(category, priceFrom, priceTo) {
-		const [articles] = await db.query('SELECT distinct a.id, a.status, a.name, a.description, a.price, a.seller_id FROM article a, category c, article_category ac WHERE a.status = 1 and a.id=ac.article_id and c.id=ac.category_id and c.name in (?) and a.price between ? and ?', [category, priceFrom, priceTo]);
+		let [articles] = [];
+
+		if(category&&priceFrom&&priceTo)
+		{
+			[articles] = await db.query(`
+			SELECT distinct a.id, 
+				   a.status, 
+				   a.name, 
+				   a.description, 
+				   a.price, 
+				   a.seller_id 
+			  FROM article a, 
+				   category c, 
+				   article_category ac 
+			 WHERE a.status = 1 
+			   and a.id=ac.article_id 
+			   and c.id=ac.category_id 
+			   and c.name in (?) 
+			   and a.price between ? and ?`, [category, priceFrom, priceTo]);
+		}
+		else if(category&&!priceFrom&&!priceTo)
+		{
+			[articles] = await db.query(`
+			SELECT distinct a.id, 
+				   a.status, 
+				   a.name, 
+				   a.description, 
+				   a.price, 
+				   a.seller_id 
+			  FROM article a, 
+				   category c, 
+				   article_category ac 
+			 WHERE a.status = 1 
+			   and a.id=ac.article_id 
+			   and c.id=ac.category_id 
+			   and c.name in (?)`, [category]);
+		}
+		else if(!category&&priceFrom&&priceTo)
+		{
+			[articles] = await db.query(`
+			SELECT distinct a.id, 
+				   a.status, 
+				   a.name, 
+				   a.description, 
+				   a.price, 
+				   a.seller_id 
+			  FROM article a, 
+				   category c, 
+				   article_category ac 
+			 WHERE a.status = 1 
+			   and a.id=ac.article_id 
+			   and c.id=ac.category_id 
+			   and a.price between ? and ?`, [priceFrom, priceTo]);
+		}
+		else if(!category&&priceFrom&&!priceTo)
+		{
+			[articles] = await db.query(`
+			SELECT distinct a.id, 
+				   a.status, 
+				   a.name, 
+				   a.description, 
+				   a.price, 
+				   a.seller_id 
+			  FROM article a, 
+				   category c, 
+				   article_category ac 
+			 WHERE a.status = 1 
+			   and a.id=ac.article_id 
+			   and c.id=ac.category_id 
+			   and a.price >= ?`, [priceFrom]);
+		}
+		else if(!category&&!priceFrom&&priceTo)
+		{
+			[articles] = await db.query(`
+			SELECT distinct a.id, 
+				   a.status, 
+				   a.name, 
+				   a.description, 
+				   a.price, 
+				   a.seller_id 
+			  FROM article a, 
+				   category c, 
+				   article_category ac 
+			 WHERE a.status = 1 
+			   and a.id=ac.article_id 
+			   and c.id=ac.category_id 
+			   and a.price <= ?`, [priceTo]);
+		}
+
 
 		let [images] = await db.query('SELECT id, url, article_id FROM image');
 		images = images.map((image) => {
@@ -88,7 +176,6 @@ export default class Article {
 		});
 
 		return articles.map((article) => {
-			console.log(article.name);
 			const art_img = images.filter((image) => image.article_id === article.id);
 			const art_categories = article_categories.filter((article_category) => article_category.article_id === article.id).map((article_category) => article_category.category_id);
 			const cat = categories.filter((category) => art_categories.includes(category.id));
