@@ -24,7 +24,45 @@ const register = async (req, res) => {
 			return res.status(400).json({ message: 'This user already exists.' });
 		}
 
-		// check if user already exists
+		// validate username
+		let usernameRegex = /^[a-zA-Z0-9-_.]+$/;
+		if (!usernameRegex.test(username)) {
+			return res.status(400).json({ message: 'Username can only contain letters, numbers, dashes, underscores and dots.' });
+		} else if (username.length > 30) {
+			return res.status(400).json({ message: 'Username can not be longer than 30 characters.' });
+		}
+
+		// validate password
+		if (password.length > 65000) {
+			return res.status(400).json({ message: 'Password can not be longer than 65000 characters.' });
+		} else if (password.length < 4) {
+			return res.status(400).json({ message: 'Password must be at least 4 characters long.' });
+		}
+
+		// validate length of fields
+		if (firstname.length > 50) {
+			return res.status(400).json({ message: 'Firstname can not be longer than 50 characters.' });
+		}
+		if (lastname.length > 50) {
+			return res.status(400).json({ message: 'Lastname can not be longer than 50 characters.' });
+		}
+		if (email.length > 50) {
+			return res.status(400).json({ message: 'Email can not be longer than 50 characters.' });
+		}
+		if (city && city.length > 50) {
+			return res.status(400).json({ message: 'City name can not be longer than 50 characters.' });
+		}
+		if (street && street.length > 50) {
+			return res.status(400).json({ message: 'Street name can not be longer than 50 characters.' });
+		}
+		if (plz && plz.length > 10) {
+			return res.status(400).json({ message: 'PLZ can not be longer than 10 characters.' });
+		}
+		if (street_nr && street_nr.length > 10) {
+			return res.status(400).json({ message: 'Street number can not be longer than 10 characters.' });
+		}
+
+		// check if username is taken
 		if (await User.findByUsername(username)) {
 			return res.status(400).json({ message: 'This username is already taken.' });
 		}

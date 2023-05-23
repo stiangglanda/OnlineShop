@@ -3,6 +3,7 @@ import { nextId } from '../models/db.js';
 
 const getArticles = async (req, res) => {
 	const filters = req.query;
+	// If there are no filters, return all articles
 	if (Object.keys(filters).length == 0) {
 		try {
 			const articles = await Article.list();
@@ -11,6 +12,7 @@ const getArticles = async (req, res) => {
 			res.status(404).json({ message: 'There is no articles.' });
 		}
 	} else {
+		// Otherwise, apply the filters and return the articles
 		try {
 			const articles = await Article.listFiltered(filters.category, filters.priceFrom, filters.priceTo);
 			res.status(200).json(articles);
