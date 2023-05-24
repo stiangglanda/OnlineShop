@@ -2,6 +2,7 @@ import { nextId } from '../models/db.js';
 import User from '../models/user.js';
 import Address from '../models/address.js';
 import { hash, compare } from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 // get all users from the database
 const getUsers = async (req, res) => {
@@ -114,6 +115,9 @@ const login = async (req, res) => {
 		}
 
 		// TODO: save token to session
+		const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+		user.token = token;
+
 		res.status(200).json(user);
 	} catch (error) {
 		res.status(400).json({ message: error.message });
