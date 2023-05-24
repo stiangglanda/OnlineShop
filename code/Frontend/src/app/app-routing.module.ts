@@ -6,6 +6,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { AgbComponent } from './components/agb/agb.component';
+import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
+import { ImpressumComponent } from './components/impressum/impressum.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
@@ -16,7 +19,10 @@ const routes: Routes = [
   {path: 'shop', component: ShopComponent},
   {path: 'userprofile', component: UserprofileComponent},
   {path: 'transactions', component: TransactionsComponent},
-  {path: 'payment', component: PaymentComponent}
+  {path: 'payment', component: PaymentComponent},
+  {path: 'agb', component: AgbComponent},
+  {path: 'datenschutz', component: DatenschutzComponent},
+  {path: 'impressum', component: ImpressumComponent}
 ];
 
 @NgModule({
