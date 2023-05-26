@@ -145,7 +145,7 @@ const getUserListings = async (req, res) => {
 // updates an user in the database
 const updateUser = async (req, res) => {
 	try {
-		const user = await User.findById(req.params.id);
+		const user = await User.findByUsername(req.params.username);
 		const { status, username, firstname, lastname, email, password, balance, address } = req.body;
 
 		if (username) {
