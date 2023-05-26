@@ -6,10 +6,13 @@ router // /api/users
 	.route('/')
 	.get(userCtrl.getUsers);
 
-router // /api/users/auth
-	.route('/auth')
-	.get(userCtrl.login)
+router // /api/users/register
+	.route('/register')
 	.post(userCtrl.register);
+
+router // /api/users/login
+	.route('/login')
+	.post(userCtrl.login)
 
 router // /api/users/:id
 	.route('/:id')

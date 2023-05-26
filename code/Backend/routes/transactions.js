@@ -6,12 +6,12 @@ router // /api/transaction
 	.route('/')
 	.post(transactionsCtrl.createTransaction);
 
-router // /api/transaction/buyer/:id
-	.route('/buyer/:id')
+router // /api/transaction/buyer/:username
+	.route('/buyer/:username')
 	.get(transactionsCtrl.getBuyerTransaction);
 
-router // /api/transaction/seller/:id
-	.route('/seller/:id')
+router // /api/transaction/seller/:username
+	.route('/seller/:username')
 	.get(transactionsCtrl.getSellerTransaction);
 
 export default router;
