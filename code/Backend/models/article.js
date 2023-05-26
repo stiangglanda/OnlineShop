@@ -249,12 +249,10 @@ export default class Article {
 	 * @returns {Promise<Article>} The updated article.
 	 */
 	async update() {
-		await db.query('UPDATE article SET name = ?, status = ?, description = ?, price = ?, seller_id = ? WHERE id = ?', [
+		await db.query('UPDATE article SET name = ?, description = ?, price = ? WHERE id = ?', [
 			this.name,
-			this.status,
 			this.description,
 			this.price,
-			this.seller_id,
 			this.id
 		]);
 		return this;
