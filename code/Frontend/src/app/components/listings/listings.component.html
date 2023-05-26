@@ -18,15 +18,15 @@
 						<nav class="side-menu">
 							<ul class="nav">
 								<li><a routerLink="/userprofile"><span class="fa fa-user"></span> Personal Profile</a></li>
-								<li><a routerLink="/listings"><span class="fa fa-list"></span> My Listings</a></li>
-								<li class="active"><a><span class="fa fa-credit-card"></span> Transactions</a></li>
+								<li class="active"><a routerLink="/listings"><span class="fa fa-list"></span> My Listings</a></li>
+								<li><a><span class="fa fa-credit-card"></span> Transactions</a></li>
 								<li><a routerLink="/payment"><span class="fa fa-envelope"></span> Payment information</a></li>
 								<li><a routerLink="/messages"><span class="fa fa-envelope"></span> Messages</a></li>
 							</ul>
 						</nav>
 					</div>
 					<div class="content-panel">
-						
+						<canvas id="labelchart"></canvas>
 						<h2 class="title">Balance</h2>
 						<form class="form-horizontal">
 							<fieldset class="fieldset">

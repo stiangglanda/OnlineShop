@@ -13,6 +13,7 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { PaymentComponent } from './components/payment/payment.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ListingsComponent } from './components/listings/listings.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FooterComponent } from './components/footer/footer.component';
     TransactionsComponent,
     PaymentComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ListingsComponent
   ],
   imports: [
     BrowserModule,

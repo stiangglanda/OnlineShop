@@ -18,6 +18,7 @@
 						<nav class="side-menu">
 							<ul class="nav">
 								<li><a routerLink="/userprofile"><span class="fa fa-user"></span> Personal Profile</a></li>
+								<li><a routerLink="/listings"><span class="fa fa-list"></span> My Listings</a></li>
 								<li><a routerLink="/transactions"><span class="fa fa-credit-card"></span> Transactions</a></li>
 								<li class="active"><a><span class="fa fa-envelope"></span> Payment information</a></li>
 								<li><a routerLink="/messages"><span class="fa fa-envelope"></span> Messages</a></li>
@@ -36,7 +37,7 @@
                                         <div class="col-md-12 col-sm-9 col-xs-12">
                                             <input type="email" class="form-control" placeholder="Barack.O@Bama.com">
                                         </div>
-                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">Telefonnummer / Phone Number</label>
+                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">Phone Number</label>
                                         <div class="col-md-12 col-sm-9 col-xs-12">
                                             <input type="text" class="form-control" placeholder="+43 660 123456">
                                         </div>
@@ -54,33 +55,28 @@
 								</div>
 								<div class="card-body">
                                     <div class="form-group row">
-										<div role="tablist">
-											<button type="button" data-testid="card" id="card-tab" aria-disabled="false" aria-controls="card-panel" aria-selected="true" aria-setsize="2" class="p-Tab Tab p-Tab--selected Tab--selected" role="tab" tabindex="0" value="card">
-												<div class="p-TabIconContainer">
-													<svg class="p-Icon p-Icon--card Icon p-Icon--md p-TabIcon TabIcon p-TabIcon--selected TabIcon--selected" role="presentation" fill="var(--colorIcon)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-														<path fill-rule="evenodd" clip-rule="evenodd" d="M0 4a2 2 0 012-2h12a2 2 0 012 2H0zm0 2v6a2 2 0 002 2h12a2 2 0 002-2V6H0zm3 5a1 1 0 011-1h1a1 1 0 110 2H4a1 1 0 01-1-1z">
-														</path>
-													</svg>
-												</div>
-												<span class="p-TabLabel TabLabel TabLabel--selected">Card</span>
-											</button>
+										<div class="col-md-6 col-sm-6"> 
+											<label class="control-label">Card number</label>
+											
+											<input type="text" class="form-control" placeholder="5555 1234 0000 0012 XXX">
 										</div>
-										<div class="col-md-6 col-sm-12"> 
-											<label class="control-label">Adresse / Address</label>
-											<input type="text" class="form-control">
+										<div class="col-md-3 col-sm-3"> 
+											<label class="control-label">Expiration</label>
+											<input type="text" class="form-control" placeholder="MM/YY">
 										</div>
-										<div class="col-md-6 col-sm-12"> 
-											<label class="control-label">Adresse Zeile 2 / Address Line 2 (Optional)</label>
-											<input type="text" class="form-control">
+										<div class="col-md-3 col-sm-3"> 
+											<label class="control-label">CVC</label>
+											<input type="text" class="form-control" placeholder="000">
 										</div>
-										<div class="col-md-6 col-sm-12"> 
-											<label class="control-label">Stadt / City</label>
-											<input type="text" class="form-control">
+									
+										<div class="col-md-6 col-sm-6"> 
+											<label class="control-label">City</label>
+											<input type="text" class="form-control" placeholder="Linz">
 										</div>
-										<div class="col-md-6 col-sm-12"> 
-											<label class="control-label">Postleitzahl / Zip Code</label>
-											<input type="text" class="form-control">
-										</div>	
+										<div class="col-md-6 col-sm-6"> 
+											<label class="control-label">Postcode</label>
+											<input type="text" class="form-control" placeholder="4020">
+										</div>		
                                     </div>
                                     <div class="text-center form-group col-sm-12">
                                         <button class="btn btn-group btn-amazon-green" type="submit">
@@ -96,24 +92,24 @@
 								<div class="card-body">
                                     <div class="form-group row">
 										<div class="col-md-6 col-sm-12"> 
-											<label class="control-label">Adresse / Address</label>
-											<input type="text" class="form-control">
+											<label class="control-label">Address</label>
+											<input type="text" class="form-control" placeholder="Musterstraße 10">
 										</div>
 										<div class="col-md-6 col-sm-12"> 
-											<label class="control-label">Adresse Zeile 2 / Address Line 2 (Optional)</label>
-											<input type="text" class="form-control">
+											<label class="control-label">Address Line 2 (Optional)</label>
+											<input type="text" class="form-control" placeholder="Musterstraße 10">
 										</div>
 										<div class="col-md-6 col-sm-12"> 
-											<label class="control-label">Stadt / City</label>
-											<input type="text" class="form-control">
+											<label class="control-label">City</label>
+											<input type="text" class="form-control" placeholder="Linz">
 										</div>
 										<div class="col-md-6 col-sm-12"> 
-											<label class="control-label">Postleitzahl / Zip Code</label>
-											<input type="text" class="form-control">
+											<label class="control-label">Zip Code</label>
+											<input type="text" class="form-control" placeholder="4020">
 										</div>	
 										<div class="col-md-12 col-sm-12"> 
-											<label class="control-label">Telefonnummer / Phone number</label>
-											<input type="text" class="form-control">
+											<label class="control-label">Phone number</label>
+											<input type="text" class="form-control" placeholder="+43 465 132 999 65">
 										</div>	
                                     </div>
                                     <div class="text-center form-group col-sm-12">
