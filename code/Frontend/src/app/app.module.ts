@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,9 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ListingsComponent } from './components/listings/listings.component';
+import { AgbComponent } from './components/agb/agb.component';
+import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
+import { ImpressumComponent } from './components/impressum/impressum.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +31,17 @@ import { ListingsComponent } from './components/listings/listings.component';
     PaymentComponent,
     HeaderComponent,
     FooterComponent,
-    ListingsComponent
+    ListingsComponent,
+    AgbComponent,
+    DatenschutzComponent,
+    ImpressumComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

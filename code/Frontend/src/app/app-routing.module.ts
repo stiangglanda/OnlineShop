@@ -7,6 +7,9 @@ import { UserprofileComponent } from './components/userprofile/userprofile.compo
 import { ListingsComponent } from './components/listings/listings.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { AgbComponent } from './components/agb/agb.component';
+import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
+import { ImpressumComponent } from './components/impressum/impressum.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
@@ -18,7 +21,10 @@ const routes: Routes = [
   {path: 'userprofile', component: UserprofileComponent},
   {path: 'listings', component: ListingsComponent},
   {path: 'transactions', component: TransactionsComponent},
-  {path: 'payment', component: PaymentComponent}
+  {path: 'payment', component: PaymentComponent},
+  {path: 'agb', component: AgbComponent},
+  {path: 'datenschutz', component: DatenschutzComponent},
+  {path: 'impressum', component: ImpressumComponent}
 ];
 
 @NgModule({

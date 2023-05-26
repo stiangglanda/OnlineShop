@@ -3,6 +3,7 @@ import { nextId } from '../models/db.js';
 
 const createTransaction = async (req, res) => {
 	const id = await nextId('transaction');
+	console.log(req.body.seller_id);
 	const transaction = new Transaction(id, req.body.seller_id, req.body.buyer_id, req.body.article_id, new Date());
 	try {
 		res.status(201).json(await transaction.save());
@@ -13,7 +14,7 @@ const createTransaction = async (req, res) => {
 
 const getBuyerTransaction = async (req, res) => {
 	try {
-		const transaction = await Transaction.findBybuyerId(req.params.id);
+		const transaction = await Transaction.findBybuyerUsername(req.params.username);
 		return res.status(200).json(transaction);
 	} catch (error) {
 		return res.status(404).json({ message: 'Could not find this transaction.' });
@@ -22,7 +23,7 @@ const getBuyerTransaction = async (req, res) => {
 
 const getSellerTransaction = async (req, res) => {
 	try {
-		const transaction = await Transaction.findBysellerId(req.params.id);
+		const transaction = await Transaction.findBysellerUsername(req.params.username);
 		return res.status(200).json(transaction);
 	} catch (error) {
 		return res.status(404).json({ message: 'Could not find this transaction.' });
