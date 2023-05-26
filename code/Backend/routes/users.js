@@ -19,7 +19,7 @@ router // /api/users/:id/listings
 	.get(userCtrl.getUserListings)	
 
 router // /api/users/:id
-	.route('/:id')
+	.route('/:username')
 	.get(userCtrl.getUser)
 	.put(userCtrl.updateUser)
 	.delete(userCtrl.disableUser);
