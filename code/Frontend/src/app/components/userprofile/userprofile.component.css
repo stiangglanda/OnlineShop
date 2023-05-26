@@ -221,7 +221,8 @@ body{
         box-shadow: 2px 3px #40BABD;
         opacity: 75%;
         margin-bottom: 1.5em;
-        min-width: 300px;
+        width: 100%;
+        min-width: 220px;
     }
 
     .view-account .content-panel .card .card-body .form-group.avatar input {
@@ -580,7 +581,7 @@ body{
         margin-bottom: 15px
     }
     .view-account .file-uploader {
-        margin-bottom: 15px
+        margin-bottom: 15px;
     }
     .view-account .mail-subject {
         max-width: 100px;

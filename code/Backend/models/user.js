@@ -13,6 +13,7 @@ export default class User {
 		this.password = password;
 		this.balance = balance;
 		this.address = address;
+		this.token = null;
 	}
 
 	/**
