@@ -208,6 +208,7 @@ body{
         margin-left:5px;
         margin-right:5px;
         margin-bottom:0;
+        margin-right: 3%;
     }
 
     .view-account .content-panel .card .card-body .form-group{
@@ -674,3 +675,4 @@ body{
         display: inline-block
     }
     }
+    

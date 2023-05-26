@@ -4,6 +4,7 @@ import { ShopComponent } from './components/shop/shop.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
+import { ListingsComponent } from './components/listings/listings.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { AgbComponent } from './components/agb/agb.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'shop', component: ShopComponent},
   {path: 'userprofile', component: UserprofileComponent},
+  {path: 'listings', component: ListingsComponent},
   {path: 'transactions', component: TransactionsComponent},
   {path: 'payment', component: PaymentComponent},
   {path: 'agb', component: AgbComponent},
