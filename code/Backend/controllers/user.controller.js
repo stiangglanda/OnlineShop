@@ -126,20 +126,20 @@ const login = async (req, res) => {
 
 // get a user from the database
 const getUser = async (req, res) => {
-	// attempt to find user using id
-	let user = await User.findById(req.params.id);
-	if (user) return res.status(200).json(user);
-
-	// attempt to find user using username
-	user = await User.findByUsername(req.params.id);
-	if (user) return res.status(200).json(user);
-
-	// attempt to find user using email
-	user = await User.findByEmail(req.params.id);
+	let user = await User.findByUsername(req.params.username);
 	if (user) return res.status(200).json(user);
 
 	// no user found, return error
 	return res.status(404).json({ message: 'Could not find this user.' });
+};
+
+// get a user from the database
+const getUserListings = async (req, res) => {
+	let user = await User.findByUsername(req.params.username);
+	if (!user) return res.status(404).json({ message: 'Could not find this user.' });
+
+	let listings=await User.getListingsbyUserId(user.id);
+	return res.status(200).json(listings);
 };
 
 // updates an user in the database
@@ -218,6 +218,7 @@ export default {
 	register,
 	login,
 	getUser,
+	getUserListings,
 	updateUser,
 	disableUser
 };
