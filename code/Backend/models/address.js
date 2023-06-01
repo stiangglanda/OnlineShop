@@ -78,9 +78,10 @@ export default class Address {
 		if (address_rows.length > 0) {
 			return new Address(address_rows[0].id, this.city, this.plz, this.street, this.street_nr);
 		}
-		
+
 		// insert address
-		await db.query('INSERT INTO address (id, city_id, street_id, street_nr) VALUES (?, ?, ?, ?)', [this.address_id, city_id, street_id, this.street_nr]);
+		let address_id = await nextId('address');
+		await db.query('INSERT INTO address (id, city_id, street_id, street_nr) VALUES (?, ?, ?, ?)', [address_id, city_id, street_id, this.street_nr]);
 		return this;
 	}
 
@@ -89,23 +90,33 @@ export default class Address {
 	 * @returns {Promise<Address>} The updated address.
 	 */
 	async update() {
-		// check if city already exists, if it does, update it
+		let new_city_id;
+		let new_street_id;
+
+		// reuse existing city or create new city
 		const [city_rows] = await db.query('SELECT * FROM city WHERE name = ? AND plz = ?', [this.city, this.plz]);
-		if (city_rows.length >= 0) {
-			await db.query('UPDATE city SET name = ?, plz = ? WHERE id = ?', [this.city, this.plz, city_rows[0].id]);
-		} else {
-			await db.query('INSERT INTO city (id, name, plz) VALUES (?, ?, ?)', [this.address_id, this.city, this.plz]);
+
+		// if the zip / city combination already exists, use it
+		if (city_rows.length > 0) {
+			new_city_id = city_rows[0].id;
+		}
+		// if the zip / city combination doesn't exist, create it
+		else {
+			const city_insert = await db.query('INSERT INTO city (name, plz) VALUES (?, ?)', [this.city, this.plz]);
+			new_city_id = city_insert[0].insertId;
 		}
 
-		// check if street already exists, if it does, update it
+		// reuse existing street or create new street
 		const [street_rows] = await db.query('SELECT * FROM street WHERE name = ?', [this.street]);
 		if (street_rows.length > 0) {
-			await db.query('UPDATE street SET name = ? WHERE id = ?', [this.street, street_rows[0].id]);
+			new_street_id = street_rows[0].id;
 		} else {
-			await db.query('INSERT INTO street (id, name) VALUES (?, ?)', [await nextId('street'), this.street]);
+			const street_insert = await db.query('INSERT INTO street (name) VALUES (?)', [this.street]);
+			new_street_id = street_insert[0].insertId;
 		}
 
-		return this;
+		// update address
+		await db.query('UPDATE address SET city_id = ?, street_id = ?, street_nr = ? WHERE id = ?', [new_city_id, new_street_id, this.street_nr, this.id]);
 	}
 
 	/**
