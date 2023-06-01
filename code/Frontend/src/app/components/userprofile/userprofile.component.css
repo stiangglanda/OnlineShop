@@ -193,7 +193,11 @@ body{
     }
     
     .view-account .content-panel .card-header {
-        color: #40BABD;
+        font-weight: 500;
+        letter-spacing: .05rem;
+        font-size: 1.32rem;
+        margin-bottom: 0;
+        color: #676a6c;
     }
     
     .view-account .content-panel .card-body {

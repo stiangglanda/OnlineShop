@@ -194,7 +194,18 @@
     }
     
     .view-account .content-panel .card-header {
-        color: #40BABD;
+        font-weight: 500;
+        letter-spacing: .05rem;
+        font-size: 1.32rem;
+        margin-bottom: 0;
+        color: #676a6c;
+    }
+    
+    .view-account .content-panel .card-utils {
+        padding-left: 1.5rem;
+        padding-top: 1.5rem;
+        padding-right: 1.5em;
+        font-weight: bold;
     }
     
     .view-account .content-panel .card-body {
