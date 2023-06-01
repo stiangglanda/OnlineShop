@@ -138,7 +138,7 @@ const getUserListings = async (req, res) => {
 	let user = await User.findByUsername(req.params.username);
 	if (!user) return res.status(404).json({ message: 'Could not find this user.' });
 
-	let listings=await User.getListingsbyUserId(user.id);
+	let listings = await User.getListingsbyUserId(user.id);
 	return res.status(200).json(listings);
 };
 
