@@ -146,54 +146,64 @@ const getUser = async (req, res) => {
 const updateUser = async (req, res) => {
 	try {
 		const user = await User.findById(req.params.id);
-		const { status, username, firstname, lastname, email, password, balance, address } = req.body;
+		const {
+			status: new_status,
+			username: new_username,
+			firstname: new_firstname,
+			lastname: new_lastname,
+			email: new_email,
+			password: new_password,
+			balance: new_balance,
+			city: new_city,
+			street: new_street,
+			plz: new_plz,
+			street_nr: new_street_nr
+		} = req.body;
 
-		if (username) {
+		if (new_username) {
 			// check if username is already taken
-			if (await User.findByUsername(username)) {
+			if (await User.findByUsername(new_username)) {
 				return res.status(400).json({ message: 'This username is already taken.' });
 			}
-			user.username = username;
+			user.username = new_username;
 		}
 
-		if (email) {
+		if (new_email) {
 			// check if email is already taken
-			if (await User.findByEmail(email)) {
+			if (await User.findByEmail(new_email)) {
 				return res.status(400).json({ message: 'This email is already in use.' });
 			}
-			user.email = email;
+			user.email = new_email;
 		}
 
-		if (password) {
+		if (new_password) {
 			// check if password is already hashed
 			if (password.length !== 60) {
-				user.password = await hash(password, 10);
+				user.password = await hash(new_password, 10);
 			} else {
-				user.password = password;
+				user.password = new_password;
 			}
 		}
 
-		if (address) {
-			const { plz, city, street, street_nr } = address;
-
-			if (user.address) {
-				if (plz) user.address.plz = plz;
-				if (city) user.address.city = city;
-				if (street) user.address.street = street;
-				if (street_nr) user.address.street_nr = street_nr;
+		// if one of address fields is provided, check if all are provided
+		if (new_city || new_street || new_plz || new_street_nr) {
+			if (!new_city || !new_street || !new_plz || !new_street_nr) {
+				return res.status(400).json({ message: 'Not all address fields were provided.' });
 			} else {
-				const newAddress = new Address(await nextId('address'), city, plz, street, street_nr);
-				await newAddress.save();
-				user.address = newAddress;
+				let new_address = new Address(null, new_city, new_plz, new_street, new_street_nr);
+				new_address = await new_address.update();
+				user.address = new_address;
 			}
-
-			this.address = await user.address.update();
 		}
 
-		if (status) user.status = status;
-		if (firstname) user.firstname = firstname;
-		if (lastname) user.lastname = lastname;
-		if (balance) user.balance = Math.abs(balance);
+		if (!new_city && !new_plz && !new_street && !new_street_nr) {
+			return res.status(400).json({ message: 'Please provide the required fields: city, plz, street, street_nr.' });
+		}
+
+		if (new_status) user.status = new_status;
+		if (new_firstname) user.firstname = new_firstname;
+		if (new_lastname) user.lastname = new_lastname;
+		if (new_balance) user.balance = Math.abs(new_balance);
 
 		const updatedUser = await user.update();
 		res.status(200).json(updatedUser);
