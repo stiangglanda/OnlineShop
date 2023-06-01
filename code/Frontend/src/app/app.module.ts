@@ -14,6 +14,7 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { PaymentComponent } from './components/payment/payment.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ListingsComponent } from './components/listings/listings.component';
 import { AgbComponent } from './components/agb/agb.component';
 import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
 import { ImpressumComponent } from './components/impressum/impressum.component';
@@ -30,6 +31,7 @@ import { ImpressumComponent } from './components/impressum/impressum.component';
     PaymentComponent,
     HeaderComponent,
     FooterComponent,
+    ListingsComponent,
     AgbComponent,
     DatenschutzComponent,
     ImpressumComponent

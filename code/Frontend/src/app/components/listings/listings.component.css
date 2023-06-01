@@ -1,6 +1,7 @@
-body{
-    background: #F3F3F4; 
-    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+
+    body{
+        background: #F3F3F4; 
+        font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
     }
     
     .btn-amazon-green { 
@@ -198,6 +199,13 @@ body{
         font-size: 1.32rem;
         margin-bottom: 0;
         color: #676a6c;
+    }
+    
+    .view-account .content-panel .card-utils {
+        padding-left: 1.5rem;
+        padding-top: 1.5rem;
+        padding-right: 1.5em;
+        font-weight: bold;
     }
     
     .view-account .content-panel .card-body {
@@ -678,4 +686,6 @@ body{
         width: 40px;
         display: inline-block
     }
+    
     }
+    

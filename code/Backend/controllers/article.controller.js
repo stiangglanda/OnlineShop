@@ -69,13 +69,11 @@ const getArticle = async (req, res) => {
 const updateArticle = async (req, res) => {
 	try {
 		const article = await Article.findById(req.params.id);
-		const { status, name, description, price, seller_id } = req.body || null;
+		const { name, description, price } = req.body || null;
 
-		if (status) article.status = status;
 		if (name) article.name = name;
 		if (description) article.description = description;
 		if (price) article.price = price;
-		if (seller_id) article.seller_id = seller_id;
 
 		const updatedArticle = await article.update();
 		res.status(200).json(updatedArticle);

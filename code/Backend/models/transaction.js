@@ -1,4 +1,5 @@
 import { db } from './db.js';
+import User from '../models/user.js';
 
 export default class Transaction {
 	constructor(id, seller_id, buyer_id, article_id, created) {
@@ -28,11 +29,35 @@ export default class Transaction {
 	}
 
 	/**
+	 * Finds a Transaction by buyer username.
+	 * @returns {Promise<Transaction>}
+	 */
+	static async findBybuyerUsername(username) {
+		let user = await User.findByUsername(username);
+		if (!user) return null;
+			
+		const [rows] = await db.query('select * from transaction where buyer_id=?', [user.id]);
+		return rows.map((row) => new Transaction(row.id, row.seller_id, row.buyer_id, row.article_id, row.created));
+	}
+
+	/**
 	 * Finds a Transaction by seller id.
 	 * @returns {Promise<Transaction>}
 	 */
 	static async findBysellerId(id) {
 		const [rows] = await db.query('select * from transaction where seller_id=?', [id]);
+		return rows.map((row) => new Transaction(row.id, row.seller_id, row.buyer_id, row.article_id, row.created));
+	}
+
+	/**
+	 * Finds a Transaction by seller username.
+	 * @returns {Promise<Transaction>}
+	 */
+	static async findBysellerUsername(username) {
+		let user = await User.findByUsername(username);
+		if (!user) return null;
+		
+		const [rows] = await db.query('select * from transaction where seller_id=?', [user.id]);
 		return rows.map((row) => new Transaction(row.id, row.seller_id, row.buyer_id, row.article_id, row.created));
 	}
 

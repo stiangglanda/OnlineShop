@@ -6,13 +6,20 @@ router // /api/users
 	.route('/')
 	.get(userCtrl.getUsers);
 
-router // /api/users/auth
-	.route('/auth')
-	.get(userCtrl.login)
+router // /api/users/register
+	.route('/register')
 	.post(userCtrl.register);
 
+router // /api/users/login
+	.route('/login')
+	.post(userCtrl.login)
+
+router // /api/users/:id/listings
+	.route('/:username/listings')
+	.get(userCtrl.getUserListings)	
+
 router // /api/users/:id
-	.route('/:id')
+	.route('/:username')
 	.get(userCtrl.getUser)
 	.put(userCtrl.updateUser)
 	.delete(userCtrl.disableUser);
