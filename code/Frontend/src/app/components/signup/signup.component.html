@@ -65,7 +65,7 @@
 									<div class="col-12 col-md-6">
 										<div class="form-group">
 											<label for="inputPasswordRepeat">Repeat Password</label>
-											<input formControlName="password" type="password" class="form-control" id="inputPasswordRepeat" placeholder="Enter Repeat Password">
+											<input formControlName="rep_password" type="password" class="form-control" id="inputPasswordRepeat" placeholder="Enter Repeat Password">
 										</div>
 									</div>
 									<div class="col-12">
@@ -76,7 +76,7 @@
 									</div>
 								</div>
 								<div class="text-center form-group col-12">
-									<button class="btn btn-group btn-amazon-green" type="submit">Submit</button>
+									<button class="btn btn-group btn-amazon-green" (click)="onRegister()" type="button">Submit</button>
 								</div>
 							</div>
 						</div>

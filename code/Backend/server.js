@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express, { json, urlencoded } from 'express';
+import cors from 'cors';
 
 import articlesRouter from './routes/articles.js';
 import usersRouter from './routes/users.js';
@@ -15,6 +16,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use(json());
+app.use(cors());
 
 // redirect to /api/ when accessing /
 app.get('/', (req, res) => {

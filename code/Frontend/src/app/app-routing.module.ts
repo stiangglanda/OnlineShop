@@ -12,13 +12,14 @@ import { DatenschutzComponent } from './components/datenschutz/datenschutz.compo
 import { ImpressumComponent } from './components/impressum/impressum.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'shop', component: ShopComponent},
-  {path: 'userprofile', component: UserprofileComponent},
+  {path: 'userprofile', component: UserprofileComponent, canActivate: [AuthGuard]},
   {path: 'listings', component: ListingsComponent},
   {path: 'transactions', component: TransactionsComponent},
   {path: 'payment', component: PaymentComponent},
