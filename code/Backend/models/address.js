@@ -143,13 +143,13 @@ export default class Address {
 		}
 
 		// delete unused cities
-		let deleted_cities = await db.query('DELETE FROM city WHERE id NOT IN (SELECT DISTINCT city_id FROM address)');
+		await db.query('DELETE FROM city WHERE id NOT IN (SELECT DISTINCT city_id FROM address)');
 
 		// delete unused streets
-		let deleted_streets = await db.query('DELETE FROM street WHERE id NOT IN (SELECT DISTINCT street_id FROM address)');
+		await db.query('DELETE FROM street WHERE id NOT IN (SELECT DISTINCT street_id FROM address)');
 
 		//delete unused addresses
-		let deleted_addresses = await db.query('DELETE FROM address WHERE id NOT IN (SELECT DISTINCT address_id FROM user)');
+		await db.query('DELETE FROM address WHERE id NOT IN (SELECT DISTINCT address_id FROM user)');
 
 		// get and return updated address
 		return await Address.findById(this.id);
