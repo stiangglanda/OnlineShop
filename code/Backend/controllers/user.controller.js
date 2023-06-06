@@ -144,7 +144,6 @@ const getUserListings = async (req, res) => {
 // updates an user in the database
 const updateUser = async (req, res) => {
 	try {
-		console.log('Start updating user...');
 		const user = await User.findByUsername(req.params.username);
 
 		if (!user) {
@@ -164,8 +163,6 @@ const updateUser = async (req, res) => {
 			plz: new_plz,
 			street_nr: new_street_nr
 		} = req.body;
-
-		console.log('New Data:', req.body);
 
 		if (new_username) {
 			// check if username is already taken
@@ -197,21 +194,15 @@ const updateUser = async (req, res) => {
 			if (!new_city || !new_street || !new_plz || !new_street_nr) {
 				return res.status(400).json({ message: 'Not all address fields were provided.' });
 			} else {
-				console.log('New Address: ' + new_city + ' ' + new_street + ' ' + new_plz + ' ' + new_street_nr);
-
 				let new_address;
 
 				if (user.address) {
-					console.log('User has an old address: ' + user.address);
 					new_address = new Address(user.address.id, new_city, new_plz, new_street, new_street_nr);
 				} else {
-					console.log('User has no old address.');
 					new_address = new Address(null, new_city, new_plz, new_street, new_street_nr);
 				}
-				
-				console.log('Starting to update address...');
+
 				user.address = await new_address.update(user);
-				console.log('New Address: ' + JSON.stringify(user.address));
 			}
 
 			if (!new_city && !new_plz && !new_street && !new_street_nr) {
