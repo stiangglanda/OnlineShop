@@ -114,8 +114,7 @@ const login = async (req, res) => {
 			return res.status(401).json({ message: 'Password is incorrect.' });
 		}
 
-		// TODO: save token to session
-		const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+		const token = jwt.sign({ id: user.id, username: user.username }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
 		user.token = token;
 
 		res.status(200).json(user);
@@ -145,7 +144,13 @@ const getUserListings = async (req, res) => {
 // updates an user in the database
 const updateUser = async (req, res) => {
 	try {
+		console.log('Start updating user...');
 		const user = await User.findByUsername(req.params.username);
+
+		if (!user) {
+			return res.status(404).json({ message: 'Could not find this user.' });
+		}
+
 		const {
 			status: new_status,
 			username: new_username,
@@ -159,6 +164,8 @@ const updateUser = async (req, res) => {
 			plz: new_plz,
 			street_nr: new_street_nr
 		} = req.body;
+
+		console.log('New Data:', req.body);
 
 		if (new_username) {
 			// check if username is already taken
@@ -190,14 +197,26 @@ const updateUser = async (req, res) => {
 			if (!new_city || !new_street || !new_plz || !new_street_nr) {
 				return res.status(400).json({ message: 'Not all address fields were provided.' });
 			} else {
-				let new_address = new Address(null, new_city, new_plz, new_street, new_street_nr);
-				new_address = await new_address.update();
-				user.address = new_address;
-			}
-		}
+				console.log('New Address: ' + new_city + ' ' + new_street + ' ' + new_plz + ' ' + new_street_nr);
 
-		if (!new_city && !new_plz && !new_street && !new_street_nr) {
-			return res.status(400).json({ message: 'Please provide the required fields: city, plz, street, street_nr.' });
+				let new_address;
+
+				if (user.address) {
+					console.log('User has an old address: ' + user.address);
+					new_address = new Address(user.address.id, new_city, new_plz, new_street, new_street_nr);
+				} else {
+					console.log('User has no old address.');
+					new_address = new Address(null, new_city, new_plz, new_street, new_street_nr);
+				}
+				
+				console.log('Starting to update address...');
+				user.address = await new_address.update(user);
+				console.log('New Address: ' + JSON.stringify(user.address));
+			}
+
+			if (!new_city && !new_plz && !new_street && !new_street_nr) {
+				return res.status(400).json({ message: 'Please provide the required fields: city, plz, street, street_nr.' });
+			}
 		}
 
 		if (new_status) user.status = new_status;
