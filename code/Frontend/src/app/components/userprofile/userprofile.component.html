@@ -46,16 +46,16 @@
 											<div class="form-group">
 												<label class="col-12 control-label">User Name</label>
 												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-													<input type="text" class="form-control" formControlName="username" placeholder="BerryO'"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+													<input type="text" class="form-control" formControlName="username" [(ngModel)]="model.username"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 												</div>
 												<div class="row">
 													<div class="col-lg-6">
 														<label class="control-label">First Name</label>
-														<input type="text" class="form-control" formControlName="firstname" placeholder="Barack"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+														<input type="text" class="form-control" formControlName="firstname" [(ngModel)]="model.firstname"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 													</div>
 													<div class="col-lg-6">
 														<label class="control-label">Last Name</label>
-														<input type="text" class="form-control" formControlName="lastname" placeholder="Obama"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+														<input type="text" class="form-control" formControlName="lastname" [(ngModel)]="model.lastname"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 													</div>
 												</div>												
 											</div>
@@ -70,7 +70,7 @@
 										<div class="form-group">
 											<label class="col-md-3  col-sm-3 col-xs-12 control-label">E-Mail</label>
 											<div class="col-md-12 col-sm-9 col-xs-12">
-												<input type="email" class="form-control" formControlName="email" placeholder="Barack.O@Bama.com"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+												<input type="email" class="form-control" formControlName="email" [(ngModel)]="model.email"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 											</div>
 										</div>
 										<div class="form-group">

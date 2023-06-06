@@ -1,75 +1,88 @@
-<div class="container bg-dark">
-	<form [formGroup]="registerForm">
-		<div class="row">
-			<div class="col-12">
-				<div class="form-group">
-					<label for="inputUsername">Username</label>
-					<input formControlName="username" type="text" class="form-control" id="inputUsername" placeholder="Enter Username">
+<div class="container mt-3">
+	<div class="view-account">
+		<section class="module">
+			<div class="module-inner">
+				<div class="content-panel">
+					<form class="form-horizontal" [formGroup]="registerForm">
+						<div class="card">
+							<div class="card-header">Sign-In</div>
+							<div class="card-body">
+								<div class="form-group row">
+									<div class="col-12 col-md-6"> 
+										<div class="form-group">
+											<label for="inputUsername">Username</label>
+											<input formControlName="username" type="text" class="form-control" id="inputUsername" placeholder="Enter Username">
+										</div>
+									</div>
+									<div class="col-12 col-md-6">
+										<div class="form-group">
+											<label for="inputEmail">E-Mail Address</label>
+											<input formControlName="email" type="email" class="form-control" id="inputEmail" placeholder="Enter E-Mail Address">
+										</div>
+									</div>
+									<div class="col-12 col-md-6">
+										<div class="form-group">
+											<label for="inputFirstname">Firstname</label>
+											<input formControlName="firstname" type="text" class="form-control" id="inputFirstname" placeholder="Enter Firstname">
+										</div>
+									</div>
+									<div class="col-12 col-md-6">
+										<div class="form-group">
+											<label for="inputLastname">Lastname</label>
+											<input formControlName="lastname" type="text" class="form-control" id="inputLastname" placeholder="Enter Lastname">
+										</div>
+									</div>
+									<div class="col-3 col-md-2">
+										<div class="form-group">
+											<label for="inputPLZ">PLZ</label>
+											<input formControlName="plz" type="text" class="form-control" id="inputPLZ" placeholder="Enter PLZ">
+										</div>
+									</div>
+									<div class="col-9 col-md-4">
+										<div class="form-group">
+											<label for="inputCity">City</label>
+											<input formControlName="city" type="text" class="form-control" id="inputCity" placeholder="Enter City">
+										</div>
+									</div>
+									<div class="col-9 col-md-5">
+										<div class="form-group">
+											<label for="inputStreet">Street</label>
+											<input formControlName="street" type="text" class="form-control" id="inputStreet" placeholder="Enter Street">
+										</div>
+									</div>
+									<div class="col-3 col-md-1">
+										<div class="form-group">
+											<label for="inputStreetNumber">Nr</label>
+											<input formControlName="street_nr" type="text" class="form-control" id="inputStreetNumber" placeholder="Enter Nr">
+										</div>
+									</div>
+									<div class="col-12 col-md-6">
+										<div class="form-group">
+											<label for="inputPassword">Password</label>
+											<input formControlName="password" type="password" class="form-control" id="inputPassword" placeholder="Enter Password">
+										</div>
+									</div>
+									<div class="col-12 col-md-6">
+										<div class="form-group">
+											<label for="inputPasswordRepeat">Repeat Password</label>
+											<input formControlName="rep_password" type="password" class="form-control" id="inputPasswordRepeat" placeholder="Enter Repeat Password">
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="form-check">
+											<input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+											<label class="form-check-label" for="exampleCheck1">Yes, I have read the <a href="/datenschutz">privacy statement</a> and agree entirely with it!*</label>
+										</div>
+									</div>
+								</div>
+								<div class="text-center form-group col-12">
+									<button class="btn btn-group btn-amazon-green" (click)="onRegister()" type="button">Submit</button>
+								</div>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
-			<div class="col-6">
-				<div class="form-group">
-					<label for="inputFirstname">Firstname</label>
-					<input formControlName="firstname" type="text" class="form-control" id="inputFirstname" placeholder="Enter Firstname">
-				</div>
-			</div>
-			<div class="col-6">
-				<div class="form-group">
-					<label for="inputLastname">Lastname</label>
-					<input formControlName="lastname" type="text" class="form-control" id="inputLastname" placeholder="Enter Lastname">
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="form-group">
-					<label for="inputPLZ">PLZ</label>
-					<input formControlName="plz" type="text" class="form-control" id="inputPLZ" placeholder="Enter PLZ">
-				</div>
-			</div>
-			<div class="col-9">
-				<div class="form-group">
-					<label for="inputCity">City</label>
-					<input formControlName="city" type="text" class="form-control" id="inputCity" placeholder="Enter City">
-				</div>
-			</div>
-			<div class="col-9">
-				<div class="form-group">
-					<label for="inputStreet">Street</label>
-					<input formControlName="street" type="text" class="form-control" id="inputStreet" placeholder="Enter Street">
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="form-group">
-					<label for="inputStreetNumber">Street Number</label>
-					<input formControlName="street_nr" type="text" class="form-control" id="inputStreetNumber" placeholder="Enter Street Number">
-				</div>
-			</div>
-			<div class="col-12">
-				<div class="form-group">
-					<label for="inputEmail">Email address</label>
-					<input formControlName="email" type="email" class="form-control" id="inputEmail" placeholder="Enter email">
-				</div>
-			</div>
-			<div class="col-6">
-				<div class="form-group">
-					<label for="inputPassword">Password</label>
-					<input formControlName="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
-				</div>
-			</div>
-			<div class="col-6">
-				<div class="form-group">
-					<label for="inputPasswordRepeat">Repeat Password</label>
-					<input formControlName="password" type="password" class="form-control" id="inputPasswordRepeat" placeholder="Repeat Password">
-				</div>
-			</div>
-			<div class="col-12">
-				<div class="form-check">
-					<input type="checkbox" class="form-check-input" id="exampleCheck1">
-					<label class="form-check-label" for="exampleCheck1">Check me out</label>
-				</div>
-			</div>
-			<div class="col-12">
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</div>
-		</div>
-	</form>
+		</section>
+	</div>
 </div>
