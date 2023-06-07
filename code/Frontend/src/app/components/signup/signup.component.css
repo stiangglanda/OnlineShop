@@ -92,11 +92,15 @@ fieldset[disabled] .btn-amazon-green.active {
 .view-account .content-panel .card .card-body .form-group input {
 	position: relative;
 	font-size: 16px;
-	background: none;
 	outline: none;
 	box-shadow: 2px 3px #40BABD;
 	opacity: 75%;
 	margin-bottom: 1.5em;
+}
+
+.form-check-input:checked {
+	background-color: #40BABD;
+	border-color: #397D6F;
 }
 
 .view-account a {
