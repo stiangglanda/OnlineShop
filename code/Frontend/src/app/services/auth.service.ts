@@ -10,8 +10,12 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
 
   private baseUrl: string = "http://localhost:3000/api";
+  private userPayload: any;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) 
+  {
+    this.userPayload = this.decodedToken();
+  }
 
   signUp(registmodel: any)
   {
@@ -49,5 +53,15 @@ export class AuthService {
     const jwtHelper = new JwtHelperService();
     const token = this.getToken()!;
     return jwtHelper.decodeToken(token);
+  }
+
+  getUsernameFromToken()
+  {
+    if(this.userPayload) { return this.userPayload.username; }
+  }
+
+  getIdFromToken()
+  {
+    if(this.userPayload) { return this.userPayload.id; }
   }
 }

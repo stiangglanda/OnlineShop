@@ -21,13 +21,14 @@ export class UserprofileComponent implements OnInit {
 
   public model!: user_update;
   private updateModel!: user_update;
-  
+  private usernameFromToken: string = this.auth.getUsernameFromToken();
+
   userForm!: FormGroup;   
 
   ngOnInit(): void {
     if(this.auth.isLoggedIn())
     {
-      this.userService.getUserByName('test').subscribe({
+      this.userService.getUserByName(this.usernameFromToken).subscribe({
         next: (res => {
           this.model = {
             username: res.username,
@@ -69,14 +70,12 @@ export class UserprofileComponent implements OnInit {
       street_nr: this.model.street_nr
     };
 
-    this.userService.updateUserByName('test', this.updateModel).subscribe({
+    this.userService.updateUserByName(this.usernameFromToken, this.updateModel).subscribe({
       next: (res => {
         alert('you changed your data');
       }),
-      error: (err => { console.log(this.updateModel) })
+      error: (err => { console.log(err) })
     });
-
-    console.log(this.updateModel);
   }
 
 }
