@@ -18,6 +18,7 @@ import { ListingsComponent } from './components/listings/listings.component';
 import { AgbComponent } from './components/agb/agb.component';
 import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
 import { ImpressumComponent } from './components/impressum/impressum.component';
+import { ArticleListComponent } from './components/article-list/article-list.component';
 import { TestComponent } from './components/test/test.component';
 
 @NgModule({
@@ -36,6 +37,7 @@ import { TestComponent } from './components/test/test.component';
     AgbComponent,
     DatenschutzComponent,
     ImpressumComponent,
+    ArticleListComponent
     TestComponent
   ],
   imports: [

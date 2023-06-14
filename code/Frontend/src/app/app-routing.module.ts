@@ -11,6 +11,7 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { AgbComponent } from './components/agb/agb.component';
 import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
 import { ImpressumComponent } from './components/impressum/impressum.component';
+import { ArticleListComponent } from './components/article-list/article-list.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AuthGuard } from './guard/auth.guard';
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path: 'payment', component: PaymentComponent},
   {path: 'agb', component: AgbComponent},
   {path: 'datenschutz', component: DatenschutzComponent},
-  {path: 'impressum', component: ImpressumComponent}
+  {path: 'impressum', component: ImpressumComponent},
+  {path: 'article-list', component: ArticleListComponent}
 ];
 
 @NgModule({
