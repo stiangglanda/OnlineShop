@@ -37,7 +37,7 @@ import { TestComponent } from './components/test/test.component';
     AgbComponent,
     DatenschutzComponent,
     ImpressumComponent,
-    ArticleListComponent
+    ArticleListComponent,
     TestComponent
   ],
   imports: [
