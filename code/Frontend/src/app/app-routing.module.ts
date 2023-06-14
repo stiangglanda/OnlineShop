@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ShopComponent } from './components/shop/shop.component';
 import { LoginComponent } from './components/login/login.component';
+import { TestComponent } from './components/test/test.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { ListingsComponent } from './components/listings/listings.component';
@@ -17,6 +18,7 @@ import { AuthGuard } from './guard/auth.guard';
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
+  {path: 'test', component: TestComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'shop', component: ShopComponent},
   {path: 'userprofile', component: UserprofileComponent, canActivate: [AuthGuard]},
