@@ -16,12 +16,10 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginImage: string = '../../../assets/images/login.jpg';
-  loginBgImage: string = '../../../assets/images/loginBg.jpg';
 
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService) {}
+  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService,) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -37,7 +35,9 @@ export class LoginComponent implements OnInit {
         next: (res => {
           this.loginForm.reset();
           this.auth.storeToken(res.token);
-          this.router.navigate( ['shop'] );
+          this.router.navigate( ['article-list'] ).then(() => {
+            window.location.reload();
+          });
         }),
         error:(err => { console.log(err) })
       });
