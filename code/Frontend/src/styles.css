@@ -2,7 +2,18 @@
 	border-color: #3b71ca !important;
 	background-color: white !important;
 }
-
 .icon-hover:hover i {
 	color: #3b71ca !important;
+}
+
+input {
+	border: 2px solid gray!important;
+	transition: border-bottom 0.3s!important;
+	outline: none!important;
+	border-top-right-radius: 0!important;
+	border-bottom-right-radius: 0!important;
+}
+input:focus {
+	border-top: 0!important;
+	border-right: 0!important;
 }
