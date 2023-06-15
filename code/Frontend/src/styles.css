@@ -7,13 +7,6 @@
 }
 
 input {
-	border: 2px solid gray!important;
-	transition: border-bottom 0.3s!important;
-	outline: none!important;
-	border-top-right-radius: 0!important;
-	border-bottom-right-radius: 0!important;
-}
-input:focus {
-	border-top: 0!important;
-	border-right: 0!important;
+	border-bottom: 2px solid gray!important;
+	border-radius: 0!important;
 }
