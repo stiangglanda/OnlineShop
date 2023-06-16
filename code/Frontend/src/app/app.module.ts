@@ -20,6 +20,7 @@ import { DatenschutzComponent } from './components/datenschutz/datenschutz.compo
 import { ImpressumComponent } from './components/impressum/impressum.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
 import { TestComponent } from './components/test/test.component';
+import { ArticleItemComponent } from './components/article-item/article-item.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { TestComponent } from './components/test/test.component';
     DatenschutzComponent,
     ImpressumComponent,
     ArticleListComponent,
-    TestComponent
+    TestComponent,
+    ArticleItemComponent
   ],
   imports: [
     BrowserModule,
