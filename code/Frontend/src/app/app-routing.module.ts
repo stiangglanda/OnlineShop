@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ShopComponent } from './components/shop/shop.component';
 import { LoginComponent } from './components/login/login.component';
-import { TestComponent } from './components/test/test.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { ListingsComponent } from './components/listings/listings.component';
@@ -12,6 +11,7 @@ import { AgbComponent } from './components/agb/agb.component';
 import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
 import { ImpressumComponent } from './components/impressum/impressum.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
+import { ArticleItemComponent } from './components/article-item/article-item.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AuthGuard } from './guard/auth.guard';
@@ -19,7 +19,6 @@ import { AuthGuard } from './guard/auth.guard';
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'test', component: TestComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'shop', component: ShopComponent},
   {path: 'userprofile', component: UserprofileComponent, canActivate: [AuthGuard]},
@@ -29,7 +28,8 @@ const routes: Routes = [
   {path: 'agb', component: AgbComponent},
   {path: 'datenschutz', component: DatenschutzComponent},
   {path: 'impressum', component: ImpressumComponent},
-  {path: 'article-list', component: ArticleListComponent}
+  {path: 'article-list', component: ArticleListComponent},
+  {path: 'article-item', component: ArticleItemComponent}
 ];
 
 @NgModule({
