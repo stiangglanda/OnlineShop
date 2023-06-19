@@ -234,13 +234,13 @@ body{
         height: 40px;
       }
       
-      .view-account .content-panel .add-payment-text {
+      .view-account .content-panel .payment-text {
         color: #000;
         font-size: 18px;
         font-weight: bold;
         text-align: center;
         margin-top: 10px;
-      }      
+      }
 
     .view-account .content-panel .creditcard {
         width: 360px;
@@ -268,6 +268,7 @@ body{
         overflow: hidden;
         backface-visibility: hidden;
         background: linear-gradient(321.03deg, #0f6856 0%, #40babd 97.45%);
+        box-shadow: 4px 4px 12px 0 rgba(65, 65, 65, 0.37);
     }
       
     .view-account .content-panel .creditcard-bg {

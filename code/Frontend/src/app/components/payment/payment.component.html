@@ -68,18 +68,22 @@
 									</div>		
 								</div>
 								<div class="creditcard">
-									<div class="creditcard-empty">
-									  <div class="creditcard-inner">
-										<div class="circle-with-plus">
-										  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-											<path d="M12 6v12m-6-6h12" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-										  </svg>
-										</div>
-										<div class="add-payment-text">Add Payment Method</div>
-									  </div>
+									<div id="dialog-content"  style="display: none; max-width: 500px;">
 									</div>
-								  </div>
-							  </div>
+									<div class="creditcard-empty">
+										<a data-fancybox data-src="#dialog-content" href="">
+											<div class="creditcard-inner">
+												<div class="circle-with-plus">
+													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+														<path d="M12 6v12m-6-6h12" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+													</svg>
+												</div>
+												<div class="payment-text">Add Payment Method</div>
+											</div>
+										</a>										
+									</div>
+								</div>
+							</div>
 							<div class="card">
 								<div class="card-header">
 									Billing Information
