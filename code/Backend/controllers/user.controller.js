@@ -114,8 +114,7 @@ const login = async (req, res) => {
 			return res.status(401).json({ message: 'Password is incorrect.' });
 		}
 
-		// TODO: save token to session
-		const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+		const token = jwt.sign({ id: user.id, username: user.username }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
 		user.token = token;
 
 		res.status(200).json(user);
@@ -146,6 +145,11 @@ const getUserListings = async (req, res) => {
 const updateUser = async (req, res) => {
 	try {
 		const user = await User.findByUsername(req.params.username);
+
+		if (!user) {
+			return res.status(404).json({ message: 'Could not find this user.' });
+		}
+
 		const {
 			status: new_status,
 			username: new_username,
@@ -190,14 +194,20 @@ const updateUser = async (req, res) => {
 			if (!new_city || !new_street || !new_plz || !new_street_nr) {
 				return res.status(400).json({ message: 'Not all address fields were provided.' });
 			} else {
-				let new_address = new Address(null, new_city, new_plz, new_street, new_street_nr);
-				new_address = await new_address.update();
-				user.address = new_address;
-			}
-		}
+				let new_address;
 
-		if (!new_city && !new_plz && !new_street && !new_street_nr) {
-			return res.status(400).json({ message: 'Please provide the required fields: city, plz, street, street_nr.' });
+				if (user.address) {
+					new_address = new Address(user.address.id, new_city, new_plz, new_street, new_street_nr);
+				} else {
+					new_address = new Address(null, new_city, new_plz, new_street, new_street_nr);
+				}
+
+				user.address = await new_address.update(user);
+			}
+
+			if (!new_city && !new_plz && !new_street && !new_street_nr) {
+				return res.status(400).json({ message: 'Please provide the required fields: city, plz, street, street_nr.' });
+			}
 		}
 
 		if (new_status) user.status = new_status;

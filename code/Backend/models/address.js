@@ -1,4 +1,5 @@
 import { db, nextId } from './db.js';
+import User from './user.js';
 
 export default class Address {
 	constructor(id, city, plz, street, street_nr) {
@@ -87,16 +88,17 @@ export default class Address {
 
 	/**
 	 * Updates an address in the database.
+	 * @param {User} user The user whose address should be updated.
 	 * @returns {Promise<Address>} The updated address.
 	 */
-	async update() {
+	async update(user) {
 		let new_city_id;
 		let new_street_id;
 
-		// reuse existing city or create new city
+		// get city / zip combination
 		const [city_rows] = await db.query('SELECT * FROM city WHERE name = ? AND plz = ?', [this.city, this.plz]);
 
-		// if the zip / city combination already exists, use it
+		// if the zip / city combination already exists, reuse it
 		if (city_rows.length > 0) {
 			new_city_id = city_rows[0].id;
 		}
@@ -115,8 +117,42 @@ export default class Address {
 			new_street_id = street_insert[0].insertId;
 		}
 
-		// update address
-		await db.query('UPDATE address SET city_id = ?, street_id = ?, street_nr = ? WHERE id = ?', [new_city_id, new_street_id, this.street_nr, this.id]);
+		// if user has no address yet, create it
+		if (!user.address?.id) {
+			this.id = await nextId('address');
+			await db.query('INSERT INTO address (id, city_id, street_id, street_nr) VALUES (?, ?, ?, ?)', [this.id, new_city_id, new_street_id, this.street_nr]);
+		} else {
+			// if address is shared by multiple users, create a new address
+			const [address_rows] = await db.query('SELECT * FROM user WHERE address_id = ?', [this.id]);
+			if (address_rows.length > 1) {
+				this.id = await nextId('address');
+				await db.query('INSERT INTO address (id, city_id, street_id, street_nr) VALUES (?, ?, ?, ?)', [this.id, new_city_id, new_street_id, this.street_nr]);
+
+				await db.query('UPDATE user SET address_id = ? WHERE id = ?', [this.id, user.id]);
+			}
+			// if address is only used by one user, check if it can be reused, else update it
+			else {
+				const [address_rows] = await db.query('SELECT * FROM address WHERE city_id = ? AND street_id = ? AND street_nr = ?', [new_city_id, new_street_id, this.street_nr]);
+				if (address_rows.length > 0) {
+					this.id = address_rows[0].id;
+				} else {
+					this.id = user.address.id;
+					await db.query('UPDATE address SET city_id = ?, street_id = ?, street_nr = ? WHERE id = ?', [new_city_id, new_street_id, this.street_nr, this.id]);
+				}
+			}
+		}
+
+		// delete unused cities
+		await db.query('DELETE FROM city WHERE id NOT IN (SELECT DISTINCT city_id FROM address)');
+
+		// delete unused streets
+		await db.query('DELETE FROM street WHERE id NOT IN (SELECT DISTINCT street_id FROM address)');
+
+		//delete unused addresses
+		await db.query('DELETE FROM address WHERE id NOT IN (SELECT DISTINCT address_id FROM user)');
+
+		// get and return updated address
+		return await Address.findById(this.id);
 	}
 
 	/**

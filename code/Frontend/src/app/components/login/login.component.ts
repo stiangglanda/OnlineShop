@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import ValidateForm from 'src/app/helpers/validateform';
+import { user_login } from 'src/app/models/user_login';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,27 +16,44 @@ import ValidateForm from 'src/app/helpers/validateform';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginImage: string = '../../../assets/images/login.jpg';
-  loginBgImage: string = '../../../assets/images/loginBg.jpg';
 
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService,) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      password: ['', Validators.required],
-      username: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
   onLogin() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
-      this.loginForm.reset();
+      const model: user_login = this.create_user_Model();
+      this.auth.login(model).subscribe({
+        next: (res => {
+          this.loginForm.reset();
+          this.auth.storeToken(res.token);
+          this.router.navigate( ['article-list'] ).then(() => {
+            window.location.reload();
+          });
+        }),
+        error:(err => { console.log(err) })
+      });
     } else {
       ValidateForm.validateAllFormFields(this.loginForm);
       alert('Your form is invalid');
     }
+  }
+
+  create_user_Model(): user_login
+  {
+    const model: user_login = {
+      emailOrUsername: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    };
+
+    return model;
   }
 }

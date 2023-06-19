@@ -8,7 +8,7 @@ export default class Article {
 		this.name = name;
 		this.description = description;
 		this.price = price;
-		this.seller_id = seller_id;
+		this.seller_id = seller_id; // TODO: convert to User object
 		this.categories = categories;
 		this.images = images;
 	}

@@ -10,21 +10,26 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { AgbComponent } from './components/agb/agb.component';
 import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
 import { ImpressumComponent } from './components/impressum/impressum.component';
+import { ArticleListComponent } from './components/article-list/article-list.component';
+import { ArticleItemComponent } from './components/article-item/article-item.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'shop', component: ShopComponent},
-  {path: 'userprofile', component: UserprofileComponent},
+  {path: 'userprofile', component: UserprofileComponent, canActivate: [AuthGuard]},
   {path: 'listings', component: ListingsComponent},
   {path: 'transactions', component: TransactionsComponent},
   {path: 'payment', component: PaymentComponent},
   {path: 'agb', component: AgbComponent},
   {path: 'datenschutz', component: DatenschutzComponent},
-  {path: 'impressum', component: ImpressumComponent}
+  {path: 'impressum', component: ImpressumComponent},
+  {path: 'article-list', component: ArticleListComponent},
+  {path: 'article-item', component: ArticleItemComponent}
 ];
 
 @NgModule({
