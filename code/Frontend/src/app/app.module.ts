@@ -18,40 +18,6 @@ import { AgbComponent } from './components/agb/agb.component';
 import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
 import { ImpressumComponent } from './components/impressum/impressum.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
-<<<<<<< HEAD
-import { TestComponent } from './components/test/test.component';
-import { ArticleItemComponent } from './components/article-item/article-item.component';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    ShopComponent,
-    LoginComponent,
-    ShopListContentComponent,
-    SignupComponent,
-    UserprofileComponent,
-    TransactionsComponent,
-    PaymentComponent,
-    HeaderComponent,
-    FooterComponent,
-    ListingsComponent,
-    AgbComponent,
-    DatenschutzComponent,
-    ImpressumComponent,
-    ArticleListComponent,
-    TestComponent,
-    ArticleItemComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-=======
 
 @NgModule({
 	declarations: [
@@ -74,6 +40,5 @@ import { ArticleItemComponent } from './components/article-item/article-item.com
 	imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule],
 	providers: [],
 	bootstrap: [AppComponent]
->>>>>>> 5d8d0bbd50cb3552389bf93d7ac2c8c9cbb6ee2c
 })
 export class AppModule {}
