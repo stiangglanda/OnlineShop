@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router){}
+  constructor(private auth: AuthService, public router: Router){}
 
   public isLogedIn!: boolean; 
 
