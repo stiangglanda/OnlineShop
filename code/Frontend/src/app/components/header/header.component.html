@@ -20,19 +20,30 @@
 						</button>
 					</div>
 				</div>
-				<div class="col-lg-4 col-3">
-					<div class="d-flex float-end" *ngIf="router.url !== '/login'">
-						<a (click)="signIn()" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank" *ngIf="!isLogedIn">
+				<div class="col-lg-4 col-3 text-end" *ngIf="router.url !== '/login'">
+					<a class="btn btn-primary" type="button" id="signInButton" (click)="signIn()" *ngIf="!isLogedIn">
+						<i class="fas fa-user-alt m-1 me-md-2"></i>Sign in
+					</a>
+					<div class="dropdown float-end" *ngIf="isLogedIn">
+						<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenue" data-mdb-toggle="dropdown" aria-expanded="false">
 							<i class="fas fa-user-alt m-1 me-md-2"></i>
-							<p class="d-none d-md-block mb-0">Sign in</p>
-						</a>
-						<a (click)="signOut()" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank" *ngIf="isLogedIn">
-							<i class="fas fa-user-alt m-1 me-md-2"></i>
-							<p class="d-none d-md-block mb-0">Sign Out</p>
-						</a>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenue">
+							<li>
+								<a class="dropdown-item" href="/userprofile">My Profile</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="/listings">My Listings</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="/transactions">My Transactions</a>
+							</li>
+							<li>
+								<a class="dropdown-item" (click)="signOut()">Sign Out</a>
+							</li>
+						</ul>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
