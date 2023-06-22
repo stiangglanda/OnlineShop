@@ -7,6 +7,10 @@ router // /api/articles
 	.get(articleCtrl.getArticles)
 	.post(articleCtrl.createArticle);
 
+router // /api/articles
+	.route('/search/:articleName')
+	.get(articleCtrl.searchArticle())
+
 router // /api/articles/:id
 	.route('/:id')
 	.get(articleCtrl.getArticle)
