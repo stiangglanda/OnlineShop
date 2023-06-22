@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import express, { json, urlencoded } from 'express';
+import express, { json } from 'express';
 import cors from 'cors';
 
 import articlesRouter from './routes/articles.js';
@@ -11,7 +11,6 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 
