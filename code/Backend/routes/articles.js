@@ -9,7 +9,7 @@ router // /api/articles
 
 router // /api/articles
 	.route('/search/:articleName')
-	.get(articleCtrl.searchArticle())
+	.get(articleCtrl.searchArticle);
 
 router // /api/articles/:id
 	.route('/:id')
@@ -19,6 +19,6 @@ router // /api/articles/:id
 
 router // /api/articles/:id
 	.route('/:category/:priceFrom&:priceTo')
-	.get(articleCtrl.getFilteredArticles)
+	.get(articleCtrl.getFilteredArticles);
 
 export default router;
