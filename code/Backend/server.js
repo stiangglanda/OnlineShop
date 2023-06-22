@@ -28,7 +28,6 @@ app.use('/api/users', usersRouter);
 app.use('/api/transactions', transactionsRouter);
 app.use('/api/categories', categoriesRouter);
 
-
 app.listen(3000, function () {
 	console.log('Backend at http://localhost:3000');
 });
