@@ -15,7 +15,7 @@ body{
       .btn-amazon-green.active, 
       .open .dropdown-toggle.btn-amazon-green { 
         color: #ffffff; 
-        background-color: #397D6F; 
+        background-color: #3153b6; 
         border-color: #FFFFFF; 
       } 
        
@@ -139,8 +139,8 @@ body{
     }
     
     .view-account .side-bar .side-menu .nav>li.active a {
-    color: #40babd;
-    border-bottom: 2px solid #40babd;
+    color: #3B71CA;
+    border-bottom: 2px solid #3B71CA;
     background: none;
     border-right: none
     }
@@ -201,7 +201,7 @@ body{
     }
     
     .view-account .content-panel .card-body {
-        color: #397D6F;
+        color: #3153b6;
         padding-left: 1.5rem;
         padding-top: 1.5rem;
         padding-right: 1.5em;
@@ -224,7 +224,7 @@ body{
         font-size: 16px;
         background: none;
         outline: none;
-        box-shadow: 2px 3px #40BABD;
+        box-shadow: 2px 3px #3B71CA;
         opacity: 75%;
         margin-bottom: 1.5em;
     }
@@ -438,7 +438,7 @@ body{
     }
     
     .drive-wrapper .drive-item-title a:hover {
-    color: #40babd
+    color: #3B71CA
     }
     
     .theme-2 .drive-wrapper .drive-item-title a:hover {
@@ -515,7 +515,7 @@ body{
     }
     
     .drive-list-view a:hover {
-    color: #40babd
+    color: #3B71CA
     }
     
     .theme-2 .drive-list-view a:hover {
@@ -659,7 +659,7 @@ body{
     }
     .view-account .side-bar .side-menu .nav>li.active a {
         background: #f9f9fb;
-        border-right: 4px solid #40babd;
+        border-right: 4px solid #3B71CA;
         border-bottom: none
     }
     .theme-2 .view-account .side-bar .side-menu .nav>li.active a {
