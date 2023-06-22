@@ -61,177 +61,221 @@ fieldset[disabled] .btn-amazon-green.active {
 	background-color: #ffffff; 
 }
 
-.view-account{
-	background:#F3F3F4; 
-	margin-top:20px;
-	padding: 30px;
-}
-.view-account .pro-label {
-	font-size: 13px;
-	padding: 4px 5px;
-	position: relative;
-	top: -5px;
-	margin-left: 10px;
-	display: inline-block
-}
-	
-.view-account .side-bar {
-	padding-bottom: 30px
-}
-	
-.view-account .side-bar .user-info {
-	text-align: center;
-	margin:0px!important;
-	padding: 0px!important;
-	color: #616670;
-	border-bottom: 1px solid #f3f3f3
-}
-	
-.view-account .side-bar .user-info .img-profile {
-	width: 120px;
-	height: 120px;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 15px;
-}
-	
-.view-account .side-bar .user-info .meta li {
-	margin-bottom: 10px
-}
-	
-.view-account .side-bar .user-info .meta li span {
-	display: inline-block;
-	width: 100px;
-	margin-right: 5px;
-	text-align: right
-}
-	
-.view-account .side-bar .user-info .meta li a {
-	color: #616670
-}
-	
-.view-account .side-bar .user-info .meta li.activity {
-	color: #a2a6af
-}
-	
-.view-account .side-bar .side-menu {
-	text-align: center
-}
-	
-.view-account .side-bar .side-menu .nav {
-	display: inline-block;
-	margin: 0 auto
-}
-	
-.view-account .side-bar .side-menu .nav>li {
-	font-size: 14px;
-	margin-bottom: 0;
-	border-bottom: none;
-	display: inline-block;
-	float: left;
-	margin-right: 15px;
-	margin-bottom: 15px
-}
-	
-.view-account .side-bar .side-menu .nav>li:last-child {
-	margin-right: 0
-}
-	
-.view-account .side-bar .side-menu .nav>li>a {
-	display: inline-block;
-	color: #9499a3;
-	padding: 5px;
-	border-bottom: 2px solid transparent
-}
-	
-.view-account .side-bar .side-menu .nav>li>a:hover {
-	color: #616670;
-	background: none
-}
-	
-.view-account .side-bar .side-menu .nav>li.active a {
-	color: #40babd;
-	border-bottom: 2px solid #40babd;
-	background: none;
-	border-right: none
-}
-	
-.theme-2 .view-account .side-bar .side-menu .nav>li.active a {
-	color: #6dbd63;
-	border-bottom-color: #6dbd63
-}
-	
-.theme-3 .view-account .side-bar .side-menu .nav>li.active a {
-	color: #497cb1;
-	border-bottom-color: #497cb1
-}
-	
-.theme-4 .view-account .side-bar .side-menu .nav>li.active a {
-	color: #ec6952;
-	border-bottom-color: #ec6952
-}
-	
-.view-account .side-bar .side-menu .nav>li .icon {
-	display: block;
-	font-size: 24px;
-	margin-bottom: 5px
-}
-	
-.view-account .content-panel {
-	padding: 30px
-}
-	
-.view-account .content-panel .title {
-	margin-bottom: 15px;
-	margin-top: 0;
-	font-size: 18px
-}
-	
-.view-account .content-panel .fieldset-title {
-	padding-bottom: 15px;
-	border-bottom: 1px solid #eaeaf1;
-	margin-bottom: 30px;
-	color: #616670;
-	font-size: 16px
-}
-	
-.view-account .content-panel .card {
-	margin-bottom: 2.2rem;
-	border: none;
-	border-radius: 0.5rem;
-	box-shadow: 0 4px 25px 0 rgba(0,0,0,.1);
-	transition: all .3s ease-in-out;
-}
-	
-.view-account .content-panel .card-header {
-	font-weight: 500;
-	letter-spacing: .05rem;
-	font-size: 1.32rem;
-	margin-bottom: 0;
-	color: #676a6c;
-}
-	
-.view-account .content-panel .card-utils {
-	padding-left: 1.5rem;
-	padding-top: 1.5rem;
-	padding-right: 1.5em;
-	font-weight: bold;
-}
-	
-.view-account .content-panel .card-body {
-	color: #397D6F;
-	padding-left: 1.5rem;
-	padding-top: 1.5rem;
-	padding-right: 1.5em;
-}
+    body{
+        background: #F3F3F4; 
+        font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    }
+    
+    .btn-amazon-green { 
+        color: #ffffff; 
+        background-color: #1AB394; 
+        border-color: #FFFFFF; 
+      } 
+       
+      .btn-amazon-green:hover, 
+      .btn-amazon-green:focus, 
+      .btn-amazon-green:active, 
+      .btn-amazon-green.active, 
+      .open .dropdown-toggle.btn-amazon-green { 
+        color: #ffffff; 
+        background-color: #3153b6; 
+        border-color: #FFFFFF; 
+      } 
+       
+      .btn-amazon-green:active, 
+      .btn-amazon-green.active, 
+      .open .dropdown-toggle.btn-amazon-green { 
+        background-image: none; 
+      } 
+       
+      .btn-amazon-green.disabled, 
+      .btn-amazon-green[disabled], 
+      fieldset[disabled] .btn-amazon-green, 
+      .btn-amazon-green.disabled:hover, 
+      .btn-amazon-green[disabled]:hover, 
+      fieldset[disabled] .btn-amazon-green:hover, 
+      .btn-amazon-green.disabled:focus, 
+      .btn-amazon-green[disabled]:focus, 
+      fieldset[disabled] .btn-amazon-green:focus, 
+      .btn-amazon-green.disabled:active, 
+      .btn-amazon-green[disabled]:active, 
+      fieldset[disabled] .btn-amazon-green:active, 
+      .btn-amazon-green.disabled.active, 
+      .btn-amazon-green[disabled].active, 
+      fieldset[disabled] .btn-amazon-green.active { 
+        background-color: #1AB394; 
+        border-color: #FFFFFF; 
+      } 
+       
+      .btn-amazon-green .badge { 
+        color: #1AB394; 
+        background-color: #ffffff; 
+      }
 
-.view-account .content-panel .card .card-body .btn{
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-bottom: 0;
-	margin-right: 3%;
-}
+    .view-account{
+    background:#F3F3F4; 
+    margin-top:20px;
+    padding: 30px;
+    }
+    .view-account .pro-label {
+    font-size: 13px;
+    padding: 4px 5px;
+    position: relative;
+    top: -5px;
+    margin-left: 10px;
+    display: inline-block
+    }
+    
+    .view-account .side-bar {
+    padding-bottom: 30px
+    }
+    
+    .view-account .side-bar .user-info {
+    text-align: center;
+    margin:0px!important;
+    padding: 0px!important;
+    color: #616670;
+    border-bottom: 1px solid #f3f3f3
+    }
+    
+    .view-account .side-bar .user-info .img-profile {
+    width: 120px;
+    height: 120px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    }
+    
+    .view-account .side-bar .user-info .meta li {
+    margin-bottom: 10px
+    }
+    
+    .view-account .side-bar .user-info .meta li span {
+    display: inline-block;
+    width: 100px;
+    margin-right: 5px;
+    text-align: right
+    }
+    
+    .view-account .side-bar .user-info .meta li a {
+    color: #616670
+    }
+    
+    .view-account .side-bar .user-info .meta li.activity {
+    color: #a2a6af
+    }
+    
+    .view-account .side-bar .side-menu {
+    text-align: center
+    }
+    
+    .view-account .side-bar .side-menu .nav {
+    display: inline-block;
+    margin: 0 auto
+    }
+    
+    .view-account .side-bar .side-menu .nav>li {
+    font-size: 14px;
+    margin-bottom: 0;
+    border-bottom: none;
+    display: inline-block;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px
+    }
+    
+    .view-account .side-bar .side-menu .nav>li:last-child {
+    margin-right: 0
+    }
+    
+    .view-account .side-bar .side-menu .nav>li>a {
+    display: inline-block;
+    color: #9499a3;
+    padding: 5px;
+    border-bottom: 2px solid transparent
+    }
+    
+    .view-account .side-bar .side-menu .nav>li>a:hover {
+    color: #616670;
+    background: none
+    }
+    
+    .view-account .side-bar .side-menu .nav>li.active a {
+    color: #3B71CA;
+    border-bottom: 2px solid #3B71CA;
+    background: none;
+    border-right: none
+    }
+    
+    .theme-2 .view-account .side-bar .side-menu .nav>li.active a {
+    color: #6dbd63;
+    border-bottom-color: #6dbd63
+    }
+    
+    .theme-3 .view-account .side-bar .side-menu .nav>li.active a {
+    color: #497cb1;
+    border-bottom-color: #497cb1
+    }
+    
+    .theme-4 .view-account .side-bar .side-menu .nav>li.active a {
+    color: #ec6952;
+    border-bottom-color: #ec6952
+    }
+    
+    .view-account .side-bar .side-menu .nav>li .icon {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 5px
+    }
+    
+    .view-account .content-panel {
+    padding: 30px
+    }
+    
+    .view-account .content-panel .title {
+    margin-bottom: 15px;
+    margin-top: 0;
+    font-size: 18px
+    }
+    
+    .view-account .content-panel .fieldset-title {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eaeaf1;
+    margin-bottom: 30px;
+    color: #616670;
+    font-size: 16px
+    }
+    
+    .view-account .content-panel .card {
+        margin-bottom: 2.2rem;
+        border: none;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 25px 0 rgba(0,0,0,.1);
+        transition: all .3s ease-in-out;
+    }
+    
+    .view-account .content-panel .card-header {
+        font-weight: 500;
+        letter-spacing: .05rem;
+        font-size: 1.32rem;
+        margin-bottom: 0;
+        color: #676a6c;
+    }
+    
+    .view-account .content-panel .card-utils {
+        padding-left: 1.5rem;
+        padding-top: 1.5rem;
+        padding-right: 1.5em;
+        font-weight: bold;
+    }
+    
+    .view-account .content-panel .card-body {
+        color: #3153b6;
+        padding-left: 1.5rem;
+        padding-top: 1.5rem;
+        padding-right: 1.5em;
+    }
 
 .view-account .content-panel .card .card-body .form-group{
 	width: 100%;
