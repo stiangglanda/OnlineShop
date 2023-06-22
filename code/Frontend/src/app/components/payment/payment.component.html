@@ -6,13 +6,11 @@
 					<div class="side-bar">
 						<div class="user-info">
 							<!--ToDo load picture from database so we can update it on the fly-->
-							<img class="img-profile img-circle img-responsive center-block" src="/assets/images/Profilepic1.webp" alt="">
+							<img class="rounded img-profile img-circle img-responsive center-block" src="/assets/images/default-profile-picture.jpg" alt="">
 							<ul class="meta list list-unstyled">
-								<li class="name">Barack Obama
-									<label class="label label-info">Web Developer</label>
+								<li class="name activity" >{{ model.firstname }} {{ model.lastname }}
 								</li>
-								<li class="email"><a href="#">Barack.O@Bama.com</a></li>
-								<li class="activity">Last logged in:<br>Today at 2:18pm</li>
+								<li class="email activity	">{{ model.email }}</li>
 							</ul>
 						</div>
 						<nav class="side-menu">
@@ -61,7 +59,7 @@
 											</svg>
 											</div>
 											<div class="creditcard-chip"></div>
-											<div class="creditcard-holder">Barack Obama</div>
+											<div class="creditcard-holder">{{ model.lastname }} {{ model.firstname }}</div>
 											<div class="creditcard-number">1234 5678 9000 1234</div>
 											<div class="creditcard-valid">12/24</div>
 										</div>
@@ -93,15 +91,15 @@
 										<div class="col-md-6 col-sm-6"> 
 											<label class="control-label">Card number</label>
 											
-											<input type="text" class="form-control" placeholder="5555 1234 0000 0012 XXX">
+											<input type="text" class="form-control" placeholder="1234 5678 9000 1234">
 										</div>
 										<div class="col-md-3 col-sm-3"> 
 											<label class="control-label">Expiration</label>
-											<input type="text" class="form-control" placeholder="MM/YY">
+											<input type="text" class="form-control" placeholder="12/24">
 										</div>
 										<div class="col-md-3 col-sm-3"> 
 											<label class="control-label">CVC</label>
-											<input type="text" class="form-control" placeholder="000">
+											<input type="text" class="form-control" placeholder="860">
 										</div>
 									
 										<div class="col-md-6 col-sm-6"> 
@@ -122,7 +120,7 @@
 							</div>
 							<div class="card">
 								<div class="card-header">
-									<button type="button" class="collapsible">Contact information</button>
+									Contact Information
 								</div>
 								<div class="card-body collapsible">
                                     <div class="form-group">
@@ -178,7 +176,7 @@
 							</div>
                             <div class="card">
 								<div class="card-header">
-									Discount???
+									Discount
 								</div>
 								<div class="card-body">
                                     <div class="form-group">

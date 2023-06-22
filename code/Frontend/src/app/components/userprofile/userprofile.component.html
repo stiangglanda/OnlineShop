@@ -6,13 +6,11 @@
 					<div class="side-bar">
 						<div class="user-info">
 							<!--ToDo load picture from database so we can update it on the fly-->
-							<img class="img-profile img-circle img-responsive center-block" src="/assets/images/Profilepic1.webp" alt="">
+							<img class="rounded img-profile img-circle img-responsive center-block" src="/assets/images/default-profile-picture.jpg" alt="">
 							<ul class="meta list list-unstyled">
-								<li class="name">Barack Obama
-									<label class="label label-info">Web Developer</label>
+								<li class="name activity" >{{ model.firstname }} {{ model.lastname }}
 								</li>
-								<li class="email"><a href="#">Barack.O@Bama.com</a></li>
-								<li class="activity">Last logged in:<br>Today at 2:18pm</li>
+								<li class="email activity	">{{ model.email }}</li>
 							</ul>
 						</div>
 						<nav class="side-menu">
@@ -36,11 +34,10 @@
 										<div class="card-body">
 											<div class="form-group avatar">
 												<figure class="figure col-md-2 col-sm-3 col-xs-12">
-													<img class="img-rounded img-responsive" src="/assets/images/Profilepic1.webp" alt=""> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+													<img class="rounded img-rounded img-responsive" src="/assets/images/default-profile-picture.jpg" alt=""> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 												</figure>
 												<div class="form-inline col-lg-6 col-md-9 col-sm-10 col-xs-10 text-left">
 													<input type="file" class="file-uploader pull-left">
-													<button type="submit" class="btn btn-sm btn-default-alt pull-left">Update Image</button>
 												</div>
 											</div>
 											<div class="form-group">
