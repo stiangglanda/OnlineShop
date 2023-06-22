@@ -33,7 +33,7 @@ const getFilteredArticles = async (req, res) => {
 
 const searchArticle = async (req, res) => {
 	try {
-		const articles = await Article.getByName(req.params.category, req.params.priceFrom, req.params.priceTo);
+		const articles = await Article.findByName(req.params.articleName);
 		res.status(200).json(articles);
 	} catch (error) {
 		res.status(404).json({ message: 'There are no articles.' });
