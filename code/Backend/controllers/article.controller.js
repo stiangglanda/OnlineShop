@@ -69,21 +69,7 @@ const getArticle = async (req, res) => {
 const updateArticle = async (req, res) => {
 	try {
 		const article = await Article.findById(req.params.id);
-		const { name, description, price, images } = req.body;
-		// TODO: remove this and make to req.body categories
-		let categories = [
-			{
-				id: 1,
-				name: 'Technology'
-			},
-			{
-				id: 2,
-				name: 'Gaming'
-			},
-		];
-
-		if (categories) article.categories = categories;
-		if (images) article.images = images;
+		const { name, description, price } = req.body;
 
 		if (name) article.name = name;
 		if (description) article.description = description;
