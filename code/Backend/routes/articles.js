@@ -9,7 +9,7 @@ router // /api/articles
 
 router // /api/articles
 	.route('/search/:articleName')
-	.get(articleCtrl.findByName())
+	.get(articleCtrl.searchArticle())
 
 router // /api/articles/:id
 	.route('/:id')
