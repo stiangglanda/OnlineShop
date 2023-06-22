@@ -36,23 +36,20 @@ const searchArticle = async (req, res) => {
 		const articles = await Article.findByName(req.params.articleName);
 		res.status(200).json(articles);
 	} catch (error) {
-		res.status(404).json({ message: 'There are no articles.' });
+		res.status(404).jsond({ message: 'There are no articles.' });
 	}
 };
 
 const createArticle = async (req, res) => {
 	const { name, description, price, seller_id, categories, images } = req.body || null;
 
-	if(name.length > 150)
-	{
+	if (name.length > 150) {
 		return res.status(400).json({ message: `Article name exeeded the max length(150)` });
 	}
 
-	if(description.length > 2000)
-	{
+	if (description.length > 2000) {
 		return res.status(400).json({ message: `Article description exeeded the max length(2000)` });
 	}
-
 
 	const id = await nextId('article');
 
@@ -83,7 +80,7 @@ const updateArticle = async (req, res) => {
 		if (name) article.name = name;
 		if (description) article.description = description;
 		if (price) article.price = price;
-		
+
 		const updatedArticle = await article.update();
 		res.status(200).json(updatedArticle);
 	} catch (error) {

@@ -18,7 +18,6 @@ const getCategorie = async (req, res) => {
 	}
 };
 
-
 export default {
 	getCategories,
 	getCategorie

@@ -4,10 +4,10 @@ const router = Router();
 
 router // /api/categories
 	.route('/')
-	.get(categoriesCtrl.getCategories)
+	.get(categoriesCtrl.getCategories);
 
 router // /api/categories/:id
 	.route('/:id')
-	.get(categoriesCtrl.getCategorie)
+	.get(categoriesCtrl.getCategorie);
 
 export default router;
