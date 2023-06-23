@@ -6,11 +6,7 @@ import articlesRouter from './routes/articles.js';
 import usersRouter from './routes/users.js';
 import transactionsRouter from './routes/transactions.js';
 import categoriesRouter from './routes/categories.js';
-
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
+import imagesRouter from './routes/images.js';
 
 const app = express();
 
@@ -26,6 +22,7 @@ app.use('/api/articles', articlesRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/transactions', transactionsRouter);
 app.use('/api/categories', categoriesRouter);
+app.use('/api/images', imagesRouter);
 
 app.listen(3000, function () {
 	console.log('Backend at http://localhost:3000');
