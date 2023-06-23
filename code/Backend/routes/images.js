@@ -11,7 +11,7 @@ router // /api/images/article/:article_id
 	.route('/article/:article_id')
 	.get(imageCtrl.getImagesByArticle)
 	.post(imageCtrl.addImageToArticle)
-    .put(imageCtrl.updateImageFromArticle)
+	.put(imageCtrl.updateImageFromArticle)
 	.delete(imageCtrl.deleteImageFromArticle);
 
 export default router;
