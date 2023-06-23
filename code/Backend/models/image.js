@@ -8,15 +8,6 @@ export default class Category {
 		this.article = article;
 	}
 
-	/*
-    getImageById,
-	deleteImageById,
-	getImagesByArticle,
-	addImageToArticle,
-	updateImageFromArticle,
-	deleteImageFromArticle
-    */
-
 	/**
 	 * Gets an image by the image id.
 	 * @returns {Promise<Image>}
