@@ -5,36 +5,35 @@ import { user_signup } from 'src/app/models/user_signup';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+	selector: 'app-signup',
+	templateUrl: './signup.component.html',
+	styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit{
-  loginImage: string = "../../../assets/images/login.jpg";
-  loginBgImage: string = "../../../assets/images/loginBg.jpg";
+export class SignupComponent implements OnInit {
+	loginImage: string = '../../../assets/images/login.jpg';
+	loginBgImage: string = '../../../assets/images/loginBg.jpg';
 
-  registerForm!: FormGroup;
+	registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService) { }
+	constructor(private fb: FormBuilder, private router: Router, private auth: AuthService) {}
 
-  ngOnInit(): void {
-    this.registerForm = this.fb.group({
-      username: ['', Validators.required],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      city: ['', Validators.required],
-      plz: ['', Validators.required],
-      street: ['', Validators.required],
-      street_nr: ['', Validators.required],
-      rep_password: ['', Validators.required]
-    });
-  }
+	ngOnInit(): void {
+		this.registerForm = this.fb.group({
+			username: ['', Validators.required],
+			firstname: ['', Validators.required],
+			lastname: ['', Validators.required],
+			email: ['', Validators.required],
+			password: ['', Validators.required],
+			city: ['', Validators.required],
+			plz: ['', Validators.required],
+			street: ['', Validators.required],
+			street_nr: ['', Validators.required],
+			rep_password: ['', Validators.required]
+		});
+	}
 
-  onRegister()
-  {
-    if(this.registerForm.valid)
+	onRegister() {
+		/*if(this.registerForm.valid)
     {
       const model: user_signup = this.create_user_Model();
       try{
@@ -50,10 +49,10 @@ export class SignupComponent implements OnInit{
       {
         console.log(err);
       }
-    }else { alert('Password does not match'); }
-  }
+    }else { alert('Password does not match'); }*/
+	}
 
-  create_user_Model(): user_signup
+	/*create_user_Model(): user_signup
   {
     const model: user_signup = {
       username: this.registerForm.value.username,
@@ -68,5 +67,5 @@ export class SignupComponent implements OnInit{
     };
 
     return model;
-  }
+  }*/
 }
