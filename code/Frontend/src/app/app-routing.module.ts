@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { ListingsComponent } from './components/listings/listings.component';
+import { AddListingComponent } from './components/add-listing/add-listing.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { AgbComponent } from './components/agb/agb.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'shop', component: ShopComponent},
   {path: 'userprofile', component: UserprofileComponent, canActivate: [AuthGuard]},
   {path: 'listings', component: ListingsComponent},
+  {path: 'addListing', component: AddListingComponent},
   {path: 'transactions', component: TransactionsComponent},
   {path: 'payment', component: PaymentComponent},
   {path: 'agb', component: AgbComponent},

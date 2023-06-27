@@ -18,6 +18,7 @@ import { AgbComponent } from './components/agb/agb.component';
 import { DatenschutzComponent } from './components/datenschutz/datenschutz.component';
 import { ImpressumComponent } from './components/impressum/impressum.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
+import { AddListingComponent } from './components/add-listing/add-listing.component';
 
 @NgModule({
 	declarations: [
@@ -35,7 +36,8 @@ import { ArticleListComponent } from './components/article-list/article-list.com
 		AgbComponent,
 		DatenschutzComponent,
 		ImpressumComponent,
-		ArticleListComponent
+		ArticleListComponent,
+  AddListingComponent
 	],
 	imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule],
 	providers: [],
