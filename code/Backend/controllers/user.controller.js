@@ -28,7 +28,9 @@ const register = async (req, res) => {
 		// validate username
 		let usernameRegex = /^[a-zA-Z0-9-_.]+$/;
 		if (!usernameRegex.test(username)) {
-			return res.status(400).json({ message: 'Username can only contain letters, numbers, dashes, underscores and dots.' });
+			return res.status(400).json({
+				message: 'Username can only contain letters, numbers, dashes, underscores and dots.'
+			});
 		} else if (username.length > 30) {
 			return res.status(400).json({ message: 'Username can not be longer than 30 characters.' });
 		}
@@ -60,7 +62,9 @@ const register = async (req, res) => {
 			return res.status(400).json({ message: 'PLZ can not be longer than 10 characters.' });
 		}
 		if (street_nr && street_nr.length > 10) {
-			return res.status(400).json({ message: 'Street number can not be longer than 10 characters.' });
+			return res.status(400).json({
+				message: 'Street number can not be longer than 10 characters.'
+			});
 		}
 
 		// check if username is taken
@@ -206,7 +210,9 @@ const updateUser = async (req, res) => {
 			}
 
 			if (!new_city && !new_plz && !new_street && !new_street_nr) {
-				return res.status(400).json({ message: 'Please provide the required fields: city, plz, street, street_nr.' });
+				return res.status(400).json({
+					message: 'Please provide the required fields: city, plz, street, street_nr.'
+				});
 			}
 		}
 

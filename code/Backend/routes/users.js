@@ -12,11 +12,11 @@ router // /api/users/register
 
 router // /api/users/login
 	.route('/login')
-	.post(userCtrl.login)
+	.post(userCtrl.login);
 
 router // /api/users/:id/listings
 	.route('/:username/listings')
-	.get(userCtrl.getUserListings)	
+	.get(userCtrl.getUserListings);
 
 router // /api/users/:id
 	.route('/:username')

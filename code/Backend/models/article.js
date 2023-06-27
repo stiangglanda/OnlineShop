@@ -1,3 +1,4 @@
+// TODO: add null handling
 import { db } from './db.js';
 import Category from './category.js';
 
@@ -62,9 +63,9 @@ export default class Article {
 	static async listFiltered(category, priceFrom, priceTo) {
 		let [articles] = [];
 
-		if(category&&priceFrom&&priceTo)
-		{
-			[articles] = await db.query(`
+		if (category && priceFrom && priceTo) {
+			[articles] = await db.query(
+				`
 			SELECT distinct a.id, 
 				   a.status, 
 				   a.name, 
@@ -78,11 +79,12 @@ export default class Article {
 			   and a.id=ac.article_id 
 			   and c.id=ac.category_id 
 			   and c.name in (?) 
-			   and a.price between ? and ?`, [category, priceFrom, priceTo]);
-		}
-		else if(category&&!priceFrom&&!priceTo)
-		{
-			[articles] = await db.query(`
+			   and a.price between ? and ?`,
+				[category, priceFrom, priceTo]
+			);
+		} else if (category && !priceFrom && !priceTo) {
+			[articles] = await db.query(
+				`
 			SELECT distinct a.id, 
 				   a.status, 
 				   a.name, 
@@ -95,11 +97,12 @@ export default class Article {
 			 WHERE a.status = 1 
 			   and a.id=ac.article_id 
 			   and c.id=ac.category_id 
-			   and c.name in (?)`, [category]);
-		}
-		else if(!category&&priceFrom&&priceTo)
-		{
-			[articles] = await db.query(`
+			   and c.name in (?)`,
+				[category]
+			);
+		} else if (!category && priceFrom && priceTo) {
+			[articles] = await db.query(
+				`
 			SELECT distinct a.id, 
 				   a.status, 
 				   a.name, 
@@ -112,11 +115,12 @@ export default class Article {
 			 WHERE a.status = 1 
 			   and a.id=ac.article_id 
 			   and c.id=ac.category_id 
-			   and a.price between ? and ?`, [priceFrom, priceTo]);
-		}
-		else if(!category&&priceFrom&&!priceTo)
-		{
-			[articles] = await db.query(`
+			   and a.price between ? and ?`,
+				[priceFrom, priceTo]
+			);
+		} else if (!category && priceFrom && !priceTo) {
+			[articles] = await db.query(
+				`
 			SELECT distinct a.id, 
 				   a.status, 
 				   a.name, 
@@ -129,11 +133,12 @@ export default class Article {
 			 WHERE a.status = 1 
 			   and a.id=ac.article_id 
 			   and c.id=ac.category_id 
-			   and a.price >= ?`, [priceFrom]);
-		}
-		else if(!category&&!priceFrom&&priceTo)
-		{
-			[articles] = await db.query(`
+			   and a.price >= ?`,
+				[priceFrom]
+			);
+		} else if (!category && !priceFrom && priceTo) {
+			[articles] = await db.query(
+				`
 			SELECT distinct a.id, 
 				   a.status, 
 				   a.name, 
@@ -146,9 +151,10 @@ export default class Article {
 			 WHERE a.status = 1 
 			   and a.id=ac.article_id 
 			   and c.id=ac.category_id 
-			   and a.price <= ?`, [priceTo]);
+			   and a.price <= ?`,
+				[priceTo]
+			);
 		}
-
 
 		let [images] = await db.query('SELECT id, url, article_id FROM image');
 		images = images.map((image) => {
@@ -233,7 +239,7 @@ export default class Article {
 			this.price,
 			this.seller_id
 		]);
-		
+
 		for (let i = 0; i < this.categories.length; i++) {
 			const cat_name = await Category.findByName(this.categories[i]);
 			await db.query('INSERT INTO article_category (article_id, category_id) VALUES (?, ?)', [this.id, cat_name.id]);
@@ -249,12 +255,7 @@ export default class Article {
 	 * @returns {Promise<Article>} The updated article.
 	 */
 	async update() {
-		await db.query('UPDATE article SET name = ?, description = ?, price = ? WHERE id = ?', [
-			this.name,
-			this.description,
-			this.price,
-			this.id
-		]);
+		await db.query('UPDATE article SET name = ?, description = ?, price = ? WHERE id = ?', [this.name, this.description, this.price, this.id]);
 		return this;
 	}
 
@@ -264,5 +265,17 @@ export default class Article {
 	 */
 	async disable() {
 		return await db.query('UPDATE article SET status = 0 WHERE id = ?', [this.id]);
+	}
+
+	/**
+	 * Finds articles by a string, substring search
+	 * @returns {Promise<Article[]>} The articles.
+	 */
+	static async findByName(name) {
+		let [articles] = await db.query('SELECT * FROM article WHERE name LIKE ?', [`%${name}%`]);
+		if (articles.length === 0) return [];
+		return articles.map((article) => {
+			return new Article(article.id, article.status, article.name, article.description, article.price, article.seller_id);
+		});
 	}
 }

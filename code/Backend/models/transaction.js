@@ -35,7 +35,7 @@ export default class Transaction {
 	static async findBybuyerUsername(username) {
 		let user = await User.findByUsername(username);
 		if (!user) return null;
-			
+
 		const [rows] = await db.query('select * from transaction where buyer_id=?', [user.id]);
 		return rows.map((row) => new Transaction(row.id, row.seller_id, row.buyer_id, row.article_id, row.created));
 	}
@@ -56,7 +56,7 @@ export default class Transaction {
 	static async findBysellerUsername(username) {
 		let user = await User.findByUsername(username);
 		if (!user) return null;
-		
+
 		const [rows] = await db.query('select * from transaction where seller_id=?', [user.id]);
 		return rows.map((row) => new Transaction(row.id, row.seller_id, row.buyer_id, row.article_id, row.created));
 	}
