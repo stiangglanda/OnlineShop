@@ -4,39 +4,26 @@
 			<aside class="col-lg-6">
 				<div class="border rounded-4 mb-3 d-flex justify-content-center">
 					<a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="">
-						<img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" />
+						<img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="{{ articleListModel.image_url[0] }}" />
 					</a>
 				</div>
 				<div class="d-flex justify-content-center mb-3">
-					<a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="" class="item-thumb">
-						<img width="60" height="60" class="rounded-2" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big1.webp" />
-					</a>
-					<a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="" class="item-thumb">
-						<img width="60" height="60" class="rounded-2" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big2.webp" />
-					</a>
-					<a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="" class="item-thumb">
-						<img width="60" height="60" class="rounded-2" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big3.webp" />
-					</a>
-					<a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="" class="item-thumb">
-						<img width="60" height="60" class="rounded-2" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big4.webp" />
-					</a>
-					<a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="" class="item-thumb">
-						<img width="60" height="60" class="rounded-2" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" />
+					<a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="" class="item-thumb" *ngFor="let url of articleListModel.image_url">
+						<img width="60" height="60" class="rounded-2" src="{{ url }}" />
 					</a>
 				</div>
 			</aside>
 			<main class="col-lg-6">
 				<div class="ps-lg-3">
-					<h4 class="title text-dark">Quality Men's Hoodie for Winter, Men's Fashion <br />Casual Hoodie</h4>
+					<h4 class="title text-dark">{{ articleListModel.name }}</h4>
 					<div class="mb-3">
-						<span class="h5">€ 75,00</span>
+						<span class="h5">{{ articleListModel.price }}€</span>
 					</div>
-					<p>Modern look and quality demo item is a streetwear-inspired collection that continues to break away from the conventions of mainstream fashion. Made in Italy, these black and brown clothing low-top shirts formen.</p>
+					<p>{{ articleListModel.description }}</p>
 					<div class="row">
 						<dt class="col-3">Category:</dt>
-						<dd class="col-9">Hoodie</dd>
+						<dd class="col-9">{{ articleListModel.categorie }}</dd>
 						<dt class="col-3"></dt>
-						<dd class="col-9">Clothing</dd>
 					</div>
 					<hr />
 					<a href="" class="btn btn-warning shadow-0">Buy now</a>
