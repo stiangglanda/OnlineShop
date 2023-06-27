@@ -31,7 +31,7 @@ const routes: Routes = [
   {path: 'datenschutz', component: DatenschutzComponent},
   {path: 'impressum', component: ImpressumComponent},
   {path: 'article-list', component: ArticleListComponent},
-  {path: 'article-item', component: ArticleItemComponent}
+  {path: 'article-item/:id', component: ArticleItemComponent}
 ];
 
 @NgModule({
