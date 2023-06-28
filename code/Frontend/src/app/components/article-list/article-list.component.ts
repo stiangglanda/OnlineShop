@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { article_list } from 'src/app/models/article_list';
 import { ArticleService } from 'src/app/services/article.service';
 import { CategorieService } from 'src/app/services/categorie.service';
@@ -10,7 +11,7 @@ import { CategorieService } from 'src/app/services/categorie.service';
 	styleUrls: ['./article-list.component.css']
 })
 export class ArticleListComponent implements OnInit {
-	constructor(private article: ArticleService, private categorie: CategorieService) {}
+	constructor(private article: ArticleService, private categorie: CategorieService, private router: Router) {}
 
 	public articleListModel!: article_list[];
 	public categories!: string[];
@@ -27,6 +28,7 @@ export class ArticleListComponent implements OnInit {
 					categorie: item.categories.name,
 					image_url: item.images.map((image: any) => image.url)
 				}));
+				
 				this.articleCount = this.articleListModel.length;
 			},
 			error: (err) => {
@@ -41,5 +43,10 @@ export class ArticleListComponent implements OnInit {
 				console.log(err);
 			}
 		});
+	}
+
+	navigateToItem(id: any)
+	{
+		this.router.navigate(['/article-item', id]);
 	}
 }
