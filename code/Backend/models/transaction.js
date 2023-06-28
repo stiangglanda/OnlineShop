@@ -4,9 +4,9 @@ import User from '../models/user.js';
 export default class Transaction {
 	constructor(id, seller_id, buyer_id, article_id, created) {
 		this.id = id;
-		this.seller_id = seller_id;
-		this.buyer_id = buyer_id;
-		this.article_id = article_id;
+		this.seller_id = seller_id; // TODO: convert to User object
+		this.buyer_id = buyer_id; // TODO: convert to User object
+		this.article_id = article_id; // TODO: convert to User object
 		this.created = created;
 	}
 
