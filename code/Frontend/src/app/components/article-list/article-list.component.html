@@ -31,29 +31,14 @@
 		<div class="row">
 			<!-- sidebar -->
 			<div class="col-lg-3">
-				<button
-					class="btn btn-outline-secondary mb-3 w-100 d-lg-none"
-					type="button"
-					data-mdb-toggle="collapse"
-					data-mdb-target="#navbarSupportedContent"
-					aria-controls="navbarSupportedContent"
-					aria-expanded="false"
-					aria-label="Toggle navigation"
-				>
+				<button class="btn btn-outline-secondary mb-3 w-100 d-lg-none" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span>Show filter</span>
 				</button>
 				<div class="collapse card d-lg-block mb-5" id="navbarSupportedContent">
 					<div class="accordion" id="accordionPanelsStayOpenExample">
 						<div class="accordion-item">
 							<h2 class="accordion-header" id="headingTwo">
-								<button
-									class="accordion-button text-dark bg-light"
-									type="button"
-									data-mdb-toggle="collapse"
-									data-mdb-target="#panelsStayOpen-collapseTwo"
-									aria-expanded="true"
-									aria-controls="panelsStayOpen-collapseTwo"
-								>
+								<button class="accordion-button text-dark bg-light" type="button" data-mdb-toggle="collapse" data-mdb-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
 									Categories
 								</button>
 							</h2>
@@ -71,14 +56,7 @@
 						</div>
 						<div class="accordion-item">
 							<h2 class="accordion-header" id="headingThree">
-								<button
-									class="accordion-button text-dark bg-light"
-									type="button"
-									data-mdb-toggle="collapse"
-									data-mdb-target="#panelsStayOpen-collapseThree"
-									aria-expanded="false"
-									aria-controls="panelsStayOpen-collapseThree"
-								>
+								<button class="accordion-button text-dark bg-light" type="button" data-mdb-toggle="collapse" data-mdb-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
 									Price
 								</button>
 							</h2>
@@ -116,14 +94,14 @@
 			<div class="col-lg-9">
 				<div class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
 					<strong class="d-block py-2">{{ articleCount }} Items found </strong>
-					<div class="ms-auto">
+					<!--<div class="ms-auto">
 						<select class="form-select d-inline-block w-auto border pt-1">
 							<option value="0">Best match</option>
 							<option value="1">Recommended</option>
 							<option value="2">High rated</option>
 							<option value="3">Randomly</option>
 						</select>
-					</div>
+					</div>-->
 				</div>
 				<div class="row">
 					<div class="col-lg-4 col-md-6 col-sm-6 d-flex" *ngFor="let item of articleListModel">
