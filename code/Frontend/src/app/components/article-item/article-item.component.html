@@ -8,8 +8,8 @@
 					</a>
 				</div>
 				<div class="d-flex justify-content-center mb-3">
-					<a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="" class="item-thumb" *ngFor="let url of articleListModel.image_url">
-						<img width="60" height="60" class="rounded-2" src="{{ url }}" />
+					<a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="" class="item-thumb">
+						<img width="60" height="60" class="rounded-2" src="{{ articleListModel.image_url[0] }}" />
 					</a>
 				</div>
 			</aside>
