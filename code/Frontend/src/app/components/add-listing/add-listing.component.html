@@ -1,62 +1,127 @@
-<body>
-	<div class="container mt-3">
-		<div class="view-account">
-			<section class="module">
-				<div class="module-inner">
-					<div class="side-bar">
-						<nav class="side-menu">
-							<ul class="nav">
-								<li><a routerLink="/userprofile"><span class="fa fa-user"></span> Personal Profile</a></li>
-								<li class="active"><a routerLink="/listings"><span class="fa fa-list"></span> My Listings</a></li>
-								<li><a routerLink="/transactions"><span class="fa fa-credit-card"></span> Transactions</a></li>
-								<li><a routerLink="/payment"><span class="fa fa-envelope"></span> Payment information</a></li>
-							</ul>
-						</nav>
-					</div>
-					<div class="content-panel">
-						<form class="form-horizontal">
-							<div class="card">
-								<div class="card-header">Rucksack Backpack Jeans</div>
-								<div class="card-body">
-									<div class="row justify-content-center mb-3">
-										<div class="col-md-12">
-											<div class="card shadow-0">
-												<div class="card-body">
-													<div class="row g-0">
-														<div class="col-xl-2 col-md-3 d-flex justify-content-center">
-															<div class="bg-image hover-zoom ripple rounded ripple-surface me-md-3 mb-3 mb-md-0">
-																<img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/8.webp" class="w-100" />
-																<a href="/">
-																	<div class="hover-overlay">
-																		<div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
-																	</div>
-																</a>
-															</div>
-														</div>
-														<div class="col-xl-8 col-md-7 col-sm-9">
-															<p class="text mb-4 mb-md-0">
-																Short description about the product goes here, for ex its features. Lorem ipsum dolor sit amet with hapti you enter into any new area of science, you almost lorem ipsum is great text
-																consectetur adipisicing
-															</p>
-														</div>
-														<div class="col-xl-2 col-md-2 col-sm-3">
-															<div class="text-end">
-																<h4 class="text-success">+34,50 €</h4>
-																<h4 class="text-danger">-34,50 €</h4>
-																<h4 class="text-dark">34,50 €</h4>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
+<section class="py-5">
+	<div class="container">
+		<div class="row gx-5">
+			<aside class="col-lg-6">
+				<div class="d-flex justify-content-center mb-3">
+					<a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" class="item-thumb">
+						<img width="410" height="410" class="rounded-2" src="/assets/images/DefaultImg.jpg" />
+					</a>
 				</div>
-			</section>
+			</aside>
+			<main class="col-lg-6">
+				<div class="ps-lg-3">
+					<div class="row">
+						<dt class="col-2">Name:</dt>
+						<dd class="col-6">
+							<input type="text" class="form-control" formControlName="username" placeholder="Pazi Item Price€">
+						</dd>
+						<dt class="col-2"></dt>
+					</div>
+					<div class="row">
+						<dt class="col-2">Price:</dt>
+						<dd class="col-6">
+							<input type="text" class="form-control" formControlName="username" placeholder="Pazi Item Price€">
+						</dd>
+						<dt class="col-2"></dt>
+					</div>
+					<div class="row">
+						<dt class="col-2">IMG-URL:</dt>
+						<dd class="col-6">
+							<input type="text" class="form-control" formControlName="username" placeholder="Pazi Item Price€">
+						</dd>
+						<dt class="col-2"></dt>
+					</div>
+					<div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0 mt-1 mb-3">
+						<div class="d-flex justify-content-center">
+						  <input class="btn btn-group btn-primary rounded" type="button" value="Add image">
+						</div>
+					  </div>
+					  
+					<div class="row">
+						<dt class="col-2">Category:</dt>
+						<dd class="col-6">
+							<select name="category" id="category" class="form-control">
+								<option value="technology">Technology</option>
+								<option value="laptop">Laptop</option>
+							  </select>
+						</dd>
+						<dt class="col-3"></dt>
+					</div>
+					<hr />
+				</div>
+			</main>
 		</div>
 	</div>
-</body>
+</section>
+<section class="bg-light border-top py-4">
+	<div class="container">
+		<div class="row gx-4">
+			<div class="col-lg-8 mb-4">
+				<div class="border rounded-2 px-3 py-2 bg-white">
+					<!-- Pills navs -->
+					<ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+						<li class="nav-item d-flex" role="presentation">
+							<p class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-4" data-mdb-toggle="pill" href="" role="tab">Seller profile</p>
+						</li>
+					</ul>
+
+					<div class="tab-content" id="ex1-content">
+						<div class="tab-pane fade show active" role="tabpanel" aria-labelledby="ex1-tab-1">
+							<textarea id="itemDescription" name="itemDescription" class="form-control" placeholder="Add the item description here" required></textarea>
+						</div>
+					</div>
+					
+				</div>
+				<div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0 mt-4 ">
+					<input class="btn btn-group btn-primary rounded " type="button" value="Add item">
+				</div>
+			</div>
+			
+			<div class="col-lg-4">
+				<div class="px-0 border rounded-2 shadow-0">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Similar items</h5>
+							<div class="d-flex mb-3">
+								<a href="#" class="me-3">
+									<img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/8.webp" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
+								</a>
+								<div class="info">
+									<a href="" class="nav-link mb-1">Rucksack Backpack Large</a>
+									<strong class="text-dark">€ 38,90</strong>
+								</div>
+							</div>
+							<div class="d-flex mb-3">
+								<a href="#" class="me-3">
+									<img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/9.webp" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
+								</a>
+								<div class="info">
+									<a href="#" class="nav-link mb-1">Summer New Men's Denim</a>
+									<strong class="text-dark">€ 29,50</strong>
+								</div>
+							</div>
+							<div class="d-flex mb-3">
+								<a href="#" class="me-3">
+									<img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/10.webp" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
+								</a>
+								<div class="info">
+									<a href="#" class="nav-link mb-1">T-shirts with multiple colors</a>
+									<strong class="text-dark">€ 120,00</strong>
+								</div>
+							</div>
+							<div class="d-flex">
+								<a href="#" class="me-3">
+									<img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/11.webp" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
+								</a>
+								<div class="info">
+									<a href="#" class="nav-link mb-1">Blazer Suit Dress Jacket for Men</a>
+									<strong class="text-dark">€ 339,90</strong>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
