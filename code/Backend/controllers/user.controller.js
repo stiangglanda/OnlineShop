@@ -168,6 +168,13 @@ const updateUser = async (req, res) => {
 			street_nr: new_street_nr
 		} = req.body;
 
+		if (new_balance) {
+			if (new_balance < 0) {
+				return res.status(400).json({ message: 'There is not enough money on your account.' });
+			}
+			user.balance = new_balance;
+		}
+
 		if (new_username) {
 			// check if username is already taken
 			if (await User.findByUsername(new_username)) {
@@ -219,7 +226,6 @@ const updateUser = async (req, res) => {
 		if (new_status) user.status = new_status;
 		if (new_firstname) user.firstname = new_firstname;
 		if (new_lastname) user.lastname = new_lastname;
-		if (new_balance) user.balance = Math.abs(new_balance);
 
 		const updatedUser = await user.update();
 		res.status(200).json(updatedUser);
