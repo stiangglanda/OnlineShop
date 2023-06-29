@@ -41,40 +41,12 @@
 										  </tr>
 										</thead>
 										<tbody>
-										  <tr>
-											<th scope="row">1</th>
-											<td>Rucksack Backpack Jeans</td>
-											<td>Otto</td>
-											<td>22.06.2023</td>
-											<td class="sales">+ 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">2</th>
-											<td>Adidos</td>
-											<td>Hofmann</td>
-											<td>24.06.2023</td>
-											<td class="sales">+ 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">3</th>
-											<td>Ray Dan</td>
-											<td>O.G.Kieweg</td>
-											<td>24.06.2023</td>
-											<td class="sales">+ 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">4</th>
-											<td>Vöeslauer Schmutzwasser</td>
-											<td>Schern</td>
-											<td>25.06.2023</td>
-											<td class="sales">+ 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">5</th>
-											<td>Staatsbürgerschaft</td>
-											<td>Natotea</td>
-											<td>26.06.2023</td>
-											<td class="sales">+ 34,50€</td>
+										  <tr *ngFor="let item of transModel">
+                        <th scope="row">{{ item.nr }}</th>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.buyer }}</td>
+                        <td>{{ item.date }}</td>
+                        <td class="sales">+ {{ item.price }}€</td>
 										  </tr>
 										</tbody>
 									  </table>
@@ -98,40 +70,12 @@
 										  </tr>
 										</thead>
 										<tbody>
-										  <tr>
-											<th scope="row">1</th>
-											<td>Rucksack Backpack Jeans</td>
-											<td>Otto</td>
-											<td>22.06.2023</td>
-											<td class="purchases">- 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">2</th>
-											<td>Adidos</td>
-											<td>Hofmann</td>
-											<td>24.06.2023</td>
-											<td class="purchases">- 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">3</th>
-											<td>Ray Dan</td>
-											<td>O.G.Kieweg</td>
-											<td>24.06.2023</td>
-											<td class="purchases">- 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">4</th>
-											<td>Vöeslauer Schmutzwasser</td>
-											<td>Schern</td>
-											<td>25.06.2023</td>
-											<td class="purchases">- 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">5</th>
-											<td>Staatsbürgerschaft</td>
-											<td>Natotea</td>
-											<td>26.06.2023</td>
-											<td class="purchases">- 34,50€</td>
+										  <tr *ngFor="let item of buyTransModel">
+                        <th scope="row">{{ item.nr }}</th>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.buyer }}</td>
+                        <td>{{ item.date }}</td>
+                        <td class="purchases">- {{ item.price }}€</td>
 										  </tr>
 										</tbody>
 									  </table>

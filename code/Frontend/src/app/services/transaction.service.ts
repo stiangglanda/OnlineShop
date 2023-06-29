@@ -15,4 +15,14 @@ constructor(private http: HttpClient) { }
     return this.http.post<any>(`${this.baseUrl}/transactions`, body);
   }
 
+  getSellerTransaction(username: string)
+  {
+    return this.http.get<any>(`${this.baseUrl}/transactions/seller/` + username);
+  }
+
+  getBuyerTransaction(username: string)
+  {
+    return this.http.get<any>(`${this.baseUrl}/transactions/buyer/` + username);
+  }
+
 }

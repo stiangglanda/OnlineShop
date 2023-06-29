@@ -49,15 +49,31 @@
 							<table class="table border mt-3 mb-2">
 								<tr>
 									<th class="py-2">First Name:</th>
-									<td class="py-2">Max</td>
+									<td class="py-2">{{ sellerInformation.firstname }}</td>
 								</tr>
 								<tr>
 									<th class="py-2">Last Name:</th>
-									<td class="py-2">Musterman</td>
+									<td class="py-2">{{ sellerInformation.lastname }}</td>
 								</tr>
 								<tr>
 									<th class="py-2">e-mail:</th>
-									<td class="py-2">test@mail.com</td>
+									<td class="py-2">{{ sellerInformation.email }}</td>
+								</tr>
+                <tr>
+									<th class="py-2">City:</th>
+									<td class="py-2">{{ sellerInformation.city }}</td>
+								</tr>
+                <tr>
+									<th class="py-2">PLZ:</th>
+									<td class="py-2">{{ sellerInformation.plz }}</td>
+								</tr>
+                <tr>
+									<th class="py-2">Street:</th>
+									<td class="py-2">{{ sellerInformation.street }}</td>
+								</tr>
+                <tr>
+									<th class="py-2">Street-Nr.:</th>
+									<td class="py-2">{{ sellerInformation.street_nr }}</td>
 								</tr>
 							</table>
 						</div>

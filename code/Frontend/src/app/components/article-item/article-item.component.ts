@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { article_list } from 'src/app/models/article_list';
 import { create_transaction } from 'src/app/models/create_transaction';
+import { seller_information } from 'src/app/models/seller_information';
 import { ArticleService } from 'src/app/services/article.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TransactionService } from 'src/app/services/transaction.service';
@@ -28,6 +29,8 @@ export class ArticleItemComponent implements OnInit {
 
 	public id: any;
   public seller_id: any;
+  private sellerName: any;
+  public sellerInformation!: seller_information;
 
 	ngOnInit(): void {
 		this.id = this.route.snapshot.paramMap.get('id');
@@ -50,6 +53,16 @@ export class ArticleItemComponent implements OnInit {
 						image_url: res.images.map((image: any) => image.url),
             seller_id: 1
 					};
+          this.sellerName = res.seller.username;
+          this.sellerInformation = {
+            firstname: res.seller.firstname,
+            lastname: res.seller.lastname,
+            email: res.seller.email,
+            city: res.seller.address.city,
+            plz: res.seller.address.plz,
+            street: res.seller.address.street,
+            street_nr: res.seller.address.street_nr
+          }
 				},
 				error: (err) => {
 					this.toast.error({detail:"ERROR", summary: err, duration: 5000});
@@ -63,6 +76,7 @@ export class ArticleItemComponent implements OnInit {
     if(this.auth.isLoggedIn())
     {
       var balanceModel = { balance: -balance };
+      var sellerBalanceModel = { balance: +balance };
 
       this.user.updateUserBalance(this.auth.getUsernameFromToken(), balanceModel).subscribe(
         {
@@ -84,6 +98,18 @@ export class ArticleItemComponent implements OnInit {
                     {
                       next: (res) => 
                       {
+                        this.user.updateUserBalance(this.sellerName, sellerBalanceModel).subscribe(
+                          {
+                            next: (res) => 
+                            {
+                              
+                            },
+                            error: (err) =>
+                            {
+                              this.toast.error({detail:"ERROR", summary: err.error.message, duration: 5000});
+                            }
+                          }
+                        );
                         this.toast.success({detail:"SUCCESS", summary: "You bought this product", duration: 5000});
                         this.router.navigate(['/article-list']);
                       },

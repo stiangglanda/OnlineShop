@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { user_update } from 'src/app/models/user_update';
+import { NgToastService } from 'ng-angular-popup';
+import { TransactionService } from 'src/app/services/transaction.service';
+import { transaction_list } from 'src/app/models/transaction_list';
 
 @Component({
   selector: 'app-transactions',
@@ -13,17 +15,19 @@ import { user_update } from 'src/app/models/user_update';
 export class TransactionsComponent implements OnInit {
 
   constructor(
-    private fb: FormBuilder,
     private userService: UserService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private toast: NgToastService,
+    private transaction: TransactionService,
   ){}
 
   public model!: user_update;
-  private updateModel!: user_update;
+  public transModel!: transaction_list[];
+  public buyTransModel!: transaction_list[];
   private usernameFromToken: string = this.auth.getUsernameFromToken();
-
-  userForm!: FormGroup;   
+  private counter: number = 1; 
+  private buycounter: number = 1; 
 
   ngOnInit(): void {
     if(this.auth.isLoggedIn())
@@ -42,42 +46,59 @@ export class TransactionsComponent implements OnInit {
             balance: res.balance
           };
         }),
-        error: (err => { console.log(err) })
+        error: (err) => 
+        { 
+          this.toast.error({detail:"ERROR", summary: err.error.message, duration: 5000});
+        }
       });
-    }else
+      this.transaction.getSellerTransaction(this.usernameFromToken).subscribe(
+        {
+          next: (res) => 
+          {
+            this.transModel = res.map((item: any) => 
+              ({
+                nr:  this.counter++,
+                name: item.article.name,
+                buyer: item.buyer.username,
+                date: item.created,
+                price: item.article.price
+              })
+            );
+          },
+          error: (err) =>
+          {
+            this.toast.error({detail:"ERROR", summary: err.error.message, duration: 5000});
+          }
+        }
+      );
+
+      this.transaction.getBuyerTransaction(this.usernameFromToken).subscribe(
+        {
+          next: (res) => 
+          {
+            this.buyTransModel = res.map((item: any) => 
+              ({
+                nr: this.buycounter++,
+                name: item.article.name,
+                buyer: item.article.seller.username,
+                date: item.created,
+                price: item.article.price
+              })
+            );
+          },
+          error: (err) =>
+          {
+            this.toast.error({detail:"ERROR", summary: err.error.message, duration: 5000});
+          }
+        }
+      );
+
+    }
+    else
     {
       this.router.navigate( ['login'] );
     }
-
-    this.userForm = this.fb.group({
-      username: ['', Validators.required],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', Validators.required],
-      phoneNumber: ['', Validators.required]
-    });
   }
 
-  update_Profile(){
-
-    this.updateModel = {
-      username: this.userForm.value.username,
-      firstname: this.userForm.value.firstname,
-      lastname: this.userForm.value.lastname,
-      email: this.userForm.value.email,
-      city: this.model.city,
-      plz: this.model.plz,
-      street: this.model.street,
-      street_nr: this.model.street_nr,
-      balance: this.model.balance
-    };
-
-    this.userService.updateUserFullName(this.usernameFromToken, this.updateModel).subscribe({
-      next: (res => {
-        alert('you changed your data');
-      }),
-      error: (err => { console.log(err) })
-    });
-  }
 
 }
