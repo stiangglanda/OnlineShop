@@ -95,8 +95,12 @@ export class LoginComponent implements OnInit {
 			} 
       else 
       {
-				alert('Passwort does not match');
+				//this.toast.error({detail:"ERROR", summary:"Password doesn't match!", duration: 5000});
 			}
 		}
+    else
+    {
+      //this.toast.warning({detail:"WARN", summary:"This form is not valid!", duration: 5000});
+    }
 	}
 }
