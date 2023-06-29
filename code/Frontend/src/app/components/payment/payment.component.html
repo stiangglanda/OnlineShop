@@ -175,21 +175,23 @@
 							</div>
                             <div class="card">
 								<div class="card-header">
-									Discount
+									Add Money
 								</div>
-								<div class="card-body">
-                                    <div class="form-group">
-                                        <label class="col-md-2  col-sm-3 col-xs-12 control-label">Coupon Code</label>
-                                        <div class="col-md-12 col-sm-9 col-xs-12">
-                                            <input type="discound" class="form-control" placeholder="Comming soon!" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="text-center form-group col-sm-12">
-                                        <button class="btn btn-group btn-primary" type="submit">
-                                            Update
-                                        </button>
-                                    </div>
-								</div>
+                <form [formGroup]="addMoneyForm">
+                  <div class="card-body">
+                    <div class="form-group">
+                        <label class="col-md-2  col-sm-3 col-xs-12 control-label">Add Money</label>
+                        <div class="col-md-12 col-sm-9 col-xs-12">
+                            <input type="number" min="1" formControlName="balance" class="form-control" placeholder="999€">
+                        </div>
+                    </div>
+                    <div class="text-center form-group col-sm-12">
+                        <button (click)="addBalance()" class="btn btn-group btn-primary" type="submit">
+                            Update
+                        </button>
+                    </div>
+                  </div>
+                </form>
 							</div>
 						</form>
 					</div>

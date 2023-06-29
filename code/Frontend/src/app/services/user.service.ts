@@ -31,4 +31,9 @@ export class UserService {
   {
     return this.http.get<any>(`${this.baseUrl}/users/${username}/listings`);
   }
+
+  updateUserBalance(username: string, balance: any)
+  {
+    return this.http.put<any>(`${this.baseUrl}/users/${username}`, balance);
+  }
 }

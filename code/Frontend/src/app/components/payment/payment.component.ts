@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { user_update } from 'src/app/models/user_update';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-payment',
@@ -16,14 +17,14 @@ export class PaymentComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private toast: NgToastService
   ){}
 
   public model!: user_update;
-  private updateModel!: user_update;
   private usernameFromToken: string = this.auth.getUsernameFromToken();
 
-  userForm!: FormGroup;   
+  addMoneyForm!: FormGroup;   
 
   ngOnInit(): void {
     if(this.auth.isLoggedIn())
@@ -42,42 +43,50 @@ export class PaymentComponent implements OnInit {
             balance: res.balance
           };
         }),
-        error: (err => { console.log(err) })
+        error: (err) => 
+        { 
+          this.toast.error({detail:"ERROR", summary: err.error.message, duration: 5000}); 
+        }
       });
     }else
     {
       this.router.navigate( ['login'] );
     }
 
-    this.userForm = this.fb.group({
-      username: ['', Validators.required],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', Validators.required],
-      phoneNumber: ['', Validators.required]
-    });
+    this.addMoneyForm = this.fb.group(
+      {
+        balance: ['', Validators.required]
+      }
+    );
   }
 
-  update_Profile(){
 
-    this.updateModel = {
-      username: this.userForm.value.username,
-      firstname: this.userForm.value.firstname,
-      lastname: this.userForm.value.lastname,
-      email: this.userForm.value.email,
-      city: this.model.city,
-      plz: this.model.plz,
-      street: this.model.street,
-      street_nr: this.model.street_nr,
-      balance: this.model.balance
-    };
+  addBalance()
+  {
+    if(this.addMoneyForm.valid)
+    {
+      var Balance = this.addMoneyForm.value.balance;
+      var newBalance = { balance: +Balance }
 
-    this.userService.updateUserFullName(this.usernameFromToken, this.updateModel).subscribe({
-      next: (res => {
-        alert('you changed your data');
-      }),
-      error: (err => { console.log(err) })
-    });
+      console.log(newBalance)
+      this.userService.updateUserBalance(this.usernameFromToken, newBalance).subscribe(
+        {
+          next: (res) => 
+          {
+            this.toast.success({detail:"SUCESS", summary: "You have updated your Balance", duration: 5000});
+          },
+          error: (err) =>
+          {
+            console.log(err);
+            this.toast.error({detail:"ERROR", summary: err.error.message, duration: 5000});
+          }
+        }
+      );
+    }
+    else
+    {
+      this.toast.warning({detail:"WARN", summary:"This form is not valid!", duration: 5000});
+    }
   }
 
 }

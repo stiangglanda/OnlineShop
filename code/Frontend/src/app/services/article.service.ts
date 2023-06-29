@@ -26,4 +26,8 @@ export class ArticleService {
   changeArticle(id: string, item: change_article){
     return this.http.put<change_article>(`${this.baseUrl}/articles/` + id, item);
   }
+
+  changeArticleStatus(id: string, status: any) {
+		return this.http.put<any>(`${this.baseUrl}/articles/${id}`, status);
+	}
 }
