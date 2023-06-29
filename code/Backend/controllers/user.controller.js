@@ -170,7 +170,12 @@ const updateUser = async (req, res) => {
 		} = req.body;
 
 		if (new_balance) {
-			user.balance += new_balance;
+			let result = user.balance + new_balance;
+			if (result < 0) {
+				return res.status(400).json({ message: 'Balance can not be negative.' });
+			}
+
+			user.balance = result;
 		}
 
 		if (new_username) {
