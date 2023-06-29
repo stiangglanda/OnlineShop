@@ -26,4 +26,9 @@ export class UserService {
   {
     return this.http.put<adress_update>(`${this.baseUrl}/users/${username}`, model);
   }
+
+  getListingByName(username: string)
+  {
+    return this.http.get<any>(`${this.baseUrl}/users/${username}/listings`);
+  }
 }

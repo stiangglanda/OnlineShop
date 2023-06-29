@@ -38,7 +38,8 @@ export class TransactionsComponent implements OnInit {
             city: res.address.city,
             plz: res.address.plz,
             street: res.address.street,
-            street_nr: res.address.street_nr
+            street_nr: res.address.street_nr,
+            balance: res.balance
           };
         }),
         error: (err => { console.log(err) })
@@ -67,7 +68,8 @@ export class TransactionsComponent implements OnInit {
       city: this.model.city,
       plz: this.model.plz,
       street: this.model.street,
-      street_nr: this.model.street_nr
+      street_nr: this.model.street_nr,
+      balance: this.model.balance
     };
 
     this.userService.updateUserFullName(this.usernameFromToken, this.updateModel).subscribe({
