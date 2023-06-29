@@ -26,7 +26,8 @@ export class ArticleListComponent implements OnInit {
 					description: item.description,
 					price: item.price,
 					categorie: item.categories.name,
-					image_url: item.images.map((image: any) => image.url)
+					image_url: item.images.map((image: any) => image.url),
+          seller_id: item.seller.id
 				}));
 				
 				this.articleCount = this.articleListModel.length;
@@ -45,8 +46,8 @@ export class ArticleListComponent implements OnInit {
 		});
 	}
 
-	navigateToItem(id: any)
+	navigateToItem(id: any, seller: any)
 	{
-		this.router.navigate(['/article-item', id]);
+		this.router.navigate(['/article-item/'+id+'/'+seller]);
 	}
 }

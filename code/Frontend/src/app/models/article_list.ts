@@ -5,4 +5,5 @@ export interface article_list{
     price: number;
     categorie: string;
     image_url: string;
+    seller_id: number;
   }

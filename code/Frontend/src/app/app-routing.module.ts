@@ -31,7 +31,7 @@ const routes: Routes = [
   {path: 'datenschutz', component: DatenschutzComponent},
   {path: 'impressum', component: ImpressumComponent},
   {path: 'article-list', component: ArticleListComponent},
-  {path: 'article-item/:id', component: ArticleItemComponent},
+  {path: 'article-item/:id/:sellerid', component: ArticleItemComponent},
   {path: 'addlisting', component: AddListingComponent, canActivate: [AuthGuard]},
   {path: 'change-article/:id', component: ChangeArticleComponent, canActivate: [AuthGuard]}
 ];
