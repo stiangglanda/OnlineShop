@@ -107,7 +107,6 @@ export default class Article {
 				[category]
 			);
 		} else if (!category && priceFrom && priceTo) {
-
 			[articles] = await db.query(
 				`
 				SELECT distinct a.id,
@@ -233,10 +232,6 @@ export default class Article {
 	 * @returns {Promise<Article>} The saved article.
 	 */
 	async save() {
-
-		console.log(this);
-		console.log("------------------");
-
 		await db.query('INSERT INTO article (id, status, name, description, price, seller_id) VALUES (?, ?, ?, ?, ?, ?)', [
 			this.id,
 			this.status,
@@ -245,26 +240,16 @@ export default class Article {
 			this.price,
 			this.seller.id
 		]);
-
-		console.log("Article saved");
-		console.log("------------------");
-		console.log("Categories");
+		
 		for (let i = 0; i < this.categories.length; i++) {
-
-			console.log("Saving category: " + this.categories[i]);
 			const category = await Category.findByName(this.categories[i]);
 
 			if (!category) {
-				console.log("Category not found, creating it");
-
 				const cat_id = await nextId('category');
 				await db.query('INSERT INTO category (id, name) VALUES (?, ?)', [cat_id, this.categories[i]]);
 				await db.query('INSERT INTO article_category (article_id, category_id) VALUES (?, ?)', [this.id, cat_id]);
-				console.log("Category created");
 			} else {
-				console.log("Category found, saving it");
 				await db.query('INSERT INTO article_category (article_id, category_id) VALUES (?, ?)', [this.id, category.id]);
-				console.log("Category saved");
 			}
 		}
 		for (let i = 0; i < this.images.length; i++) {
