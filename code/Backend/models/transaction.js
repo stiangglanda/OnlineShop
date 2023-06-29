@@ -1,12 +1,13 @@
 import { db } from './db.js';
 import User from '../models/user.js';
+import Article from './article.js';
 
 export default class Transaction {
-	constructor(id, seller_id, buyer_id, article_id, created) {
+	constructor(id, seller, buyer, article, created) {
 		this.id = id;
-		this.seller_id = seller_id; // TODO: convert to User object
-		this.buyer_id = buyer_id; // TODO: convert to User object
-		this.article_id = article_id; // TODO: convert to User object
+		this.seller = seller;
+		this.buyer = buyer;
+		this.article = article;
 		this.created = created;
 	}
 
@@ -16,7 +17,17 @@ export default class Transaction {
 	 */
 	static async list() {
 		const [rows] = await db.query('select * from transaction');
-		return rows.map((row) => new Transaction(row.id, row.seller_id, row.buyer_id, row.article_id, row.created));
+
+		let result = rows.map(async (transaction) => {
+
+			let seller = await User.findById(transaction.seller_id);
+			let buyer = await User.findById(transaction.buyer_id);
+			let article = await Article.findById(transaction.article_id);
+
+			return new Transaction(transaction.id, seller, buyer, article, transaction.created);
+		});
+		
+		return Promise.all(result);
 	}
 
 	/**
@@ -25,7 +36,16 @@ export default class Transaction {
 	 */
 	static async findBybuyerId(id) {
 		const [rows] = await db.query('select * from transaction where buyer_id=?', [id]);
-		return rows.map((row) => new Transaction(row.id, row.seller_id, row.buyer_id, row.article_id, row.created));
+		let result = rows.map(async (transaction) => {
+
+			let seller = await User.findById(transaction.seller_id);
+			let buyer = await User.findById(transaction.buyer_id);
+			let article = await Article.findById(transaction.article_id);
+
+			return new Transaction(transaction.id, seller, buyer, article, transaction.created);
+		});
+		
+		return Promise.all(result);
 	}
 
 	/**
@@ -37,7 +57,18 @@ export default class Transaction {
 		if (!user) return null;
 
 		const [rows] = await db.query('select * from transaction where buyer_id=?', [user.id]);
-		return rows.map((row) => new Transaction(row.id, row.seller_id, row.buyer_id, row.article_id, row.created));
+
+
+		let result = rows.map(async (transaction) => {
+
+			let seller = await User.findById(transaction.seller_id);
+			let buyer = await User.findById(transaction.buyer_id);
+			let article = await Article.findById(transaction.article_id);
+
+			return new Transaction(transaction.id, seller, buyer, article, transaction.created);
+		});
+		
+		return Promise.all(result);
 	}
 
 	/**
@@ -46,7 +77,17 @@ export default class Transaction {
 	 */
 	static async findBysellerId(id) {
 		const [rows] = await db.query('select * from transaction where seller_id=?', [id]);
-		return rows.map((row) => new Transaction(row.id, row.seller_id, row.buyer_id, row.article_id, row.created));
+
+		let result = rows.map(async (transaction) => {
+
+			let seller = await User.findById(transaction.seller_id);
+			let buyer = await User.findById(transaction.buyer_id);
+			let article = await Article.findById(transaction.article_id);
+
+			return new Transaction(transaction.id, seller, buyer, article, transaction.created);
+		});
+		
+		return Promise.all(result);
 	}
 
 	/**
@@ -58,7 +99,16 @@ export default class Transaction {
 		if (!user) return null;
 
 		const [rows] = await db.query('select * from transaction where seller_id=?', [user.id]);
-		return rows.map((row) => new Transaction(row.id, row.seller_id, row.buyer_id, row.article_id, row.created));
+		let result = rows.map(async (transaction) => {
+
+			let seller = await User.findById(transaction.seller_id);
+			let buyer = await User.findById(transaction.buyer_id);
+			let article = await Article.findById(transaction.article_id);
+
+			return new Transaction(transaction.id, seller, buyer, article, transaction.created);
+		});
+		
+		return Promise.all(result);
 	}
 
 	/**
