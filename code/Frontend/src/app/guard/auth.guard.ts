@@ -4,21 +4,17 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
-export class AuthGuard  {
-  
-  constructor(private router: Router, private auth: AuthService){}
+export class AuthGuard {
+	constructor(private router: Router, private auth: AuthService) {}
 
-  canActivate(): boolean 
-  {
-    if(this.auth.isLoggedIn())
-      return true;
-    else{
-      alert('Please Login First');
-      this.router.navigate( ['login'] );
-      return false;
-    }
-  }
-  
+	canActivate(): boolean {
+		if (this.auth.isLoggedIn()) return true;
+		else {
+			alert('Please Login First');
+			this.router.navigate(['login']);
+			return false;
+		}
+	}
 }

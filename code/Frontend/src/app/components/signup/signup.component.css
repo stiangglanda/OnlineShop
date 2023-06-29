@@ -1,12 +1,12 @@
 body {
-	background: #F3F3F4;
-	font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+	background: #f3f3f4;
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 .btn-amazon-green {
 	color: #ffffff;
-	background-color: #1AB394;
-	border-color: #FFFFFF;
+	background-color: #1ab394;
+	border-color: #ffffff;
 }
 .btn-amazon-green:hover,
 .btn-amazon-green:focus,
@@ -14,8 +14,8 @@ body {
 .btn-amazon-green.active,
 .open .dropdown-toggle.btn-amazon-green {
 	color: #ffffff;
-	background-color: #397D6F;
-	border-color: #FFFFFF;
+	background-color: #397d6f;
+	border-color: #ffffff;
 }
 .btn-amazon-green:active,
 .btn-amazon-green.active,
@@ -37,42 +37,42 @@ fieldset[disabled] .btn-amazon-green:active,
 .btn-amazon-green.disabled.active,
 .btn-amazon-green[disabled].active,
 fieldset[disabled] .btn-amazon-green.active {
-	background-color: #1AB394;
-	border-color: #FFFFFF;
+	background-color: #1ab394;
+	border-color: #ffffff;
 }
 .btn-amazon-green .badge {
-	color: #1AB394;
+	color: #1ab394;
 	background-color: #ffffff;
 }
 
 .view-account {
-	background: #F3F3F4;
+	background: #f3f3f4;
 	margin-top: 20px;
 	padding: 30px;
 }
 
 .view-account .content-panel {
-	padding: 30px
+	padding: 30px;
 }
 
 .view-account .content-panel .card {
 	margin-bottom: 2.2rem;
 	border: none;
 	border-radius: 0.5rem;
-	box-shadow: 0 4px 25px 0 rgba(0,0,0,.1);
-	transition: all .3s ease-in-out;
+	box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease-in-out;
 }
 
 .view-account .content-panel .card-header {
 	font-weight: 500;
-	letter-spacing: .05rem;
+	letter-spacing: 0.05rem;
 	font-size: 1.32rem;
 	margin-bottom: 0;
 	color: #676a6c;
 }
 
 .view-account .content-panel .card-body {
-	color: #397D6F;
+	color: #397d6f;
 	padding-left: 1.5rem;
 	padding-top: 1.5rem;
 	padding-right: 1.5em;
@@ -93,18 +93,18 @@ fieldset[disabled] .btn-amazon-green.active {
 	position: relative;
 	font-size: 16px;
 	outline: none;
-	box-shadow: 2px 3px #40BABD;
+	box-shadow: 2px 3px #40babd;
 	opacity: 75%;
 	margin-bottom: 1.5em;
 }
 
 .form-check-input:checked {
-	background-color: #40BABD;
-	border-color: #397D6F;
+	background-color: #40babd;
+	border-color: #397d6f;
 }
 
 .view-account a {
-	color: #1AB394;
+	color: #1ab394;
 }
 .view-account a:hover {
 	text-decoration: underline;
@@ -112,7 +112,7 @@ fieldset[disabled] .btn-amazon-green.active {
 
 @media (max-width: 767px) {
 	.view-account .content-panel {
-		padding: 0
+		padding: 0;
 	}
 }
 

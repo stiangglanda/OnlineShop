@@ -2,18 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class TransactionService {
+	private baseUrl: string = 'http://localhost:3000/api';
 
-  private baseUrl: string = 'http://localhost:3000/api';
-
-constructor(private http: HttpClient) { }
-
-  createTransaction(body: any)
-  {
-    return this.http.post<any>(`${this.baseUrl}/transactions`, body);
-  }
+	constructor(private http: HttpClient) {}
 
   getSellerTransaction(username: string)
   {
@@ -24,5 +18,9 @@ constructor(private http: HttpClient) { }
   {
     return this.http.get<any>(`${this.baseUrl}/transactions/buyer/` + username);
   }
+
+	createTransaction(body: any) {
+		return this.http.post<any>(`${this.baseUrl}/transactions`, body);
+	}
 
 }

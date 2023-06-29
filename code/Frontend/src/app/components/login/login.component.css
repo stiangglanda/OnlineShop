@@ -1,4 +1,4 @@
-.row>* {
-    padding-left: 0!important;
-    margin-left: calc(var(--mdb-gutter-x)*0.5);
+.row > * {
+	padding-left: 0 !important;
+	margin-left: calc(var(--mdb-gutter-x) * 0.5);
 }

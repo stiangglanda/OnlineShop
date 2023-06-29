@@ -19,15 +19,15 @@ export class ArticleService {
 		return this.http.get<any>(`${this.baseUrl}/articles/` + id);
 	}
 
-  createArticle(item: create_article){
-    return this.http.post<create_article>(`${this.baseUrl}/articles`, item);
-  }
+	createArticle(item: create_article) {
+		return this.http.post<create_article>(`${this.baseUrl}/articles`, item);
+	}
 
-  changeArticle(id: string, item: change_article){
-    return this.http.put<change_article>(`${this.baseUrl}/articles/` + id, item);
-  }
+	changeArticle(id: string, item: change_article) {
+		return this.http.put<change_article>(`${this.baseUrl}/articles/` + id, item);
+	}
 
-  changeArticleStatus(id: string, status: any) {
+	changeArticleStatus(id: string, status: any) {
 		return this.http.put<any>(`${this.baseUrl}/articles/${id}`, status);
 	}
 }

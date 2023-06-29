@@ -8,12 +8,12 @@ import { TransactionService } from 'src/app/services/transaction.service';
 import { transaction_list } from 'src/app/models/transaction_list';
 
 @Component({
-  selector: 'app-transactions',
-  templateUrl: './transactions.component.html',
-  styleUrls: ['./transactions.component.css']
+	selector: 'app-transactions',
+	templateUrl: './transactions.component.html',
+	styleUrls: ['./transactions.component.css']
 })
 export class TransactionsComponent implements OnInit {
-
+	
   constructor(
     private userService: UserService,
     private auth: AuthService,

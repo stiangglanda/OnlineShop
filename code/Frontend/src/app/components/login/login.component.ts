@@ -46,12 +46,12 @@ export class LoginComponent implements OnInit {
 					});
 				},
 				error: (err) => {
-					this.toast.error({detail:"ERROR", summary: err.error.message, duration: 5000});
+					this.toast.error({ detail: 'ERROR', summary: err.error.message, duration: 5000 });
 				}
 			});
 		} else {
 			ValidateForm.validateAllFormFields(this.loginForm);
-			this.toast.warning({detail:"WARN", summary:"This form is not valid!", duration: 5000});
+			this.toast.warning({ detail: 'WARN', summary: 'This form is not valid!', duration: 5000 });
 		}
 	}
 
@@ -66,42 +66,34 @@ export class LoginComponent implements OnInit {
 
 	signIn() {
 		if (this.registerForm.valid) {
-			if (this.registerForm.value.password === this.registerForm.value.password_rep) 
-      {
-				this.signUpModel = 
-        {
+			if (this.registerForm.value.password === this.registerForm.value.password_rep) {
+				this.signUpModel = {
 					username: this.registerForm.value.username,
-          firstname: this.registerForm.value.firstname,
-          lastname: this.registerForm.value.lastname,
+					firstname: this.registerForm.value.firstname,
+					lastname: this.registerForm.value.lastname,
 					email: this.registerForm.value.email,
 					password: this.registerForm.value.password,
-          city: '1',
-          plz: 1,
-          street: '1',
-          street_nr: 1,
+					city: '1',
+					plz: 1,
+					street: '1',
+					street_nr: 1
 				};
 
 				this.auth.signUp(this.signUpModel).subscribe({
-					next: (res) => 
-          {
+					next: (res) => {
 						this.registerForm.reset();
 						alert('You have registered');
 						this.router.navigate(['login']);
 					},
-					error: (err) => 
-          {
+					error: (err) => {
 						console.log(err);
 					}
 				});
-			} 
-      else 
-      {
-				this.toast.error({detail:"ERROR", summary:"Password doesn't match!", duration: 5000});
+			} else {
+				this.toast.error({ detail: 'ERROR', summary: "Password doesn't match!", duration: 5000 });
 			}
+		} else {
+			this.toast.warning({ detail: 'WARN', summary: 'This form is not valid!', duration: 5000 });
 		}
-    else
-    {
-      this.toast.warning({detail:"WARN", summary:"This form is not valid!", duration: 5000});
-    }
 	}
 }

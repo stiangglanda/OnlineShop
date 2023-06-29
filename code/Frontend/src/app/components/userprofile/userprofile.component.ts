@@ -18,7 +18,7 @@ export class UserprofileComponent implements OnInit {
 	public model!: user_update;
 	private usernameFromToken: string = this.auth.getUsernameFromToken();
 	private updateNameModel!: name_update;
-  private updateAdressModel!: adress_update;
+	private updateAdressModel!: adress_update;
 
 	userForm!: FormGroup;
 
@@ -35,7 +35,7 @@ export class UserprofileComponent implements OnInit {
 						plz: res.address.plz,
 						street: res.address.street,
 						street_nr: res.address.street_nr,
-            balance: res.balance
+						balance: res.balance
 					};
 					console.log(this.model);
 				},
@@ -64,41 +64,30 @@ export class UserprofileComponent implements OnInit {
 			firstname: this.userForm.value.firstname,
 			lastname: this.userForm.value.lastname
 		};
-    this.updateAdressModel = {
-      city: this.userForm.value.city,
-      plz: this.userForm.value.plz,
-      street: this.userForm.value.street,
-      street_nr: this.userForm.value.street_nr
-    }
+		this.updateAdressModel = {
+			city: this.userForm.value.city,
+			plz: this.userForm.value.plz,
+			street: this.userForm.value.street,
+			street_nr: this.userForm.value.street_nr
+		};
 
+		this.userService.updateUserFullName(this.usernameFromToken, this.updateNameModel).subscribe({
+			next: (res) => {
+				console.log(res.firstname, res.lastname);
+				console.log('Firstname Lastname Updated');
+			},
+			error: (err) => {
+				console.log(err);
+			}
+		});
 
-    this.userService.updateUserFullName(this.usernameFromToken, this.updateNameModel).subscribe(
-      {
-        next: (res) => 
-        {
-          console.log(res.firstname, res.lastname);
-          console.log("Firstname Lastname Updated");
-        },
-        error: (err) => 
-        {
-          console.log(err);
-        }
-      }
-    );     
-    
-    this.userService.updateUserAdress(this.usernameFromToken, this.updateAdressModel).subscribe(
-      {
-        next: (res) =>
-        {
-          console.log("adresse geupdated");
-        },
-        error: (err) =>
-        {
-          console.log(err);
-        }
-      }
-    );
-    
-
+		this.userService.updateUserAdress(this.usernameFromToken, this.updateAdressModel).subscribe({
+			next: (res) => {
+				console.log('adresse geupdated');
+			},
+			error: (err) => {
+				console.log(err);
+			}
+		});
 	}
 }
