@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { name_update } from '../models/name_update';
+import { adress_update } from '../models/adress_update';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +17,13 @@ export class UserService {
     return this.http.get<any>(`${this.baseUrl}/users/${username}`);
   }
 
-  updateUserByName(username: string, model: any)
+  updateUserFullName(username: string, model: name_update)
   {
-    return this.http.put<any>(`${this.baseUrl}/users/${username}`, model);
+    return this.http.put<name_update>(`${this.baseUrl}/users/${username}`, model);
+  }
+
+  updateUserAdress(username: string, model: adress_update)
+  {
+    return this.http.put<adress_update>(`${this.baseUrl}/users/${username}`, model);
   }
 }

@@ -2,13 +2,12 @@
 	<div class="p-3 text-center bg-white border-bottom">
 		<div class="container">
 			<div class="row gy-3">
-
 				<div class="col-4">
-					<a href="" target="_blank" class="float-start">
+					<a routerLink="/article-list" class="float-start">
 						<img src="/assets/images/logo_old.png" style="height: 50px" />
 					</a>
 				</div>
-				
+
 				<div class="col-lg-4">
 					<div class="input-group float-center">
 						<div class="form-outline">
@@ -21,9 +20,7 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-3 text-end" *ngIf="router.url !== '/login'">
-					<a class="btn btn-primary" type="button" id="signInButton" (click)="signIn()" *ngIf="!isLogedIn">
-						<i class="fas fa-user-alt m-1 me-md-2"></i>Sign in
-					</a>
+					<a class="btn btn-primary" type="button" id="signInButton" (click)="signIn()" *ngIf="!isLogedIn"> <i class="fas fa-user-alt m-1 me-md-2"></i>Sign in </a>
 					<div class="dropdown float-end" *ngIf="isLogedIn">
 						<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenue" data-mdb-toggle="dropdown" aria-expanded="false">
 							<i class="fas fa-user-alt m-1 me-md-2"></i>
