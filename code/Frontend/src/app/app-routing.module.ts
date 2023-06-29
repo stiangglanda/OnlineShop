@@ -19,7 +19,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { ChangeArticleComponent } from './components/change-article/change-article.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '', redirectTo: 'article-list', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'shop', component: ShopComponent},

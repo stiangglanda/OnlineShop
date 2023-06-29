@@ -3,3 +3,12 @@
 	height: 250px;
 	padding: 15px;
 }
+
+.front-carousel {
+	height: 250px;
+}
+
+.front-carousel img {
+	height: 250px;
+	object-fit: cover;
+}
