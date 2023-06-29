@@ -20,7 +20,7 @@ import { ImpressumComponent } from './components/impressum/impressum.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
 import { AddListingComponent } from './components/add-listing/add-listing.component';
 import { ChangeArticleComponent } from './components/change-article/change-article.component';
-import {NgToastModule} from 'ng-angular-popup';
+import { NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
 	declarations: [
@@ -40,7 +40,7 @@ import {NgToastModule} from 'ng-angular-popup';
 		ImpressumComponent,
 		ArticleListComponent,
 		AddListingComponent,
-    ChangeArticleComponent
+		ChangeArticleComponent
 	],
 	imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule, NgToastModule],
 	providers: [],

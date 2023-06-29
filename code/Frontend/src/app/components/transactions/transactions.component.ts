@@ -6,78 +6,72 @@ import { UserService } from 'src/app/services/user.service';
 import { user_update } from 'src/app/models/user_update';
 
 @Component({
-  selector: 'app-transactions',
-  templateUrl: './transactions.component.html',
-  styleUrls: ['./transactions.component.css']
+	selector: 'app-transactions',
+	templateUrl: './transactions.component.html',
+	styleUrls: ['./transactions.component.css']
 })
 export class TransactionsComponent implements OnInit {
+	constructor(private fb: FormBuilder, private userService: UserService, private auth: AuthService, private router: Router) {}
 
-  constructor(
-    private fb: FormBuilder,
-    private userService: UserService,
-    private auth: AuthService,
-    private router: Router
-  ){}
+	public model!: user_update;
+	private updateModel!: user_update;
+	private usernameFromToken: string = this.auth.getUsernameFromToken();
 
-  public model!: user_update;
-  private updateModel!: user_update;
-  private usernameFromToken: string = this.auth.getUsernameFromToken();
+	userForm!: FormGroup;
 
-  userForm!: FormGroup;   
+	ngOnInit(): void {
+		if (this.auth.isLoggedIn()) {
+			this.userService.getUserByName(this.usernameFromToken).subscribe({
+				next: (res) => {
+					this.model = {
+						username: res.username,
+						firstname: res.firstname,
+						lastname: res.lastname,
+						email: res.email,
+						city: res.address.city,
+						plz: res.address.plz,
+						street: res.address.street,
+						street_nr: res.address.street_nr,
+						balance: res.balance
+					};
+				},
+				error: (err) => {
+					console.log(err);
+				}
+			});
+		} else {
+			this.router.navigate(['login']);
+		}
 
-  ngOnInit(): void {
-    if(this.auth.isLoggedIn())
-    {
-      this.userService.getUserByName(this.usernameFromToken).subscribe({
-        next: (res => {
-          this.model = {
-            username: res.username,
-            firstname: res.firstname,
-            lastname: res.lastname,
-            email: res.email,
-            city: res.address.city,
-            plz: res.address.plz,
-            street: res.address.street,
-            street_nr: res.address.street_nr,
-            balance: res.balance
-          };
-        }),
-        error: (err => { console.log(err) })
-      });
-    }else
-    {
-      this.router.navigate( ['login'] );
-    }
+		this.userForm = this.fb.group({
+			username: ['', Validators.required],
+			firstname: ['', Validators.required],
+			lastname: ['', Validators.required],
+			email: ['', Validators.required],
+			phoneNumber: ['', Validators.required]
+		});
+	}
 
-    this.userForm = this.fb.group({
-      username: ['', Validators.required],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', Validators.required],
-      phoneNumber: ['', Validators.required]
-    });
-  }
+	update_Profile() {
+		this.updateModel = {
+			username: this.userForm.value.username,
+			firstname: this.userForm.value.firstname,
+			lastname: this.userForm.value.lastname,
+			email: this.userForm.value.email,
+			city: this.model.city,
+			plz: this.model.plz,
+			street: this.model.street,
+			street_nr: this.model.street_nr,
+			balance: this.model.balance
+		};
 
-  update_Profile(){
-
-    this.updateModel = {
-      username: this.userForm.value.username,
-      firstname: this.userForm.value.firstname,
-      lastname: this.userForm.value.lastname,
-      email: this.userForm.value.email,
-      city: this.model.city,
-      plz: this.model.plz,
-      street: this.model.street,
-      street_nr: this.model.street_nr,
-      balance: this.model.balance
-    };
-
-    this.userService.updateUserFullName(this.usernameFromToken, this.updateModel).subscribe({
-      next: (res => {
-        alert('you changed your data');
-      }),
-      error: (err => { console.log(err) })
-    });
-  }
-
+		this.userService.updateUserFullName(this.usernameFromToken, this.updateModel).subscribe({
+			next: (res) => {
+				alert('you changed your data');
+			},
+			error: (err) => {
+				console.log(err);
+			}
+		});
+	}
 }

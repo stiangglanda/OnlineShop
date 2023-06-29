@@ -6,135 +6,138 @@
 					<div class="side-bar">
 						<div class="user-info">
 							<!--ToDo load picture from database so we can update it on the fly-->
-							<img class="rounded img-profile img-circle img-responsive center-block" src="/assets/images/default-profile-picture.jpg" alt="">
+							<img class="rounded img-profile img-circle img-responsive center-block" src="/assets/images/default-profile-picture.jpg" alt="" />
 							<ul class="meta list list-unstyled">
-								<li class="name activity" >{{ model.firstname }} {{ model.lastname }}
-								</li>
-								<li class="email activity	">{{ model.email }}</li>
+								<li class="name activity">{{ model.firstname }} {{ model.lastname }}</li>
+								<li class="email activity">{{ model.email }}</li>
 							</ul>
 						</div>
 						<nav class="side-menu">
 							<ul class="nav">
-								<li><a routerLink="/userprofile"><span class="fa fa-user"></span> Personal Profile</a></li>
-								<li><a routerLink="/listings"><span class="fa fa-list"></span> My Listings</a></li>
-								<li class="active"><a><span class="fa fa-credit-card"></span> Transactions</a></li>
-								<li><a routerLink="/payment"><span class="fa fa-envelope"></span> Payment information</a></li>
+								<li>
+									<a routerLink="/userprofile"><span class="fa fa-user"></span> Personal Profile</a>
+								</li>
+								<li>
+									<a routerLink="/listings"><span class="fa fa-list"></span> My Listings</a>
+								</li>
+								<li class="active">
+									<a><span class="fa fa-credit-card"></span> Transactions</a>
+								</li>
+								<li>
+									<a routerLink="/payment"><span class="fa fa-envelope"></span> Payment information</a>
+								</li>
 							</ul>
 						</nav>
 					</div>
 					<div class="content-panel">
 						<form class="form-horizontal">
 							<div class="card">
-								<div class="card-header">
-									Sales
-								</div>
+								<div class="card-header">Sales</div>
 								<div class="card-body">
 									<div class="table-responsive">
-									<table class="table table-hover">
-										<thead>
-										  <tr>
-											<th scope="col">Transaction Nr.</th>
-											<th scope="col">Item</th>
-											<th scope="col">Buyer</th>
-											<th scope="col">Date</th>
-											<th scope="col">Price</th>
-										  </tr>
-										</thead>
-										<tbody>
-										  <tr>
-											<th scope="row">1</th>
-											<td>Rucksack Backpack Jeans</td>
-											<td>Otto</td>
-											<td>22.06.2023</td>
-											<td class="sales">+ 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">2</th>
-											<td>Adidos</td>
-											<td>Hofmann</td>
-											<td>24.06.2023</td>
-											<td class="sales">+ 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">3</th>
-											<td>Ray Dan</td>
-											<td>O.G.Kieweg</td>
-											<td>24.06.2023</td>
-											<td class="sales">+ 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">4</th>
-											<td>Vöeslauer Schmutzwasser</td>
-											<td>Schern</td>
-											<td>25.06.2023</td>
-											<td class="sales">+ 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">5</th>
-											<td>Staatsbürgerschaft</td>
-											<td>Natotea</td>
-											<td>26.06.2023</td>
-											<td class="sales">+ 34,50€</td>
-										  </tr>
-										</tbody>
-									  </table>
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th scope="col">Transaction Nr.</th>
+													<th scope="col">Item</th>
+													<th scope="col">Buyer</th>
+													<th scope="col">Date</th>
+													<th scope="col">Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th scope="row">1</th>
+													<td>Rucksack Backpack Jeans</td>
+													<td>Otto</td>
+													<td>22.06.2023</td>
+													<td class="sales">+ 34,50€</td>
+												</tr>
+												<tr>
+													<th scope="row">2</th>
+													<td>Adidos</td>
+													<td>Hofmann</td>
+													<td>24.06.2023</td>
+													<td class="sales">+ 34,50€</td>
+												</tr>
+												<tr>
+													<th scope="row">3</th>
+													<td>Ray Dan</td>
+													<td>O.G.Kieweg</td>
+													<td>24.06.2023</td>
+													<td class="sales">+ 34,50€</td>
+												</tr>
+												<tr>
+													<th scope="row">4</th>
+													<td>Vöeslauer Schmutzwasser</td>
+													<td>Schern</td>
+													<td>25.06.2023</td>
+													<td class="sales">+ 34,50€</td>
+												</tr>
+												<tr>
+													<th scope="row">5</th>
+													<td>Staatsbürgerschaft</td>
+													<td>Natotea</td>
+													<td>26.06.2023</td>
+													<td class="sales">+ 34,50€</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</div>
 							<div class="card">
-								<div class="card-header">
-									Purchases
-								</div>
+								<div class="card-header">Purchases</div>
 								<div class="card-body">
 									<div class="table-responsive">
-									<table class="table table-hover">
-										<thead>
-										  <tr>
-											<th scope="col">Transaction Nr.</th>
-											<th scope="col">Item</th>
-											<th scope="col">Seller</th>
-											<th scope="col">Date</th>
-											<th scope="col">Price</th>
-										  </tr>
-										</thead>
-										<tbody>
-										  <tr>
-											<th scope="row">1</th>
-											<td>Rucksack Backpack Jeans</td>
-											<td>Otto</td>
-											<td>22.06.2023</td>
-											<td class="purchases">- 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">2</th>
-											<td>Adidos</td>
-											<td>Hofmann</td>
-											<td>24.06.2023</td>
-											<td class="purchases">- 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">3</th>
-											<td>Ray Dan</td>
-											<td>O.G.Kieweg</td>
-											<td>24.06.2023</td>
-											<td class="purchases">- 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">4</th>
-											<td>Vöeslauer Schmutzwasser</td>
-											<td>Schern</td>
-											<td>25.06.2023</td>
-											<td class="purchases">- 34,50€</td>
-										  </tr>
-										  <tr>
-											<th scope="row">5</th>
-											<td>Staatsbürgerschaft</td>
-											<td>Natotea</td>
-											<td>26.06.2023</td>
-											<td class="purchases">- 34,50€</td>
-										  </tr>
-										</tbody>
-									  </table>
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th scope="col">Transaction Nr.</th>
+													<th scope="col">Item</th>
+													<th scope="col">Seller</th>
+													<th scope="col">Date</th>
+													<th scope="col">Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th scope="row">1</th>
+													<td>Rucksack Backpack Jeans</td>
+													<td>Otto</td>
+													<td>22.06.2023</td>
+													<td class="purchases">- 34,50€</td>
+												</tr>
+												<tr>
+													<th scope="row">2</th>
+													<td>Adidos</td>
+													<td>Hofmann</td>
+													<td>24.06.2023</td>
+													<td class="purchases">- 34,50€</td>
+												</tr>
+												<tr>
+													<th scope="row">3</th>
+													<td>Ray Dan</td>
+													<td>O.G.Kieweg</td>
+													<td>24.06.2023</td>
+													<td class="purchases">- 34,50€</td>
+												</tr>
+												<tr>
+													<th scope="row">4</th>
+													<td>Vöeslauer Schmutzwasser</td>
+													<td>Schern</td>
+													<td>25.06.2023</td>
+													<td class="purchases">- 34,50€</td>
+												</tr>
+												<tr>
+													<th scope="row">5</th>
+													<td>Staatsbürgerschaft</td>
+													<td>Natotea</td>
+													<td>26.06.2023</td>
+													<td class="purchases">- 34,50€</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</div>
