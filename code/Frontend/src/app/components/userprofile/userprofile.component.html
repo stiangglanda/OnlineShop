@@ -6,19 +6,26 @@
 					<div class="side-bar">
 						<div class="user-info">
 							<!--ToDo load picture from database so we can update it on the fly-->
-							<img class="rounded img-profile img-circle img-responsive center-block" src="/assets/images/default-profile-picture.jpg" alt="">
+							<img class="rounded img-profile img-circle img-responsive center-block" src="/assets/images/default-profile-picture.jpg" alt="" />
 							<ul class="meta list list-unstyled">
-								<li class="name activity" >{{ model.firstname }} {{ model.lastname }}
-								</li>
-								<li class="email activity	">{{ model.email }}</li>
+								<li class="name activity">{{ model.firstname }} {{ model.lastname }}</li>
+								<li class="email activity">{{ model.email }}</li>
 							</ul>
 						</div>
 						<nav class="side-menu">
 							<ul class="nav">
-								<li class="active"><a routerLink="/userprofile"><span class="fa fa-user"></span> Personal Profile</a></li>
-								<li><a routerLink="/listings"><span class="fa fa-list"></span> My Listings</a></li>
-								<li><a routerLink="/transactions"><span class="fa fa-credit-card"></span> Transactions</a></li>
-								<li><a routerLink="/payment"><span class="fa fa-envelope"></span> Payment Information</a></li>
+								<li class="active">
+									<a routerLink="/userprofile"><span class="fa fa-user"></span> Personal Profile</a>
+								</li>
+								<li>
+									<a routerLink="/listings"><span class="fa fa-list"></span> My Listings</a>
+								</li>
+								<li>
+									<a routerLink="/transactions"><span class="fa fa-credit-card"></span> Transactions</a>
+								</li>
+								<li>
+									<a routerLink="/payment"><span class="fa fa-envelope"></span> Payment Information</a>
+								</li>
 							</ul>
 						</nav>
 					</div>
@@ -27,91 +34,91 @@
 							<form [formGroup]="userForm" class="form-horizontal">
 								<fieldset class="fieldset">
 									<div class="card">
-										<div class="card-header">
-											Personal Info
-										</div>
+										<div class="card-header">Personal Info</div>
 										<div class="card-body">
 											<div class="form-group avatar">
 												<figure class="figure col-md-2 col-sm-3 col-xs-12">
-													<img class="rounded img-rounded img-responsive" src="/assets/images/default-profile-picture.jpg" alt=""> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+													<img class="rounded img-rounded img-responsive" src="/assets/images/default-profile-picture.jpg" alt="" />
+													<!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 												</figure>
 											</div>
 											<div class="form-group">
 												<label class="col-12 control-label">User Name</label>
 												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-													<input type="text" class="form-control" formControlName="username" [(ngModel)]="model.username"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+													<input type="text" class="form-control" formControlName="username" [(ngModel)]="model.username" />
+													<!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 												</div>
 												<div class="row">
 													<div class="col-lg-6">
 														<label class="control-label">First Name</label>
-														<input type="text" class="form-control" formControlName="firstname" [(ngModel)]="model.firstname"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+														<input type="text" class="form-control" formControlName="firstname" [(ngModel)]="model.firstname" />
+														<!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 													</div>
 													<div class="col-lg-6">
 														<label class="control-label">Last Name</label>
-														<input type="text" class="form-control" formControlName="lastname" [(ngModel)]="model.lastname"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+														<input type="text" class="form-control" formControlName="lastname" [(ngModel)]="model.lastname" />
+														<!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 													</div>
-												</div>												
+												</div>
 											</div>
 										</div>
 									</div>
-								</fieldset><br>
+								</fieldset>
+								<br />
 								<div class="card">
-									<div class="card-header">
-										Contact Info									
-									</div>
+									<div class="card-header">Contact Info</div>
 									<div class="card-body">
 										<div class="form-group">
-											<label class="col-md-3  col-sm-3 col-xs-12 control-label">E-Mail</label>
+											<label class="col-md-3 col-sm-3 col-xs-12 control-label">E-Mail</label>
 											<div class="col-md-12 col-sm-9 col-xs-12">
-												<input type="email" class="form-control" formControlName="email" [(ngModel)]="model.email"> <!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
+												<input type="email" class="form-control" formControlName="email" [(ngModel)]="model.email" />
+												<!--ToDo Load Values from DB (do not remove Placeholders because we can use both)-->
 											</div>
-										</div> 
-									</div>									
-								</div><br>
-								<div class="card">
-									<div class="card-header">
-										Address
+										</div>
 									</div>
+								</div>
+								<br />
+								<div class="card">
+									<div class="card-header">Address</div>
 									<div class="card-body">
 										<div class="form-group row">
-											<div class="col-lg-6"> 
+											<div class="col-lg-6">
 												<label class="control-label">Streetname</label>
-												<input type="text" class="form-control" placeholder="Musterstraße">
+												<input type="text" class="form-control" formControlName="street" [(ngModel)]="model.street" />
 											</div>
-											<div class="col-lg-6 col-md-12"> 
+											<div class="col-lg-6 col-md-12">
 												<label class="control-label">Housenumber</label>
-												<input type="text" class="form-control" placeholder="10">
+												<input type="text" class="form-control" formControlName="street_nr" [(ngModel)]="model.street_nr" />
 											</div>
-											<div class="col-md-6 col-sm-12"> 
+											<div class="col-md-6 col-sm-12">
 												<label class="control-label">City</label>
-												<input type="text" class="form-control" placeholder="Linz">
+												<input type="text" class="form-control" formControlName="city" [(ngModel)]="model.city" />
 											</div>
-											<div class="col-md-6 col-sm-12"> 
+											<div class="col-md-6 col-sm-12">
 												<label class="control-label">Zip Code</label>
-												<input type="text" class="form-control" placeholder="4020">
-											</div>	
+												<input type="text" class="form-control" formControlName="plz" [(ngModel)]="model.plz" />
+											</div>
 										</div>
 									</div>
 								</div>
 								<div class="card">
-									<div class="card-header">
-										Balance
-									</div>
+									<div class="card-header">Balance</div>
 									<div class="card-body">
 										<div class="form-group">
-											<label class="col-md-2  col-sm-3 col-xs-12 control-label">Balance</label>
+											<label class="col-md-2 col-sm-3 col-xs-12 control-label">Balance</label>
 											<div class="col-md-12 col-sm-9 col-xs-12">
-												<input type="discound" class="form-control" placeholder="10€" disabled>
+												<input type="discound" class="form-control" placeholder="10€" disabled />
 											</div>
 										</div>
 									</div>
 								</div>
-								<hr><br>
+								<hr />
+								<br />
 								<div class="form-group">
 									<div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-										<input class="btn btn-group btn-primary rounded" type="button" (click)="update_Profile()" value="Update Profile">
+										<input class="btn btn-group btn-primary rounded" type="button" (click)="update_Profile()" value="Update Profile" />
 									</div>
-								</div>							
+								</div>
 							</form>
 						</form>
 					</div>

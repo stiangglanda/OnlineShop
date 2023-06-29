@@ -70,7 +70,7 @@ export class PaymentComponent implements OnInit {
       street_nr: this.model.street_nr
     };
 
-    this.userService.updateUserByName(this.usernameFromToken, this.updateModel).subscribe({
+    this.userService.updateUserFullName(this.usernameFromToken, this.updateModel).subscribe({
       next: (res => {
         alert('you changed your data');
       }),

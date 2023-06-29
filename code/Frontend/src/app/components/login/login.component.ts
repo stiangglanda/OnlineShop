@@ -24,6 +24,8 @@ export class LoginComponent implements OnInit {
 			password: ['', Validators.required]
 		});
 		this.registerForm = this.fb.group({
+			firstname: ['', Validators.required],
+			lastname: ['', Validators.required],
 			username: ['', Validators.required],
 			email: ['', Validators.required],
 			password: ['', Validators.required],
@@ -63,23 +65,36 @@ export class LoginComponent implements OnInit {
 
 	signIn() {
 		if (this.registerForm.valid) {
-			if (this.registerForm.value.password === this.registerForm.value.password_rep) {
-				this.signUpModel = {
+			if (this.registerForm.value.password === this.registerForm.value.password_rep) 
+      {
+				this.signUpModel = 
+        {
 					username: this.registerForm.value.username,
+          firstname: this.registerForm.value.firstname,
+          lastname: this.registerForm.value.lastname,
 					email: this.registerForm.value.email,
-					password: this.registerForm.value.password
+					password: this.registerForm.value.password,
+          city: '1',
+          plz: 1,
+          street: '1',
+          street_nr: 1,
 				};
+
 				this.auth.signUp(this.signUpModel).subscribe({
-					next: (res) => {
+					next: (res) => 
+          {
 						this.registerForm.reset();
 						alert('You have registered');
 						this.router.navigate(['login']);
 					},
-					error: (err) => {
+					error: (err) => 
+          {
 						console.log(err);
 					}
 				});
-			} else {
+			} 
+      else 
+      {
 				alert('Passwort does not match');
 			}
 		}
