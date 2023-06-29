@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import { article_list } from 'src/app/models/article_list';
 import { ArticleService } from 'src/app/services/article.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
 	selector: 'app-article-item',
@@ -9,7 +12,13 @@ import { ArticleService } from 'src/app/services/article.service';
 	styleUrls: ['./article-item.component.css']
 })
 export class ArticleItemComponent implements OnInit {
-	constructor(private route: ActivatedRoute, private article: ArticleService, private router: Router) {}
+	constructor(private route: ActivatedRoute, 
+              private article: ArticleService, 
+              private router: Router, 
+              private toast: NgToastService, 
+              private user: UserService,
+              private auth: AuthService
+  ) {}
 
 	public articleListModel: article_list = {
 		article_id: 1,
@@ -39,9 +48,47 @@ export class ArticleItemComponent implements OnInit {
 					};
 				},
 				error: (err) => {
-					console.log(err);
+					this.toast.error({detail:"ERROR", summary: err, duration: 5000});
 				}
 			});
 		}
 	}
+
+  buyItem(balance: any, article_id: any)
+  {
+    if(this.auth.isLoggedIn())
+    {
+      var balanceModel = { balance: -balance };
+
+      this.user.updateUserBalance(this.auth.getUsernameFromToken(), balanceModel).subscribe(
+        {
+          next: (res) => 
+          {
+            var statusModel = { status: 0 };
+            this.article.changeArticleStatus(article_id, statusModel).subscribe(
+              {
+                next: (res) => 
+                {
+                  this.toast.success({detail:"SUCCESS", summary: "You bought this product", duration: 5000});
+                  this.router.navigate(['/article-list']);
+                },
+                error: (err) =>
+                {
+                  this.toast.error({detail:"ERROR", summary: err.error.message, duration: 5000});
+                }
+              }
+            );
+          },
+          error: (err) =>
+          {
+            this.toast.error({detail:"ERROR", summary: err.error.message, duration: 5000});
+          }
+        }
+      );
+    }
+    else
+    {
+      this.router.navigate(['login']);
+    }
+  }
 }

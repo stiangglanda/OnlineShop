@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
 			});
 		} else {
 			ValidateForm.validateAllFormFields(this.loginForm);
-			alert('Your form is invalid');
+			this.toast.warning({detail:"WARN", summary:"This form is not valid!", duration: 5000});
 		}
 	}
 
