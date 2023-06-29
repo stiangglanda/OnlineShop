@@ -19,21 +19,21 @@ import { AuthGuard } from './guard/auth.guard';
 import { ChangeArticleComponent } from './components/change-article/change-article.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '', redirectTo: 'article-list', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'shop', component: ShopComponent},
   {path: 'userprofile', component: UserprofileComponent, canActivate: [AuthGuard]},
-  {path: 'listings', component: ListingsComponent},
-  {path: 'transactions', component: TransactionsComponent},
-  {path: 'payment', component: PaymentComponent},
+  {path: 'listings', component: ListingsComponent, canActivate: [AuthGuard]},
+  {path: 'transactions', component: TransactionsComponent, canActivate: [AuthGuard]},
+  {path: 'payment', component: PaymentComponent , canActivate: [AuthGuard]},
   {path: 'agb', component: AgbComponent},
   {path: 'datenschutz', component: DatenschutzComponent},
   {path: 'impressum', component: ImpressumComponent},
   {path: 'article-list', component: ArticleListComponent},
   {path: 'article-item/:id', component: ArticleItemComponent},
-  {path: 'addlisting', component: AddListingComponent},
-  {path: 'change-article/:id', component: ChangeArticleComponent}
+  {path: 'addlisting', component: AddListingComponent, canActivate: [AuthGuard]},
+  {path: 'change-article/:id', component: ChangeArticleComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

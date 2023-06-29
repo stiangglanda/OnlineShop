@@ -16,7 +16,6 @@ export class UserprofileComponent implements OnInit {
 	constructor(private fb: FormBuilder, private userService: UserService, private auth: AuthService, private router: Router) {}
 
 	public model!: user_update;
-	private updateModel!: user_update;
 	private usernameFromToken: string = this.auth.getUsernameFromToken();
 	private updateNameModel!: name_update;
   private updateAdressModel!: adress_update;
@@ -35,7 +34,8 @@ export class UserprofileComponent implements OnInit {
 						city: res.address.city,
 						plz: res.address.plz,
 						street: res.address.street,
-						street_nr: res.address.street_nr
+						street_nr: res.address.street_nr,
+            balance: res.balance
 					};
 					console.log(this.model);
 				},
