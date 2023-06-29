@@ -82,11 +82,8 @@ const register = async (req, res) => {
 			user = new User(user_id, 1, username, firstname, lastname, email, hashedPassword, 0, {});
 			await user.save();
 		} else {
-
 			let address = new Address(await nextId('address'), city, plz, street, street_nr);
-			
-			console.log(address);
-			
+
 			address = await address.save();
 
 			user = new User(user_id, 1, username, firstname, lastname, email, hashedPassword, 0, address);
@@ -151,14 +148,10 @@ const getUserListings = async (req, res) => {
 
 // updates an user in the database
 const updateUser = async (req, res) => {
-
-	console.log("Update User");
-
 	try {
 		const user = await User.findByUsername(req.params.username);
 
 		if (!user) {
-			console.log("User not found");
 			return res.status(404).json({ message: 'Could not find this user.' });
 		}
 
@@ -176,13 +169,8 @@ const updateUser = async (req, res) => {
 			street_nr: new_street_nr
 		} = req.body;
 
-		console.log("User found: " + user);
-
 		if (new_balance) {
-			if (new_balance < 0) {
-				return res.status(400).json({ message: 'There is not enough money on your account.' });
-			}
-			user.balance = new_balance;
+			user.balance += new_balance;
 		}
 
 		if (new_username) {
@@ -212,16 +200,9 @@ const updateUser = async (req, res) => {
 
 		// if one of address fields is provided, check if all are provided
 		if (new_city || new_street || new_plz || new_street_nr) {
-
-			console.log("Address provided");
-
 			if (!new_city || !new_street || !new_plz || !new_street_nr) {
-				console.log("Not all address fields provided");
 				return res.status(400).json({ message: 'Not all address fields were provided.' });
 			} else {
-
-				console.log("All address fields provided -> update address");
-
 				let new_address;
 
 				if (user.address) {
@@ -230,10 +211,7 @@ const updateUser = async (req, res) => {
 					new_address = new Address(null, new_city, new_plz, new_street, new_street_nr);
 				}
 
-				console.log("New address: " + JSON.stringify(new_address));
-
 				user.address = await new_address.update(user);
-				console.log("Updated address: " + JSON.stringify(user.address));
 			}
 
 			if (!new_city && !new_plz && !new_street && !new_street_nr) {
