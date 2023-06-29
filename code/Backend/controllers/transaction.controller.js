@@ -1,9 +1,14 @@
 import Transaction from '../models/transaction.js';
 import { nextId } from '../models/db.js';
+import User from '../models/user.js';
+import Article from '../models/article.js';
 
 const createTransaction = async (req, res) => {
-	const id = await nextId('transaction');
-	const transaction = new Transaction(id, req.body.seller_id, req.body.buyer_id, req.body.article_id, new Date());
+	let seller = await User.findById(req.body.seller_id);
+	let buyer = await User.findById(req.body.buyer_id);
+	let article = await Article.findById(req.body.article_id);
+
+	const transaction = new Transaction(null, seller, buyer, article, new Date());
 	try {
 		res.status(201).json(await transaction.save());
 	} catch (error) {

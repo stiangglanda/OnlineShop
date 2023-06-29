@@ -236,8 +236,13 @@ const updateUser = async (req, res) => {
 const disableUser = async (req, res) => {
 	try {
 		const user = await User.findByUsername(req.params.username);
+
+		if (!user) {
+			return res.status(404).json({ message: 'Could not find this user.' });
+		}
+
 		await user.disable();
-		res.status(200).json({ message: `The user ${user.id} has been disabled.` });
+		return res.status(200).json({ message: `The user ${user.username} has been disabled.` });
 	} catch (error) {
 		res.status(400).json({ message: error.message });
 	}
