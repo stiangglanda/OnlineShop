@@ -19,8 +19,8 @@ import { DatenschutzComponent } from './components/datenschutz/datenschutz.compo
 import { ImpressumComponent } from './components/impressum/impressum.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
 import { AddListingComponent } from './components/add-listing/add-listing.component';
-import { UserService } from './services/user.service';
 import { ChangeArticleComponent } from './components/change-article/change-article.component';
+import {NgToastModule} from 'ng-angular-popup';
 
 @NgModule({
 	declarations: [
@@ -42,7 +42,7 @@ import { ChangeArticleComponent } from './components/change-article/change-artic
 		AddListingComponent,
     ChangeArticleComponent
 	],
-	imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule],
+	imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule, NgToastModule],
 	providers: [],
 	bootstrap: [AppComponent]
 })

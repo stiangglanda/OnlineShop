@@ -7,4 +7,5 @@ export interface user_update{
   plz: number;
   street: string;
   street_nr: number;
+  balance: number;
 }
