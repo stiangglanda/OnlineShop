@@ -1,15 +1,15 @@
-// TODO: add null handling
-import { db } from './db.js';
+import { db, nextId } from './db.js';
 import Category from './category.js';
+import User from './user.js';
 
 export default class Article {
-	constructor(id, status, name, description, price, seller_id, categories, images) {
+	constructor(id, status, name, description, price, seller, categories, images) {
 		this.id = id;
 		this.status = status;
 		this.name = name;
 		this.description = description;
 		this.price = price;
-		this.seller_id = seller_id; // TODO: convert to User object
+		this.seller = seller;
 		this.categories = categories;
 		this.images = images;
 	}
@@ -20,6 +20,7 @@ export default class Article {
 	 */
 	static async list() {
 		const [articles] = await db.query('SELECT * FROM article WHERE status = 1');
+
 		let [images] = await db.query('SELECT id, url, article_id FROM image');
 		images = images.map((image) => {
 			return {
@@ -45,12 +46,17 @@ export default class Article {
 			};
 		});
 
-		return articles.map((article) => {
+		let result = articles.map(async (article) => {
 			const art_img = images.filter((image) => image.article_id === article.id);
 			const art_categories = article_categories.filter((article_category) => article_category.article_id === article.id).map((article_category) => article_category.category_id);
 			const cat = categories.filter((category) => art_categories.includes(category.id));
-			return new Article(article.id, article.status, article.name, article.description, article.price, article.seller_id, cat, art_img);
+
+			let seller = await User.findById(article.seller_id);
+
+			return new Article(article.id, article.status, article.name, article.description, article.price, seller, cat, art_img);
 		});
+
+		return Promise.all(result);
 	}
 
 	/**
@@ -101,21 +107,18 @@ export default class Article {
 				[category]
 			);
 		} else if (!category && priceFrom && priceTo) {
+
 			[articles] = await db.query(
 				`
-			SELECT distinct a.id, 
-				   a.status, 
-				   a.name, 
-				   a.description, 
-				   a.price, 
-				   a.seller_id 
-			  FROM article a, 
-				   category c, 
-				   article_category ac 
-			 WHERE a.status = 1 
-			   and a.id=ac.article_id 
-			   and c.id=ac.category_id 
-			   and a.price between ? and ?`,
+				SELECT distinct a.id,
+					   a.status,
+					   a.name,
+					   a.description,
+					   a.price,
+					   a.seller_id
+				  FROM article a
+		     	 WHERE a.status = 1
+			   	   and a.price between ? and ?`,
 				[priceFrom, priceTo]
 			);
 		} else if (!category && priceFrom && !priceTo) {
@@ -127,12 +130,8 @@ export default class Article {
 				   a.description, 
 				   a.price, 
 				   a.seller_id 
-			  FROM article a, 
-				   category c, 
-				   article_category ac 
-			 WHERE a.status = 1 
-			   and a.id=ac.article_id 
-			   and c.id=ac.category_id 
+			  FROM article a
+			 WHERE a.status = 1  
 			   and a.price >= ?`,
 				[priceFrom]
 			);
@@ -145,12 +144,8 @@ export default class Article {
 				   a.description, 
 				   a.price, 
 				   a.seller_id 
-			  FROM article a, 
-				   category c, 
-				   article_category ac 
-			 WHERE a.status = 1 
-			   and a.id=ac.article_id 
-			   and c.id=ac.category_id 
+			  FROM article a
+			 WHERE a.status = 1
 			   and a.price <= ?`,
 				[priceTo]
 			);
@@ -181,12 +176,17 @@ export default class Article {
 			};
 		});
 
-		return articles.map((article) => {
+		let result = articles.map(async (article) => {
 			const art_img = images.filter((image) => image.article_id === article.id);
 			const art_categories = article_categories.filter((article_category) => article_category.article_id === article.id).map((article_category) => article_category.category_id);
 			const cat = categories.filter((category) => art_categories.includes(category.id));
-			return new Article(article.id, article.status, article.name, article.description, article.price, article.seller_id, cat, art_img);
+
+			let seller = await User.findById(article.seller_id);
+
+			return new Article(article.id, article.status, article.name, article.description, article.price, seller, cat, art_img);
 		});
+
+		return Promise.all(result);
 	}
 
 	/**
@@ -214,7 +214,9 @@ export default class Article {
 			};
 		});
 
-		return new Article(article[0].id, article[0].status, article[0].name, article[0].description, article[0].price, article[0].seller_id, article_categories, images);
+		let seller = await User.findById(article[0].seller_id);
+
+		return new Article(article[0].id, article[0].status, article[0].name, article[0].description, article[0].price, seller, article_categories, images);
 	}
 
 	/**
@@ -231,18 +233,39 @@ export default class Article {
 	 * @returns {Promise<Article>} The saved article.
 	 */
 	async save() {
+
+		console.log(this);
+		console.log("------------------");
+
 		await db.query('INSERT INTO article (id, status, name, description, price, seller_id) VALUES (?, ?, ?, ?, ?, ?)', [
 			this.id,
 			this.status,
 			this.name,
 			this.description,
 			this.price,
-			this.seller_id
+			this.seller.id
 		]);
 
+		console.log("Article saved");
+		console.log("------------------");
+		console.log("Categories");
 		for (let i = 0; i < this.categories.length; i++) {
-			const cat_name = await Category.findByName(this.categories[i]);
-			await db.query('INSERT INTO article_category (article_id, category_id) VALUES (?, ?)', [this.id, cat_name.id]);
+
+			console.log("Saving category: " + this.categories[i]);
+			const category = await Category.findByName(this.categories[i]);
+
+			if (!category) {
+				console.log("Category not found, creating it");
+
+				const cat_id = await nextId('category');
+				await db.query('INSERT INTO category (id, name) VALUES (?, ?)', [cat_id, this.categories[i]]);
+				await db.query('INSERT INTO article_category (article_id, category_id) VALUES (?, ?)', [this.id, cat_id]);
+				console.log("Category created");
+			} else {
+				console.log("Category found, saving it");
+				await db.query('INSERT INTO article_category (article_id, category_id) VALUES (?, ?)', [this.id, category.id]);
+				console.log("Category saved");
+			}
 		}
 		for (let i = 0; i < this.images.length; i++) {
 			await db.query('INSERT INTO image (url, article_id) VALUES (?, ?)', [this.images[i], this.id]);
@@ -272,10 +295,40 @@ export default class Article {
 	 * @returns {Promise<Article[]>} The articles.
 	 */
 	static async findByName(name) {
-		let [articles] = await db.query('SELECT * FROM article WHERE name LIKE ?', [`%${name}%`]);
-		if (articles.length === 0) return [];
+		const [articles] = await db.query('SELECT * FROM article WHERE status = 1 AND name LIKE ?', ['%' + name + '%']);
+
+		let [images] = await db.query('SELECT id, url, article_id FROM image');
+		images = images.map((image) => {
+			return {
+				id: image.id,
+				url: image.url,
+				article_id: image.article_id
+			};
+		});
+
+		let [categories] = await db.query('SELECT * FROM category');
+		categories = categories.map((category) => {
+			return {
+				id: category.id,
+				name: category.name
+			};
+		});
+
+		let [article_categories] = await db.query('SELECT * FROM article_category');
+		article_categories = article_categories.map((article_category) => {
+			return {
+				article_id: article_category.article_id,
+				category_id: article_category.category_id
+			};
+		});
+
 		return articles.map((article) => {
-			return new Article(article.id, article.status, article.name, article.description, article.price, article.seller_id);
+			const art_img = images.filter((image) => image.article_id === article.id);
+			const art_categories = article_categories.filter((article_category) => article_category.article_id === article.id).map((article_category) => article_category.category_id);
+			const cat = categories.filter((category) => art_categories.includes(category.id));
+
+			let seller = User.findById(article.seller_id);
+			return new Article(article.id, article.status, article.name, article.description, article.price, seller, cat, art_img);
 		});
 	}
 }

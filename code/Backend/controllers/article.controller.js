@@ -1,4 +1,5 @@
 import Article from '../models/article.js';
+import User from '../models/user.js';
 import { nextId } from '../models/db.js';
 
 const getArticles = async (req, res) => {
@@ -15,6 +16,7 @@ const getArticles = async (req, res) => {
 		// Otherwise, apply the filters and return the articles
 		try {
 			const articles = await Article.listFiltered(filters.category, filters.priceFrom, filters.priceTo);
+
 			res.status(200).json(articles);
 		} catch (error) {
 			res.status(404).json({ message: 'There are no articles.' });
@@ -22,21 +24,16 @@ const getArticles = async (req, res) => {
 	}
 };
 
-const getFilteredArticles = async (req, res) => {
-	try {
-		const articles = await Article.listFiltered(req.params.category, req.params.priceFrom, req.params.priceTo);
-		res.status(200).json(articles);
-	} catch (error) {
-		res.status(404).json({ message: 'There are no articles.' });
-	}
-};
-
 const searchArticle = async (req, res) => {
 	try {
 		const articles = await Article.findByName(req.params.articleName);
+		if (articles.length == 0) {
+			return res.status(404).json({ message: 'There are no articles.' });
+		}
+
 		res.status(200).json(articles);
 	} catch (error) {
-		res.status(404).jsond({ message: 'There are no articles.' });
+		res.status(404).json({ message: error.message });
 	}
 };
 
@@ -53,8 +50,9 @@ const createArticle = async (req, res) => {
 
 	const id = await nextId('article');
 
-	const article = new Article(id, 1, name, description, Math.abs(price), seller_id, categories, images);
-	//TODO validation
+	let seller = await User.findById(seller_id);
+	const article = new Article(id, 1, name, description, Math.abs(price), seller, categories, images);
+
 	try {
 		res.status(201).json(await article.save());
 	} catch (error) {
@@ -101,7 +99,6 @@ const disableArticle = async (req, res) => {
 
 export default {
 	getArticles,
-	getFilteredArticles,
 	createArticle,
 	getArticle,
 	searchArticle,

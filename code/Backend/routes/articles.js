@@ -2,7 +2,7 @@ import { Router } from 'express';
 import articleCtrl from '../controllers/article.controller.js';
 const router = Router();
 
-router // /api/articles
+router // /api/articles ?priceFrom ?priceTo ?categories
 	.route('/')
 	.get(articleCtrl.getArticles)
 	.post(articleCtrl.createArticle);
@@ -18,7 +18,6 @@ router // /api/articles/:id
 	.delete(articleCtrl.disableArticle);
 
 router // /api/articles/:id
-	.route('/:category/:priceFrom&:priceTo')
-	.get(articleCtrl.getFilteredArticles);
+	.route('/:category/:priceFrom&:priceTo');
 
 export default router;

@@ -30,6 +30,7 @@ export default class Category {
 	 */
 	static async findByName(name) {
 		const [rows] = await db.query('SELECT * FROM category WHERE name = ?', [name]);
+		if (rows.length === 0) return null;
 		return new Category(rows[0].id, rows[0].name);
 	}
 }

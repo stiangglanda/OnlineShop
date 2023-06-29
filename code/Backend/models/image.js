@@ -13,11 +13,14 @@ export default class Category {
 	 * @returns {Promise<Image>}
 	 * @param {number} id
 	 */
-	static async getImageById(id) {
+	static async findById(id) {
 		const [rows] = await db.query('SELECT * FROM image WHERE id = ?', [id]);
-		if (rows.length <= 0) return null; // nothing found
+		
+        
+        if (rows.length <= 0) return null; // nothing found
 
 		let article = await Article.findById(rows[0].article_id);
+
 		return new Image(rows[0].id, rows[0].url, article);
 	}
 
