@@ -1,11 +1,11 @@
-<form [formGroup]="addItemForm">
+<form [formGroup]="changeItemForm">
   <section class="py-5">
     <div class="container">
       <div class="row gx-5">
         <aside class="col-lg-6">
           <div class="d-flex justify-content-center mb-3">
             <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" class="item-thumb">
-              <img width="410" height="410" class="rounded-2" src="/assets/images/DefaultImg.jpg" />
+              <img width="410" height="410" class="rounded-2" src="{{ imgUrl }}" />
             </a>
           </div>
         </aside>
@@ -14,39 +14,28 @@
               <div class="row">
                 <dt class="col-2">Name:</dt>
                 <dd class="col-6">
-                  <input type="text" class="form-control input" formControlName="name" placeholder="Article">
+                  <input type="text" class="form-control input" formControlName="name" [ngModel]="article.name">
                 </dd>
                 <dt class="col-2"></dt>
               </div>
               <div class="row">
                 <dt class="col-2">Price:</dt>
                 <dd class="col-6">
-                  <input type="text" class="form-control input" formControlName="price" placeholder="Price">
+                  <input type="text" class="form-control input" formControlName="price" [ngModel]="article.price">
                 </dd>
                 <dt class="col-2"></dt>
               </div>
               <div class="row">
-                <dt class="col-2">IMG-URL:</dt>
+                <dt class="col-2">Description:</dt>
                 <dd class="col-6">
-                  <input type="text" class="form-control input" formControlName="img_url" placeholder="IMG-URL">
+                  <textarea formControlName="description" id="itemDescription" name="itemDescription" class="form-control input" [ngModel]="article.description" required></textarea>
                 </dd>
                 <dt class="col-2"></dt>
-              </div>
-
-              
-              <div class="row">
-                <dt class="col-2">Category:</dt>
-                  <dd class="col-6">
-                    <select name="category" id="category" class="form-control input" formControlName="categories" multiple>
-                      <option *ngFor="let item of categories" value="{{ item }}">{{ item }}</option>
-                    </select>
-                  </dd>
-                <dt class="col-3"></dt>
-              </div>
+              </div>               
               <hr />
               <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0 mt-1 mb-3">
                 <div class="d-flex justify-content-center">
-                  <input class="btn btn-group btn-primary rounded" type="button" (click)="createArticle()" value="Create">
+                  <input class="btn btn-group btn-primary rounded" type="button" (click)="changeArticle()" value="Save Changes">
                 </div>
               </div>
             </div>

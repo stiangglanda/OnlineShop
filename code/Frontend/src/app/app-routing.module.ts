@@ -16,6 +16,7 @@ import { ArticleItemComponent } from './components/article-item/article-item.com
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AuthGuard } from './guard/auth.guard';
+import { ChangeArticleComponent } from './components/change-article/change-article.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -31,7 +32,8 @@ const routes: Routes = [
   {path: 'impressum', component: ImpressumComponent},
   {path: 'article-list', component: ArticleListComponent},
   {path: 'article-item/:id', component: ArticleItemComponent},
-  {path: 'addlisting', component: AddListingComponent}
+  {path: 'addlisting', component: AddListingComponent},
+  {path: 'change-article/:id', component: ChangeArticleComponent}
 ];
 
 @NgModule({

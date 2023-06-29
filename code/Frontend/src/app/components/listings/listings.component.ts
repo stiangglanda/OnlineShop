@@ -13,7 +13,6 @@ import { user_update } from 'src/app/models/user_update';
 export class ListingsComponent implements OnInit {
 
   constructor(
-    private fb: FormBuilder,
     private userService: UserService,
     private auth: AuthService,
     private router: Router
@@ -21,9 +20,7 @@ export class ListingsComponent implements OnInit {
 
   public model!: user_update;
   private updateModel!: user_update;
-  private usernameFromToken: string = this.auth.getUsernameFromToken();
-
-  userForm!: FormGroup;   
+  private usernameFromToken: string = this.auth.getUsernameFromToken(); 
 
   ngOnInit(): void {
     if(this.auth.isLoggedIn())
@@ -47,35 +44,5 @@ export class ListingsComponent implements OnInit {
     {
       this.router.navigate( ['login'] );
     }
-
-    this.userForm = this.fb.group({
-      username: ['', Validators.required],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', Validators.required],
-      phoneNumber: ['', Validators.required]
-    });
   }
-
-  update_Profile(){
-
-    this.updateModel = {
-      username: this.userForm.value.username,
-      firstname: this.userForm.value.firstname,
-      lastname: this.userForm.value.lastname,
-      email: this.userForm.value.email,
-      city: this.model.city,
-      plz: this.model.plz,
-      street: this.model.street,
-      street_nr: this.model.street_nr
-    };
-
-    this.userService.updateUserFullName(this.usernameFromToken, this.updateModel).subscribe({
-      next: (res => {
-        alert('you changed your data');
-      }),
-      error: (err => { console.log(err) })
-    });
-  }
-
 }

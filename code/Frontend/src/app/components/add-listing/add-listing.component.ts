@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserService } from 'src/app/services/user.service';
-import { user_update } from 'src/app/models/user_update';
+import { CategorieService } from 'src/app/services/categorie.service';
+import { create_article } from 'src/app/models/create_article';
+import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
   selector: 'app-add-listing',
@@ -14,46 +15,86 @@ export class AddListingComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
+    private categorie: CategorieService,
     private auth: AuthService,
+    private article: ArticleService,
     private router: Router
   ){}
 
-  public model!: user_update;
-  private updateModel!: user_update;
-  private usernameFromToken: string = this.auth.getUsernameFromToken();
+  public categories!: string[];
+  private createItem!: create_article;
 
-  userForm!: FormGroup;   
+  addItemForm!: FormGroup;   
 
   ngOnInit(): void {
-    if(this.auth.isLoggedIn())
+
+    this.categorie.getAllCategories().subscribe(
+      {
+        next: (res) =>
+        {
+          this.categories = res.map((item: any) => item.name);
+        },
+        error: (err) =>
+        {
+          console.log(err);
+        }
+      }
+    );
+
+    this.addItemForm = this.fb.group(
+      {
+        name: ['', Validators.required],
+        price: ['', Validators.required],
+        img_url: ['', Validators.required],
+        categories: ['', Validators.required],
+        description: ['', Validators.required]
+      }
+    );
+
+  }
+
+  createArticle()
+  {
+    
+    if(this.addItemForm.valid)
     {
-      this.userService.getUserByName(this.usernameFromToken).subscribe({
-        next: (res => {
-          this.model = {
-            username: res.username,
-            firstname: res.firstname,
-            lastname: res.lastname,
-            email: res.email,
-            city: res.address.city,
-            plz: res.address.plz,
-            street: res.address.street,
-            street_nr: res.address.street_nr
-          };
-        }),
-        error: (err => { console.log(err) })
-      });
-    }else
-    {
-      this.router.navigate( ['login'] );
+      let selectedCategories = this.addItemForm.value.categories;
+      let image_urls = this.addItemForm.value.img_url;
+
+      if(!Array.isArray(selectedCategories))
+      {
+        selectedCategories = [selectedCategories];
+      }
+
+      if(!Array.isArray(image_urls))
+      {
+        image_urls = [image_urls];
+      }
+
+      this.createItem = {
+        name: this.addItemForm.value.name,
+        description: this.addItemForm.value.description,
+        price: this.addItemForm.value.price,
+        seller_id: this.auth.getIdFromToken(),
+        categories: selectedCategories,
+        images: image_urls
+      }
+      
+      this.article.createArticle(this.createItem).subscribe(
+        {
+          next: (res) => 
+          {
+            this.router.navigate(['/listings']);
+          },
+          error: (err) =>
+          {
+            console.log(err);
+          }
+        }
+      );
     }
 
-    this.userForm = this.fb.group({
-      username: ['', Validators.required],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', Validators.required],
-      phoneNumber: ['', Validators.required]
-    });
+
+
   }
 }
