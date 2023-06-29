@@ -24,6 +24,15 @@ const getArticles = async (req, res) => {
 	}
 };
 
+const getFilteredArticles = async (req, res) => {
+	try {
+		const articles = await Article.listFiltered(req.params.category, req.params.priceFrom, req.params.priceTo);
+		res.status(200).json(articles);
+	} catch (error) {
+		res.status(404).json({ message: 'There are no articles.' });
+	}
+};
+
 const searchArticle = async (req, res) => {
 	try {
 		const articles = await Article.findByName(req.params.articleName);
@@ -101,6 +110,7 @@ export default {
 	getArticles,
 	createArticle,
 	getArticle,
+	getFilteredArticles,
 	searchArticle,
 	updateArticle,
 	disableArticle
