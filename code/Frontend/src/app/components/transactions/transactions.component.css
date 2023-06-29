@@ -228,6 +228,14 @@ body{
         opacity: 75%;
         margin-bottom: 1.5em;
     }
+
+    .view-account .content-panel .card .card-body .sales{
+        color: rgb(1, 164, 1);        
+    }
+
+    .view-account .content-panel .card .card-body .purchases{
+        color: red;      
+    }
     
     
     .view-account .content-panel .avatar .figure img {
