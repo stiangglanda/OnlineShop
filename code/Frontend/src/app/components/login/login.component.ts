@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import ValidateForm from 'src/app/helpers/validateform';
 import { user_login } from 'src/app/models/user_login';
 import { user_signup } from 'src/app/models/user_signup';
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
 	registerForm!: FormGroup;
 	signUpModel!: user_signup;
 
-	constructor(private fb: FormBuilder, private router: Router, private auth: AuthService) {}
+	constructor(private fb: FormBuilder, private router: Router, private auth: AuthService, private toast: NgToastService) {}
 
 	ngOnInit(): void {
 		this.loginForm = this.fb.group({
@@ -95,12 +96,12 @@ export class LoginComponent implements OnInit {
 			} 
       else 
       {
-				//this.toast.error({detail:"ERROR", summary:"Password doesn't match!", duration: 5000});
+				this.toast.error({detail:"ERROR", summary:"Password doesn't match!", duration: 5000});
 			}
 		}
     else
     {
-      //this.toast.warning({detail:"WARN", summary:"This form is not valid!", duration: 5000});
+      this.toast.warning({detail:"WARN", summary:"This form is not valid!", duration: 5000});
     }
 	}
 }
