@@ -218,7 +218,7 @@ body{
         width: 100%;
     }
 
-    .view-account .content-panel .card .card-body .form-group input {
+    .input{
         position: relative;
         font-size: 16px;
         background: none;
@@ -228,11 +228,19 @@ body{
         margin-bottom: 1.5em;
         width: 100%;
         min-width: 220px;
-        margin-bottom: 2.2rem;
-        border: none;
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 25px 0 rgba(0,0,0,.1);
-        transition: all .3s ease-in-out;
+
+    }
+
+    .container .input input {
+        position: relative;
+        font-size: 16px;
+        background: none;
+        outline: none;
+        box-shadow: 2px 3px #3B71CA;
+        opacity: 75%;
+        margin-bottom: 1.5em;
+        width: 100%;
+        min-width: 220px;
     }
 
     .view-account .content-panel .card .card-body .form-group.avatar input {
