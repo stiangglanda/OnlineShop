@@ -12,18 +12,27 @@ export class ArticleItemComponent implements OnInit{
 
   constructor(private route : ActivatedRoute, private article : ArticleService, private router : Router){}
 
-  public articleListModel! : article_list;
+  public articleListModel : article_list = {
+    article_id: 1,
+    name: "test",
+    description: "test",
+    price: 1,
+    categorie: "test",
+    image_url: "test"
+  };
+
+  public id: any;
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-
-    if(id == null)
+    this.id = this.route.snapshot.paramMap.get('id');
+    console.log(this.id);
+    if(this.id == null)
     {
-      this.router.navigate(['article-item']);
+      this.router.navigate(['article-list']);
     }
     else
     {
-      this.article.getArticlesID(id).subscribe({
+      this.article.getArticlesID(this.id).subscribe({
         next: (res => {
           this.articleListModel = {
             article_id: res.id,
