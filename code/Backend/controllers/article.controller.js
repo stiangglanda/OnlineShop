@@ -89,7 +89,6 @@ const updateArticle = async (req, res) => {
 		if (description) article.description = description;
 		if (price) article.price = price;
 
-		console.log(status)
 		const updatedArticle = await article.update();
 		res.status(200).json(updatedArticle);
 	} catch (error) {

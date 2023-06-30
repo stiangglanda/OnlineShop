@@ -73,10 +73,10 @@ export class LoginComponent implements OnInit {
 					lastname: this.registerForm.value.lastname,
 					email: this.registerForm.value.email,
 					password: this.registerForm.value.password,
-					city: '0',
-					plz: 0,
-					street: '0',
-					street_nr: 0
+					city: 'Linz',
+					plz: 4020,
+					street: 'Musterstraße',
+					street_nr: 1
 				};
 
 				this.auth.signUp(this.signUpModel).subscribe({
