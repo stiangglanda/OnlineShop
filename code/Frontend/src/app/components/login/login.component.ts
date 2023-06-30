@@ -73,16 +73,17 @@ export class LoginComponent implements OnInit {
 					lastname: this.registerForm.value.lastname,
 					email: this.registerForm.value.email,
 					password: this.registerForm.value.password,
-					city: '1',
-					plz: 1,
-					street: '1',
-					street_nr: 1
+					city: 0,
+					plz: 0,
+					street: 0,
+					street_nr: 0
 				};
 
 				this.auth.signUp(this.signUpModel).subscribe({
 					next: (res) => {
 						this.registerForm.reset();
-						alert('You have registered');
+						// alert('You have registered your account. Please log in.');
+						this.toast.success({ detail: 'Success', summary: "You have registered your account!", duration: 5000 });
 						this.router.navigate(['login']);
 					},
 					error: (err) => {
