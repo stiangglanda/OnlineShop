@@ -2,7 +2,7 @@
 	"name": "frontend",
 	"version": "0.0.0",
 	"scripts": {
-		"ng": "ng",
+		"ng": "ng update @angular/core @angular/cli",
 		"start": "ng serve",
 		"dev": "ng serve --configuration development",
 		"build": "ng build",
